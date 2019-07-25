@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:paddingStart="10dp"
+        android:layout_margin="10dp"
+        android:paddingEnd="10dp"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+    
+    <TextView android:layout_width="wrap_content"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginTop="10dp"
+              android:text="Edit your Username and Bio"
+              android:textSize="17sp"
+              android:textColor="@color/colorAccent"
+              android:layout_height="wrap_content"/>
+    
+    <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+    
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:layout_height="wrap_content">
+        
+                <EditText
+                        android:layout_width="match_parent"
+                        android:hint="Username"
+                        android:fontFamily="@font/font_family"
+                        android:id="@+id/name_bio_name_et"
+                        android:backgroundTint="@color/colorAccent"
+                        android:layout_height="wrap_content"/>
+    
+            </android.support.design.widget.TextInputLayout>
+    
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/colorAccent"
+                    android:layout_height="wrap_content">
+        
+                <EditText
+                        android:layout_width="match_parent"
+                        android:hint="Userbio"
+                        android:fontFamily="@font/font_family"
+                        android:backgroundTint="@color/colorAccent"
+                        android:id="@+id/name_bio_bio_et"
+                        android:layout_height="wrap_content"/>
+    
+            </android.support.design.widget.TextInputLayout>
+            
+            
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+    
+    
+    
+    <Button android:layout_width="match_parent"
+            android:layout_marginTop="30dp"
+            android:text="Save Details"
+            android:id="@+id/name_bio_save_button"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/buttonbg"
+            android:layout_height="35dp"/>
+
+</LinearLayout>

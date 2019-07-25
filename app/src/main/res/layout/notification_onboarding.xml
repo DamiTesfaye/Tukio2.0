@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content">
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:id="@+id/notification_image"
+            android:layout_height="200dp"
+            android:src="@drawable/reminder"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:textSize="25sp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="Never miss out!"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center"
+            android:text="Tukio lets you add your interested events into your calendar ensuring that you never miss an event ever again!"
+            android:textSize="17sp"
+            android:textColor="@android:color/black"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>

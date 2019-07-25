@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".View.Activities.PostedEventsActivity">
+    
+    <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_height="wrap_content">
+        
+        <android.support.v7.widget.Toolbar android:layout_width="match_parent"
+                                           android:layout_height="?attr/actionBarSize">
+            
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:layout_height="match_parent">
+                
+                <ImageButton android:layout_width="30dp"
+                             android:layout_gravity="center_vertical"
+                             android:id="@+id/close_promoted_events_activity"
+                             android:background="?attr/selectableItemBackgroundBorderless"
+                             app:srcCompat="@drawable/ic_close_black_24dp"
+                             android:layout_height="30dp"/>
+                
+                <TextView android:layout_width="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginStart="20dp"
+                          android:textSize="20sp"
+                          android:text="Your Promoted Events"
+                          android:layout_height="wrap_content"/>
+            
+            </LinearLayout>
+        
+        </android.support.v7.widget.Toolbar>
+    
+    </android.support.design.widget.AppBarLayout>
+
+    <ProgressBar android:layout_width="wrap_content"
+                 android:layout_gravity="center"
+                 android:id="@+id/loading_promoted_events"
+                 android:layout_height="wrap_content"/>
+    
+    <LinearLayout android:layout_width="wrap_content"
+                  android:layout_gravity="center"
+                  android:visibility="gone"
+                  android:id="@+id/promoted_events_no_events"
+                  android:orientation="vertical"
+                  android:layout_height="wrap_content">
+        
+        <ImageView android:layout_width="50dp"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginEnd="10dp"
+                   android:layout_marginTop="10dp"
+                   android:layout_gravity="center_horizontal"
+                   android:src="@drawable/tukio_logo_t"
+                   android:layout_height="50dp"/>
+        
+        <TextView android:layout_width="wrap_content"
+                  android:layout_margin="20dp"
+                  android:layout_gravity="center_horizontal"
+                  android:gravity="center"
+                  android:textSize="15sp"
+                  android:text="Ooh, You haven't promoted any events yet!"
+                  android:layout_height="wrap_content"/>
+    
+    </LinearLayout>
+    
+    <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/promoted_events_recycler"
+            android:layout_height="match_parent"/>
+
+</android.support.design.widget.CoordinatorLayout>

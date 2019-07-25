@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+       android:layout_margin="5dp"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+    
+    <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="vertical"
+                      android:padding="10dp"
+                      android:layout_height="wrap_content">
+        
+            <TextView android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginBottom="20dp"
+                      android:id="@+id/card_details_label"
+                      android:text=""
+                      android:gravity="center"
+                      
+                      android:layout_marginStart="10dp"
+                      android:layout_marginEnd="10dp"
+                      android:layout_height="wrap_content"/>
+        
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+            
+                <EditText android:layout_width="match_parent"
+                          android:hint="Card Number"
+                          android:id="@+id/card_details_number_et"
+                          android:textSize="15sp"
+                          android:fontFamily="@font/font_family"
+                          android:inputType="number"
+                          android:backgroundTint="@color/colorAccent"
+                          android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+        
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+            
+                <EditText android:layout_width="match_parent"
+                          android:hint="Card Expiry Year"
+                          android:textSize="15sp"
+                          android:maxLength="2"
+                          android:fontFamily="@font/font_family"
+                          android:id="@+id/card_details_expiry_year_et"
+                          android:inputType="number"
+                          android:backgroundTint="@color/colorAccent"
+                          android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+        
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+            
+                <EditText android:layout_width="match_parent"
+                          android:hint="Card Expiry Month"
+                          android:textSize="15sp"
+                          android:maxLength="2"
+                          android:fontFamily="@font/font_family"
+                          android:inputType="number"
+                          android:id="@+id/card_details_expiry_month_et"
+                          android:backgroundTint="@color/colorAccent"
+                          android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+        
+            <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="10dp"
+                    android:layout_height="wrap_content">
+            
+                <EditText android:layout_width="match_parent"
+                          android:hint="Card CVC"
+                          android:textSize="15sp"
+                          android:fontFamily="@font/font_family"
+                          android:inputType="number"
+                          android:id="@+id/card_details_cvc_et"
+                          android:backgroundTint="@color/colorAccent"
+                          android:layout_height="wrap_content"/>
+            </android.support.design.widget.TextInputLayout>
+        
+            <Button android:layout_width="match_parent"
+                    android:background="@drawable/buttonbg"
+                    android:text="DONE!"
+                    android:id="@+id/card_details_done_btn"
+                    android:layout_marginTop="30dp"
+                    android:layout_height="35dp"/>
+    
+    
+        </LinearLayout>
+        
+    </android.support.v4.widget.NestedScrollView>
+
+    
+
+</android.support.v7.widget.CardView>

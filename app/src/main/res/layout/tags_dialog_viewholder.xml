@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.robertlevonyan.views.chip.Chip
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="wrap_content"
+        app:mcv_strokeColor="@color/colorAccent"
+        app:mcv_backgroundColor="@android:color/transparent"
+        app:mcv_strokeSize="1dp"
+        app:mcv_selectable="true"
+        app:mcv_selectedBackgroundColor="@color/colorAccent"
+        app:mcv_textColor="@android:color/black"
+        android:layout_margin="5dp"
+        android:paddingBottom="3dp"
+        android:layout_height="wrap_content"/>

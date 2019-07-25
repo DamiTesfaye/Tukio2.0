@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:padding="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardPreventCornerOverlap="true"
+        android:layout_height="wrap_content">
+
+    <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
+                                                android:layout_height="wrap_content">
+    
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_height="wrap_content">
+        
+            <TextView android:layout_width="wrap_content"
+                      android:id="@+id/range_dialog_label"
+                      android:text="Our alogrithm picks random promoted events to show on other users' feeds and it favours ads with high amount of views but gives every one a chance to show"
+                      android:gravity="center"
+                      android:layout_marginTop="10dp"
+                      android:layout_height="wrap_content"/>
+        
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="5dp"
+                          android:layout_marginTop="20dp"
+                          android:id="@+id/low_range_layout"
+                          android:foreground="?attr/selectableItemBackground"
+                          android:background="@drawable/buttonoutline"
+                          android:layout_height="wrap_content">
+            
+                <ImageView
+                        android:layout_width="50dp"
+                        android:scaleType="centerCrop"
+                        android:layout_marginStart="10dp"
+                        app:srcCompat="@drawable/ic_people"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_height="50dp"/>
+            
+                <TextView android:layout_width="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:textSize="14sp"
+                          android:text="Low amount of views"
+                          android:layout_marginStart="20dp"
+                          android:gravity="center"
+                          android:layout_height="wrap_content"/>
+        
+            </LinearLayout>
+        
+            <LinearLayout android:layout_width="match_parent"
+                          android:orientation="horizontal"
+                          android:padding="5dp"
+                          android:id="@+id/medium_range_layour"
+                          android:layout_marginTop="10dp"
+                          android:foreground="?attr/selectableItemBackground"
+                          android:background="@drawable/buttonoutline"
+                          android:layout_height="wrap_content">
+            
+                <ImageView android:layout_width="50dp"
+                           app:srcCompat="@drawable/ic_people"
+                           android:layout_marginStart="10dp"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_height="50dp"/>
+            
+                <TextView android:layout_width="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:layout_marginStart="20dp"
+                          android:textSize="14sp"
+                          android:text="Medium amount of views"
+                          android:gravity="center"
+                          android:layout_height="wrap_content"/>
+        
+        
+            </LinearLayout>
+        
+            <LinearLayout android:layout_width="match_parent"
+                          app:layout_constraintTop_toBottomOf="@id/range_dialog_label"
+                          android:orientation="horizontal"
+                          android:padding="5dp"
+                          android:layout_marginBottom="10dp"
+                          android:layout_marginTop="10dp"
+                          android:id="@+id/high_range_layout"
+                          android:foreground="?attr/selectableItemBackground"
+                          android:background="@drawable/buttonoutline"
+                          app:layout_constraintEnd_toEndOf="parent"
+                          android:layout_height="wrap_content">
+            
+                <ImageView android:layout_width="50dp"
+                           android:layout_marginStart="10dp"
+                           app:srcCompat="@drawable/ic_people"
+                           android:layout_gravity="center_horizontal"
+                           android:layout_height="50dp"/>
+            
+                <TextView android:layout_width="wrap_content"
+                          android:layout_gravity="center_vertical"
+                          android:textSize="14sp"
+                          android:layout_marginStart="20dp"
+                          android:text="High amount of views"
+                          android:gravity="center"
+                          android:layout_height="wrap_content"/>
+        
+        
+        
+            </LinearLayout>
+    
+        </LinearLayout>
+        
+    </android.support.v4.widget.NestedScrollView>
+    
+    
+
+</android.support.v7.widget.CardView>

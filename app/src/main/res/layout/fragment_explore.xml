@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+>
+
+	<android.support.constraint.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+		<android.support.v4.widget.SwipeRefreshLayout
+				android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/frag_explore_swipe_layout"
+				android:layout_height="match_parent">
+
+			<android.support.v7.widget.RecyclerView
+					android:layout_width="match_parent"
+					android:layout_height="match_parent"
+					android:id="@+id/frag_explore_recycler"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"
+					android:visibility="visible"
+			/>
+
+		</android.support.v4.widget.SwipeRefreshLayout>
+
+        <LinearLayout android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/frag_explore_loading"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:padding="30dp"
+                      android:orientation="vertical"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+
+            <ProgressBar android:layout_width="50dp"
+                       android:layout_height="50dp"
+					 	android:indeterminate="true"
+                       android:layout_gravity="center_horizontal"
+            />
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"
+                      android:layout_margin="10dp"
+                      android:gravity="center_horizontal"
+                      android:text="Getting ready to explore.."
+            />
+
+        </LinearLayout>
+
+		<RelativeLayout android:layout_width="wrap_content"
+		                android:layout_height="wrap_content"
+		                app:layout_constraintTop_toTopOf="parent"
+						android:id="@+id/frag_explore_no_internet"
+		                app:layout_constraintStart_toStartOf="parent"
+		                app:layout_constraintEnd_toEndOf="parent"
+		                android:padding="30dp"
+						android:visibility="gone"
+		                app:layout_constraintBottom_toBottomOf="parent">
+
+
+			<ImageView android:layout_width="50dp"
+			           android:layout_height="50dp"
+			           android:src="@drawable/tukio_logo_t"
+			           android:id="@+id/frag_explore_empty_feed_pic"
+			           android:layout_centerHorizontal="true"
+			/>
+
+			<TextView android:layout_width="wrap_content"
+			          android:layout_below="@id/frag_explore_empty_feed_pic"
+			          android:layout_centerHorizontal="true"
+			          android:layout_height="wrap_content"
+			          android:layout_margin="10dp"
+                      android:gravity="center_horizontal"
+			          android:text="@string/this_shouldn_t_be_happening_check_your_internet_connection_and_try_again"
+			/>
+
+		</RelativeLayout>
+
+	</android.support.constraint.ConstraintLayout>
+
+</layout>

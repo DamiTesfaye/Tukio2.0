@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    android:layout_width="match_parent"
+                                    android:layout_gravity="center_horizontal"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="5dp"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+                                                 android:layout_gravity="center_horizontal"
+                                                 android:layout_height="match_parent">
+
+        <LinearLayout android:layout_width="100dp"
+                      android:orientation="vertical"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintTop_toTopOf="parent"
+                      android:layout_margin="10dp"
+                      android:id="@+id/update_dialog_happening"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      android:padding="5dp"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_notification"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Happening!"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="100dp"
+                      android:orientation="vertical"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      app:layout_constraintStart_toEndOf="@id/update_dialog_happening"
+                      app:layout_constraintTop_toTopOf="parent"
+                      app:layout_constraintEnd_toStartOf="@id/update_dialog_location"
+                      android:layout_margin="10dp"
+                      android:id="@+id/update_dialog_event_name"
+                      android:padding="5dp"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_description"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Description!"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="100dp"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      android:orientation="vertical"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      app:layout_constraintTop_toTopOf="parent"
+                      android:layout_margin="10dp"
+                      android:id="@+id/update_dialog_location"
+                      android:padding="5dp"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_maps"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Location"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="100dp"
+                      android:orientation="vertical"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      app:layout_constraintStart_toStartOf="parent"
+                      app:layout_constraintTop_toBottomOf="@id/update_dialog_happening"
+                      android:layout_margin="10dp"
+                      app:layout_constraintBottom_toBottomOf="parent"
+                      android:id="@+id/update_dialog_date"
+                      android:padding="5dp"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_date"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Date and Time"
+                      android:gravity="center_horizontal"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="100dp"
+                      android:orientation="vertical"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      app:layout_constraintStart_toEndOf="@id/update_dialog_date"
+                      app:layout_constraintEnd_toStartOf="@id/update_dialog_reg_link"
+                      app:layout_constraintTop_toBottomOf="@id/update_dialog_event_name"
+                      app:layout_constraintBottom_toBottomOf="parent"
+                      android:layout_margin="10dp"
+                      android:id="@+id/update_dialog_ticket_link"
+                      android:padding="5dp"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_ticket"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Ticket Link"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="100dp"
+                      android:orientation="vertical"
+                      app:layout_constraintEnd_toEndOf="parent"
+                      android:background="?attr/selectableItemBackgroundBorderless"
+                      app:layout_constraintTop_toBottomOf="@id/update_dialog_location"
+                      android:layout_margin="10dp"
+                      android:id="@+id/update_dialog_reg_link"
+                      android:padding="5dp"
+                      app:layout_constraintBottom_toBottomOf="parent"
+                      android:layout_height="wrap_content">
+
+            <RelativeLayout android:layout_width="70dp"
+                            android:background="@drawable/update_bg"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_height="70dp">
+
+                <ImageView android:layout_width="30dp"
+                           android:layout_centerInParent="true"
+                           android:tint="@color/colorPrimary"
+                           app:srcCompat="@drawable/ic_link"
+                           android:layout_height="30dp"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content"
+                      android:text="Registartion Link"
+                      android:gravity="center_horizontal"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_height="wrap_content"/>
+
+
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		tools:context=".View.Activities.TagsActivity">
+
+	<android.support.constraint.ConstraintLayout
+
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="@color/colorPrimary">
+
+		<ImageButton android:layout_width="wrap_content"
+					 android:layout_height="wrap_content"
+					 android:layout_alignParentStart="true"
+					 android:background="?attr/selectableItemBackgroundBorderless"
+					 app:srcCompat="@drawable/ic_back"
+					 android:layout_centerVertical="true"
+					 android:visibility="visible"
+					 android:scaleType="center"
+					 app:layout_constraintTop_toTopOf="parent"
+					 app:layout_constraintStart_toStartOf="parent"
+					 android:layout_marginTop="20dp"
+					 android:layout_marginStart="20dp"
+					 android:id="@+id/tags_close_activity"
+					 android:layout_marginEnd="10dp"
+
+		/>
+
+	<TextView android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:gravity="start"
+			  app:layout_constraintTop_toBottomOf="@id/tags_close_activity"
+			  android:layout_marginTop="20dp"
+			  android:id="@+id/tags_activity_label"
+			  app:layout_constraintStart_toStartOf="parent"
+			  android:layout_centerVertical="true"
+			  android:textSize="25sp"
+			  android:textStyle="bold"
+			  android:layout_marginStart="20dp"
+			  android:text="Select Interests"
+
+		/>
+
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          app:layout_constraintTop_toBottomOf="@+id/tags_activity_label"
+	          android:layout_marginTop="7dp"
+			  android:layout_marginStart="40dp"
+	          app:layout_constraintStart_toStartOf="parent"
+	          app:layout_constraintEnd_toEndOf="parent"
+	          android:id="@+id/tags_instro"
+	          android:gravity="start"
+	          android:text="@string/select_the_tags_you_are_most_interested_in_this_tags_will_influence_your_events_feed_only_5_tags_can_be_added"
+	/>
+
+	<RelativeLayout android:layout_width="match_parent"
+					app:layout_constraintTop_toBottomOf="@id/tags_instro"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					android:id="@+id/tags_recycler_container"
+					android:layout_marginTop="40dp"
+					android:layout_height="350dp">
+
+		<ProgressBar android:layout_width="70dp"
+					 android:layout_centerInParent="true"
+					 android:visibility="visible"
+                     android:id="@+id/tags_circular_progress_bar"
+					 android:layout_height="70dp"/>
+
+		<android.support.v7.widget.RecyclerView
+				android:layout_width="match_parent"
+				app:layout_constraintStart_toStartOf="parent"
+				android:layout_centerVertical="true"
+				app:layout_constraintEnd_toEndOf="parent"
+				android:id="@+id/tags_container"
+				android:layout_marginStart="20dp"
+				android:layout_marginEnd="20dp"
+				android:layout_height="320dp"
+				/>
+
+	</RelativeLayout>
+
+
+	<RelativeLayout
+			android:layout_width="match_parent"
+			app:layout_constraintTop_toBottomOf="@id/tags_recycler_container"
+			android:background="@drawable/buttonbg"
+			android:layout_marginEnd="20dp"
+			android:animateLayoutChanges="true"
+			android:layout_marginTop="40dp"
+			android:id="@+id/tags_save_interests_container"
+			android:layout_marginStart="20dp"
+			android:layout_height="40dp">
+
+		<ProgressBar android:layout_width="25dp"
+					 android:indeterminateTint="@color/colorAccent"
+					 android:indeterminate="true"
+					 android:layout_centerInParent="true"
+					 android:visibility="gone"
+					 android:id="@+id/tags_save_interests_progress"
+					 android:layout_height="25dp"/>
+
+		<TextView android:layout_width="match_parent"
+				  android:text="Save Interests"
+				  android:gravity="center"
+				  android:textStyle="bold"
+				  android:textSize="15sp"
+				  android:id="@+id/tags_save_interests_text"
+				  android:textColor="@color/colorPrimary"
+				  android:layout_height="match_parent"/>
+
+	</RelativeLayout>
+
+
+	</android.support.constraint.ConstraintLayout>
+
+</layout>

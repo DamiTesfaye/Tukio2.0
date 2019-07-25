@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+		xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:tools="http://schemas.android.com/tools"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		android:layout_width="match_parent"
+		android:background="@color/colorPrimary"
+		android:layout_height="match_parent"
+		tools:context=".View.Activities.AboutActivity">
+
+	
+	<ImageView android:layout_width="120dp"
+			   app:layout_constraintTop_toTopOf="parent"
+			   app:layout_constraintStart_toStartOf="parent"
+			   android:layout_marginTop="60dp"
+			   android:layout_marginStart="5dp"
+			   android:id="@+id/about_app_icon"
+				android:src="@drawable/tukio_logo_tukio"
+			   android:layout_height="50dp"
+	/>
+
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:textSize="20sp"
+	          android:textColor="@android:color/black"
+	          android:text="v1.0"
+	          app:layout_constraintStart_toEndOf="@id/about_app_icon"
+			  app:layout_constraintTop_toTopOf="@id/about_app_icon"
+			  app:layout_constraintBottom_toBottomOf="@id/about_app_icon"
+	          android:layout_marginStart="5dp"
+	          android:id="@+id/about_app_title"
+
+	/>
+
+	<TextView android:layout_width="wrap_content"
+	          app:layout_constraintTop_toBottomOf="@id/about_app_title"
+	          app:layout_constraintStart_toStartOf="parent"
+	          android:layout_marginTop="30dp"
+	          android:textColor="@android:color/black"
+	          android:textSize="17sp"
+	          app:layout_constraintEnd_toEndOf="parent"
+
+	          android:paddingStart="20dp"
+	          android:paddingEnd="30dp"
+	          android:text="@string/bringing_all_events_happening_in_your_area_to_your_screen_in_a_matter_of_seconds_anyways_if_you_feel_there_s_something_that_is_missing_or_something_that_is_not_quite_right_feel_free_to_contact_us_below"
+	          android:layout_height="wrap_content"
+	/>
+	
+	<Button android:layout_width="match_parent"
+			android:background="@drawable/buttonbg"
+			android:layout_marginStart="30dp"
+			android:layout_marginEnd="30dp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			android:layout_marginBottom="10dp"
+			android:id="@+id/about_contact_us"
+			android:text="CONTACT US"
+			app:layout_constraintBottom_toTopOf="@id/about_share"
+			android:layout_height="40dp"/>
+
+	<Button android:layout_width="match_parent"
+	        android:background="@drawable/buttonbg"
+	        android:layout_marginStart="30dp"
+	        android:layout_marginEnd="30dp"
+	        app:layout_constraintStart_toStartOf="parent"
+	        app:layout_constraintEnd_toEndOf="parent"
+	        android:layout_marginBottom="20dp"
+	        android:id="@+id/about_share"
+	        android:text="SHARE THIS APP!"
+	        app:layout_constraintBottom_toTopOf="@id/about_rate_us"
+	        android:layout_height="40dp"/>
+
+	<Button android:layout_width="match_parent"
+	        android:background="@drawable/buttonbg"
+	        android:layout_marginStart="30dp"
+	        android:layout_marginEnd="30dp"
+	        app:layout_constraintBottom_toBottomOf="parent"
+	        android:layout_marginBottom="40dp"
+	        android:text="RATE US!"
+			android:visibility="gone"
+	        android:id="@+id/about_rate_us"
+	        app:layout_constraintStart_toStartOf="parent"
+	        app:layout_constraintEnd_toEndOf="parent"
+	        android:layout_height="0dp"/>
+
+</android.support.constraint.ConstraintLayout>

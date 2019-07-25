@@ -1,0 +1,102 @@
+<resources>
+    <string name="app_name">Tukio</string>
+    <string name="discard_changes_message">Do you want to discard your changes</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="conferences">Conferences</string>
+    <string name="gala">Gala</string>
+    <string name="movement">Movement</string>
+    <string name="party">Party</string>
+    <string name="sports">Sports</string>
+    <string name="full_details">Full Details</string>
+    <string name="title_activity_bottom_activity">bottom_activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="add_tags_manadatory">Select the tags specific to your event</string>
+    <string name="click_the_buttons_below_to_add_special_guests_optional">Click the buttons below to add special guests
+        (optional)
+    </string>
+    <string name="link_to_buy_tickets_optional">Link to buy tickets</string>
+    <string name="registration_link_optional">Registration link</string>
+    <string name="dress_code">Dress code(optional)</string>
+    <string name="add_event_date">Add event date</string>
+    <string name="event_location">Event location</string>
+    <string name="add_the_event_image_poster">Add the event image/poster</string>
+    <string name="event_description">Event description..</string>
+    <string name="event_title">Event title..</string>
+    <string name="title_activity_maps">Event Location</string>
+    <string name="view_more">...</string>
+    <string name="see_directions">Directions</string>
+    <string name="event_s_image">Event\'s Image</string>
+    <string name="check_more_options">Check more options</string>
+    <string name="check_event_s_updates">Check event\'s updates</string>
+    <string name="fine_tuning_your_interests">Fine-tuning your interests..</string>
+    <string name="oops_your_feed_is_empty_check_your_internet_connection_or_try_switching_up_your_interests">Oops, your
+        feed is empty! Check your internet connection or try switching up your interests
+    </string>
+
+    <string name="duration_minutes_shortest">%1$d m</string>
+    <string name="duration_hours_shortest">%1$d h</string>
+    <string name="duration_days_shortest">%1$d d</string>
+    <string name="duration_week_shortest">%1$d w</string>
+
+    <string name="now_time_range">now</string>
+
+    <string name="no_updates_at_the_moment_check_back_later">No Updates at the moment. Check back later</string>
+    <string name="guests_invitees">Guests Invitees</string>
+    <string name="registration_link">Registration Link</string>
+    <string name="ticket_link">Ticket Link</string>
+    <string name="description">Description</string>
+    <string name="this_shouldn_t_be_happening_check_your_internet_connection_and_try_again">This shouldn\'t be
+        happening. Check your internet connection and try again
+    </string>
+    <string name="type_in_comment_here">Type in comment here..</string>
+    <string name="promoted">Promoted</string>
+    <string name="mandatory_details">Mandatory Details</string>
+    <string name="optional_details">Optional Details</string>
+    <string name="modify_interests">Modify Interests</string>
+    <string name="view_posted_events">View posted events..</string>
+    <string name="view_promoted_events">View promoted events..</string>
+    <string name="edit_username_and_bio">Edit Username and Bio</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="profile">Profile</string>
+    <string name="go_back">Go Back</string>
+
+    <string name="channel_name">Tukio Events</string>
+    <string name="channel_desc">Bringing your events happening around you instantaneously</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="select_the_tags_you_are_most_interested_in_this_tags_will_influence_your_events_feed_only_5_tags_can_be_added">
+        Select the tags you are most interested in. This tags will influence your events feed! Only 5 tags can be added!
+    </string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account, Sign Up</string>
+    <string name="let_s_get_started">Let\'s Get Started!</string>
+    <string name="not_board_label">\" Oh! I ddn\'t know about it in time, Now I can\'t make it :( \"</string>
+    <string name="pers_board_label">\" I never know what is going on in this area. I\'m in no way current \"</string>
+    <string name="update_board_label">\" How do I get my event to the largest possible audience!? \"</string>
+    <string name="notifications_feature">No more. \n \n \n Tukio provides notification for all posted events as well as
+        the ability to share said events
+        at the click of a button!
+    </string>
+    <string name="pers_feature">Avoid stories that touch. \n \n \n Tukio is offering you a personalised feed of events
+        and the
+        full info that comes with them. You\'ll never miss an event again!
+    </string>
+    <string name="updates_feature">Don\'t Worry!. \n \n \n Bring your event to an even larger audience by promoting your
+        events in-app!. For the
+        right price, your events can reach everyone in your area
+    </string>
+    <string name="sorry_there_are_no_updates_to_events_that_you_re_going_to_at_the_moment_you_can_try_reloading">Sorry,
+        There are no updates to events that you\'re going to at the moment! You can try reloading..
+    </string>
+    <string name="promoted_instro">After filling your event details, you will select your audience range each having its
+        own price tag. \n \n \nThen you\'ll fill in your card details and the selected price tag will be deducted from
+        your bank acount then your event will be sent!
+    </string>
+    <string name="bringing_all_events_happening_in_your_area_to_your_screen_in_a_matter_of_seconds_anyways_if_you_feel_there_s_something_that_is_missing_or_something_that_is_not_quite_right_feel_free_to_contact_us_below">
+        Bringing all events happening in your area to your screen in a matter of seconds! \n \n \nAnyways, if you feel
+        there\'s
+        something that is missing or something that is not quite right, feel free to contact us below!
+    </string>
+</resources>

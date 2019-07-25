@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="io.neolution.eventify">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <application
+            android:name=".Init_ers.Initializer"
+            android:allowBackup="true"
+            android:icon="@drawable/tukio_icon"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/tukio_icon"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".View.Activities.TagActivity">
+        </activity>
+        <activity
+                android:name=".View.Activities.OnBoardingActivity"
+                android:screenOrientation="portrait"/>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
+
+        <activity
+                android:name=".View.Activities.PromotedEventsActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".View.Activities.ProfileActivity2"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".View.Activities.SplashActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                android:theme="@style/Base.Theme.AppCompat"/>
+        <activity android:name=".View.Activities.AuthActivity"/>
+        <activity
+                android:name=".View.Activities.HomeActivity"
+                android:launchMode="singleTop"
+                android:screenOrientation="portrait"/> <!-- android:screenOrientation="portrait"/> -->
+        <activity
+                android:name=".View.Activities.AboutActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".View.Activities.TagsActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".View.Activities.AddEventActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".View.Activities.UpdatesActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".View.Activities.FullDetails"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".View.Activities.FullDetailsFromLinkActivity"
+                android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                        android:host="tuk.io.events"
+                        android:pathPrefix="/"
+                        android:scheme="http"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name=".View.Activities.CommentActivity"
+                android:screenOrientation="portrait"/>
+        <activity
+                android:name=".View.Activities.PostedEventsActivity"
+                android:screenOrientation="portrait"/>
+
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_icon"
+                android:resource="@drawable/tukio_logo_t"/> <!-- Set color used with incoming notification messages. -->
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_color"
+                android:resource="@color/colorPrimary"/>
+        <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="Tukio Events"/>
+
+        <activity
+                android:name=".View.Activities.AddPromotedEventActivity"
+                android:screenOrientation="portrait"/>
+        <activity android:name=".View.Activities.SignUpActivity"
+        android:theme="@style/AuthThemes"/>
+        <activity android:name=".View.Activities.SignInActivity"
+                  android:theme="@style/AuthThemes"/>
+
+        <service android:name=".Services.MessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+>
+	<android.support.design.widget.CoordinatorLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+
+			<android.support.design.widget.AppBarLayout
+					android:layout_width="match_parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+
+					android:layout_height="wrap_content">
+
+				<android.support.v7.widget.Toolbar
+						android:layout_width="wrap_content"
+						app:layout_scrollFlags="scroll|enterAlways"
+						android:layout_height="?attr/actionBarSize">
+
+					<LinearLayout android:layout_width="match_parent"
+								  android:layout_height="match_parent">
+
+						<TextView
+								android:layout_width="wrap_content"
+								android:text="Home"
+								android:layout_gravity="center_vertical"
+								android:textSize="22sp"
+								android:textStyle="bold"
+								android:layout_height="wrap_content"/>
+
+					</LinearLayout>
+
+				</android.support.v7.widget.Toolbar>
+
+			</android.support.design.widget.AppBarLayout>
+
+			<android.support.v4.widget.SwipeRefreshLayout
+					android:layout_width="match_parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_behavior="@string/appbar_scrolling_view_behavior"
+					android:id="@+id/frag_home_swipe_layout"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"
+					android:layout_height="match_parent">
+
+				<android.support.v7.widget.RecyclerView
+						android:layout_width="match_parent"
+						android:layout_height="0dp"
+						android:id="@+id/frag_home_recycler"
+						app:layout_constraintTop_toTopOf="parent"
+						app:layout_constraintStart_toStartOf="parent"
+						app:layout_constraintEnd_toEndOf="parent"
+						app:layout_constraintBottom_toBottomOf="parent"
+						android:visibility="visible"
+				/>
+
+
+			</android.support.v4.widget.SwipeRefreshLayout>
+
+
+			<LinearLayout android:layout_gravity="center"
+						  android:orientation="vertical"
+						  android:visibility="gone"
+						  android:layout_width="wrap_content"
+						  android:id="@+id/frag_home_fine_tuning_layout"
+						  app:layout_constraintBottom_toBottomOf="parent"
+						  android:layout_height="wrap_content">
+
+				<ProgressBar android:layout_width="wrap_content"
+							 android:indeterminate="true"
+							 android:layout_gravity="center_horizontal"
+							 android:layout_height="wrap_content"/>
+
+				<TextView android:layout_width="wrap_content"
+						  android:layout_gravity="center_horizontal"
+						  android:gravity="center"
+						  android:layout_marginTop="10dp"
+						  android:text="@string/fine_tuning_your_interests"
+						  android:layout_height="wrap_content"/>
+
+			</LinearLayout>
+
+			<android.support.v7.widget.CardView
+					android:layout_width="match_parent"
+					android:layout_gravity="center"
+					android:layout_margin="10dp"
+					android:visibility="gone"
+					android:id="@+id/frag_home_empty_feed_pic_layout"
+					app:cardBackgroundColor="@color/colorPrimary"
+					app:layout_constraintBottom_toBottomOf="parent"
+					android:layout_height="wrap_content">
+
+				<LinearLayout android:layout_width="wrap_content"
+							  android:layout_height="wrap_content"
+							  android:padding="10dp"
+							  android:orientation="vertical"
+							  >
+
+
+					<ImageView android:layout_width="50dp"
+							   android:layout_height="50dp"
+							   android:src="@drawable/tukio_logo_t"
+							   android:id="@+id/frag_home_empty_feed_pic"
+							   android:layout_gravity="center_horizontal"
+					/>
+
+					<TextView android:layout_width="wrap_content"
+							  android:layout_marginBottom="10dp"
+							  android:layout_height="wrap_content"
+							  android:layout_marginStart="25dp"
+							  android:textSize="17sp"
+							  android:layout_marginEnd="25dp"
+							  android:layout_marginTop="10dp"
+							  android:gravity="center"
+							  android:text="@string/oops_your_feed_is_empty_check_your_internet_connection_or_try_switching_up_your_interests"
+					/>
+
+					<Button android:layout_width="match_parent"
+							android:background="@drawable/buttonbg"
+							android:layout_marginTop="20dp"
+							android:id="@+id/frag_home_change_interests"
+							android:text="Change Interests"
+							android:layout_height="35dp"/>
+
+				</LinearLayout>
+
+			</android.support.v7.widget.CardView>
+
+	</android.support.design.widget.CoordinatorLayout>
+
+</layout>

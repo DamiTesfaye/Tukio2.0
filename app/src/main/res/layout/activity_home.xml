@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+			xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:tools="http://schemas.android.com/tools"
+			xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:fab="http://schemas.android.com/apk/res-auto"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			tools:context=".View.Activities.HomeActivity">
+
+		<io.neolution.eventify.View.CustomViews.CustomViewPager
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:id="@+id/home_view_pager"
+                android:paddingBottom="?attr/actionBarSize">
+
+		</io.neolution.eventify.View.CustomViews.CustomViewPager>
+
+
+
+		<android.support.design.widget.BottomNavigationView
+				android:layout_width="match_parent"
+				android:layout_height="?attr/actionBarSize"
+				android:background="@color/colorPrimary"
+				android:layout_gravity="bottom"
+				app:itemIconTint="@color/bottom_bar_bg"
+				app:itemTextColor="@android:color/black"
+				app:menu="@menu/main_menu"
+				app:elevation="5dp"
+				android:id="@+id/home_bottom_nav_bar"
+
+		/>
+
+	<include
+			layout="@layout/share_event_bottomsheet"
+			android:id="@+id/share_event_bottomsheet"/>
+
+    <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/fab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_anchorGravity="bottom|end"
+            app:layout_anchor="@id/home_view_pager"
+            android:layout_marginBottom="75dp"
+            android:layout_marginEnd="20dp"
+            fab:menu_colorNormal="@color/colorAccent"
+            fab:menu_fab_size="normal"
+            android:tint="@color/colorPrimary"
+            fab:menu_icon="@drawable/ic_add_black_24dp"
+            fab:menu_colorPressed="@color/colorPrimary"
+            fab:menu_colorRipple="#2D2F30">
+
+        <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/promoted_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimary"
+                fab:rippleColor="@color/colorAccent"
+                android:src="@drawable/ic_money_accent"
+				app:fab_size="normal"
+                fab:fab_label="Add Promoted Event"
+                fab:fab_colorPressed= "@color/colorAccent"
+
+        />
+
+        <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/home_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_size="normal"
+                android:tint="@color/colorAccent"
+                app:fab_colorNormal="@color/colorPrimary"
+                fab:rippleColor="@color/colorAccent"
+                android:src="@drawable/ic_add_black_24dp_2"
+                fab:fab_label="Add Event"
+                fab:fab_colorPressed= "@color/colorAccent"
+
+        />
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+    
+    <RelativeLayout android:layout_width="wrap_content"
+                  android:orientation="horizontal"
+                    android:visibility="invisible"
+                  android:padding="10dp"
+                    android:id="@+id/loading_more_layout"
+                    android:elevation="5dp"
+                  android:layout_gravity="center_horizontal|bottom"
+                  android:layout_marginBottom="70dp"
+                  android:background="@drawable/buttonbg"
+                  android:layout_height="wrap_content">
+        
+        <ProgressBar android:layout_width="35dp"
+                     android:id="@+id/loading_more"
+                     android:indeterminateTint="@color/colorPrimary"
+                     android:layout_height="35dp"/>
+        
+        <TextView android:layout_width="wrap_content"
+                  android:layout_gravity="center_vertical"
+                  android:textSize="15sp"
+                  android:layout_toEndOf="@id/loading_more"
+                  android:layout_centerVertical="true"
+                  android:layout_marginStart="10dp"
+                  android:layout_marginEnd="15dp"
+                  android:textColor="@color/colorPrimary"
+                  android:text="Loading more"
+                  android:id="@+id/loading_more_text"
+                  android:layout_height="wrap_content"/>
+        
+    </RelativeLayout>
+    
+	
+	</android.support.design.widget.CoordinatorLayout>
+
