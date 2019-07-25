@@ -17,7 +17,23 @@
 
 		</io.neolution.eventify.View.CustomViews.CustomViewPager>
 
+	<android.support.design.widget.FloatingActionButton
+			android:layout_width="wrap_content"
+			app:fabSize="normal"
+			android:id="@+id/home_fab"
+			android:layout_gravity="bottom|end"
+			android:layout_marginBottom="70dp"
+			app:srcCompat="@drawable/fab_add"
+			android:layout_marginEnd="20dp"
+			android:layout_height="wrap_content"/>
 
+    <android.support.design.widget.CoordinatorLayout android:layout_width="match_parent"
+                                                     android:layout_height="match_parent">
+        <include
+                layout="@layout/share_event_bottomsheet"
+                android:id="@+id/share_event_bottomsheet"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 
 		<android.support.design.widget.BottomNavigationView
 				android:layout_width="match_parent"
@@ -31,54 +47,6 @@
 				android:id="@+id/home_bottom_nav_bar"
 
 		/>
-
-	<include
-			layout="@layout/share_event_bottomsheet"
-			android:id="@+id/share_event_bottomsheet"/>
-
-    <com.github.clans.fab.FloatingActionMenu
-            android:id="@+id/fab_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_anchorGravity="bottom|end"
-            app:layout_anchor="@id/home_view_pager"
-            android:layout_marginBottom="75dp"
-            android:layout_marginEnd="20dp"
-            fab:menu_colorNormal="@color/colorAccent"
-            fab:menu_fab_size="normal"
-            android:tint="@color/colorPrimary"
-            fab:menu_icon="@drawable/ic_add_black_24dp"
-            fab:menu_colorPressed="@color/colorPrimary"
-            fab:menu_colorRipple="#2D2F30">
-
-        <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/promoted_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:tint="@color/colorAccent"
-                app:fab_colorNormal="@color/colorPrimary"
-                fab:rippleColor="@color/colorAccent"
-                android:src="@drawable/ic_money_accent"
-				app:fab_size="normal"
-                fab:fab_label="Add Promoted Event"
-                fab:fab_colorPressed= "@color/colorAccent"
-
-        />
-
-        <com.github.clans.fab.FloatingActionButton
-                android:id="@+id/home_fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                fab:fab_size="normal"
-                android:tint="@color/colorAccent"
-                app:fab_colorNormal="@color/colorPrimary"
-                fab:rippleColor="@color/colorAccent"
-                android:src="@drawable/ic_add_black_24dp_2"
-                fab:fab_label="Add Event"
-                fab:fab_colorPressed= "@color/colorAccent"
-
-        />
-    </com.github.clans.fab.FloatingActionMenu>
 
 
     
@@ -111,6 +79,8 @@
                   android:layout_height="wrap_content"/>
         
     </RelativeLayout>
+
+
     
 	
 	</android.support.design.widget.CoordinatorLayout>

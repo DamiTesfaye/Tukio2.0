@@ -82,6 +82,10 @@ class AppUtils {
             }
         }
 
+        fun createEventLink(eventId: String): String{
+            return "$APP_BASE_URL$eventId"
+        }
+
 
 
     }

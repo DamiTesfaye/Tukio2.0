@@ -1,8 +1,6 @@
 package io.neolution.eventify.View.Activities
 
 import android.app.ActivityOptions
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -10,49 +8,46 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.Bundle
-import android.os.IBinder
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View.GONE
+import android.widget.ImageButton
 import android.widget.LinearLayout
-import com.github.clans.fab.FloatingActionButton
-import com.google.android.gms.common.ConnectionResult
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.firebase.messaging.FirebaseMessaging
 import io.neolution.eventify.Data.Adapters.HomePagerAdapter
-import io.neolution.eventify.Data.ModelClasses.UserModel
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.Data.ModelClasses.indicate
-import io.neolution.eventify.Data.ViewModels.ProfileViewModel
-import io.neolution.eventify.Listeners.OnHomeFragmentAttached
+import io.neolution.eventify.Listeners.OnHomeFragmentsAttached
 import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
-import io.neolution.eventify.Repos.FirebaseStorageRepo
-import io.neolution.eventify.Services.GoogleServicesClass
 import io.neolution.eventify.Utils.FirebaseUtils
+import io.neolution.eventify.Utils.IntentUtils
 import io.neolution.eventify.View.CustomViews.CustomViewPager
 import io.neolution.eventify.View.Fragments.HomeFragment.ExploreFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.HomeFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.UpdatesFragment
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity(),  OnHomeFragmentAttached, OnShareEventClicked {
+class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEventClicked {
 
     override fun onShareButtonClick(eventTitle: String, eventId: String, eventLocation: String, eventDate: String) {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        eventTitleToBeShared = eventTitle
+        eventDateToBeShared = eventDate
+        eventLocationToBeShared = eventLocation
+        eventIDToBeShared = eventId
     }
 
     override fun onHomeFragmentAttached() {
 
-        home_fab.apply {
+        homeFab.apply {
             setOnClickListener {
 
-                startActivity(Intent(this@HomeActivity, AddEventActivity::class.java))
+                startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
             }
             setImageDrawable(resources.getDrawable(R.drawable.ic_add_black_24dp))
         }
@@ -60,14 +55,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentAttached, OnShareEventC
 
     override fun onExploreFragmentAttached() {
 
-        homeFab.visibility = GONE
-        home_fab.visibility = GONE
-        home_fab.apply {
-            setOnClickListener {
-                startActivity(Intent(this@HomeActivity, AddEventActivity::class.java))
-            }
-            setImageDrawable(resources.getDrawable(R.drawable.ic_add_black_24dp))
-        }
+//        homeFab.visibility = GONE
     }
 
     override fun onUpdateFragmentAttached() {
@@ -77,9 +65,19 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentAttached, OnShareEventC
     lateinit var adapter: HomePagerAdapter
     lateinit var broadcast: InternetBroadcast
     lateinit var filter: IntentFilter
-    lateinit var homeFab: FloatingActionButton
+    lateinit var homeFab: android.support.design.widget.FloatingActionButton
     private lateinit var shareEventBottomSheet: LinearLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+
+    private lateinit var eventTitleToBeShared: String
+    private lateinit var eventIDToBeShared: String
+    private lateinit var eventDateToBeShared: String
+    private lateinit var eventLocationToBeShared: String
+
+    private lateinit var closeShareEventBottomSheetBtn: ImageButton
+    private lateinit var shareBsheetTukPicBtn: LinearLayout
+    private lateinit var shareBsheetSocialMedia: LinearLayout
+    private lateinit var shareBsheetCopyLink: LinearLayout
 
     var isConnected = false
     var registered = false
@@ -93,6 +91,27 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentAttached, OnShareEventC
         homeFab = findViewById(R.id.home_fab)
         shareEventBottomSheet = findViewById(R.id.share_event_bottomsheet)
         bottomSheetBehavior = BottomSheetBehavior.from(shareEventBottomSheet)
+
+        closeShareEventBottomSheetBtn = findViewById(R.id.share_bsheet_close)
+        closeShareEventBottomSheetBtn.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        shareBsheetTukPicBtn = findViewById(R.id.share_bsheet_tukpic)
+        shareBsheetTukPicBtn.setOnClickListener {
+            //TODO: SHOULD TAKE USER TO TUKPIC CREATING ACTIVITY
+            //FOR NOW,
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
+        shareBsheetSocialMedia.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            IntentUtils.shareEvent(context = this, eventDate = eventDateToBeShared, eventLocation = eventLocationToBeShared,
+                eventTitle = eventTitleToBeShared, eventID = eventIDToBeShared)
+        }
+
+        shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
 
         val currentUserId = AuthRepo.getUserUid()
         updateUid(currentUserId)
@@ -133,20 +152,9 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentAttached, OnShareEventC
         viewPager.adapter = adapter
 
         homeFab.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(Intent(this@HomeActivity, AddEventActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-            }else{
-                startActivity(Intent(this@HomeActivity, AddEventActivity::class.java))
-            }
+            startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
         }
 
-        promoted_fab.setOnClickListener {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                startActivity(Intent(this@HomeActivity, AddPromotedEventActivity::class.java), ActivityOptions.makeSceneTransitionAnimation(this).toBundle())
-            }else{
-                startActivity(Intent(this@HomeActivity, AddPromotedEventActivity::class.java))
-            }
-        }
 
         home_bottom_nav_bar.setOnNavigationItemSelectedListener {
             item ->

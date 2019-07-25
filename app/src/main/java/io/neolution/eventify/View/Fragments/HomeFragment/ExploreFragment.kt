@@ -1,5 +1,6 @@
 package io.neolution.eventify.View.Fragments.HomeFragment
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -19,6 +20,7 @@ import io.neolution.eventify.Data.Adapters.EventTypeAdapter
 import io.neolution.eventify.Data.Adapters.HomeAdapter
 import io.neolution.eventify.Data.ModelClasses.*
 import io.neolution.eventify.Data.ViewModels.EventsViewModel
+import io.neolution.eventify.Listeners.OnHomeFragmentsAttached
 import io.neolution.eventify.R
 import io.neolution.eventify.databinding.NewExploreLayoutBinding
 import java.util.*
@@ -32,6 +34,8 @@ class ExploreFragment: Fragment(){
     lateinit var binding: NewExploreLayoutBinding
     lateinit var eventsViewModel: EventsViewModel
     lateinit var swipeLayout: SwipeRefreshLayout
+
+    private lateinit var onHomeFragmentsAttached: OnHomeFragmentsAttached
 
     lateinit var adapter: HomeAdapter
     lateinit var listOfEvent : MutableList<FullEventsModel>
@@ -110,6 +114,13 @@ class ExploreFragment: Fragment(){
 //        loadExplore()
 
         return binding.root
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+        onHomeFragmentsAttached = context!! as OnHomeFragmentsAttached
+        onHomeFragmentsAttached.onExploreFragmentAttached()
     }
 
 //    private fun loadMoreEvents() {

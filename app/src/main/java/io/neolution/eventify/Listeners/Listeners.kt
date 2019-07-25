@@ -23,7 +23,7 @@ interface OnUpdatesAdded{
     fun onDoneBtnClicked(updateTitle: String, updateDescription: String)
 }
 
-interface OnHomeFragmentAttached{
+interface OnHomeFragmentsAttached{
     fun onHomeFragmentAttached()
 
     fun onExploreFragmentAttached()

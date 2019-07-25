@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
     <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -24,12 +24,15 @@
                     <RelativeLayout android:layout_width="match_parent"
                                     android:layout_weight="1"
                                     android:layout_marginStart="10dp"
+                                    android:layout_marginEnd="10dp"
+                                    android:id="@+id/new_explore_search_container"
                                     android:layout_gravity="center_vertical"
                                     android:background="@drawable/search_edit_text_bg"
                                     android:layout_height="40dp">
 
                         <TextView android:layout_width="wrap_content"
-                                  android:text="Search Tukio"
+                                  android:text="Search Events"
+                                  android:id="@+id/new_explore_seach_textview"
                                   android:layout_alignParentStart="true"
                                   android:layout_centerVertical="true"
                                   android:layout_marginStart="10dp"
@@ -39,7 +42,9 @@
 
                     <ImageButton android:layout_width="45dp"
                                  android:layout_weight="0"
+                                 android:id="@+id/new_explore_searc_settings"
                                  android:tint="@color/colorAccent"
+                                 android:visibility="gone"
                                  android:layout_gravity="center_vertical"
                                  android:background="?attr/selectableItemBackgroundBorderless"
                                  app:srcCompat="@drawable/ic_settings"
@@ -57,8 +62,16 @@
                     android:id="@+id/new_explore_tag_recycler"
                     android:layout_height="50dp"/>
 
-
         </android.support.design.widget.AppBarLayout>
+
+        <GridView android:layout_width="match_parent"
+                  android:numColumns="4"
+                  android:horizontalSpacing="5dp"
+                  android:verticalSpacing="5dp"
+                  android:background="@color/colorPrimary"
+                  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                  tools:listitem="@layout/explore_event_vh"
+                  android:layout_height="match_parent"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

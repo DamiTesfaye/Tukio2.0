@@ -22,6 +22,10 @@
             android:roundIcon="@drawable/tukio_icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".View.Activities.AddEventFinalActivity">
+        </activity>
+        <activity android:name=".View.Activities.AddEventPremActivity">
+        </activity>
         <activity android:name=".View.Activities.TagActivity">
         </activity>
         <activity
@@ -117,10 +121,12 @@
         <activity
                 android:name=".View.Activities.AddPromotedEventActivity"
                 android:screenOrientation="portrait"/>
-        <activity android:name=".View.Activities.SignUpActivity"
-        android:theme="@style/AuthThemes"/>
-        <activity android:name=".View.Activities.SignInActivity"
-                  android:theme="@style/AuthThemes"/>
+        <activity
+                android:name=".View.Activities.SignUpActivity"
+                android:theme="@style/AuthThemes"/>
+        <activity
+                android:name=".View.Activities.SignInActivity"
+                android:theme="@style/AuthThemes"/>
 
         <service android:name=".Services.MessagingService">
             <intent-filter>

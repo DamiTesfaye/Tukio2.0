@@ -37,11 +37,12 @@ class IntentUtils {
 
         fun shareEvent(context: Context, eventTitle: String, eventLocation: String, eventDate: String, eventID: String){
             val shareIntent = Intent()
-            val appBaseUrl = AppUtils.APP_BASE_URL
+
+            val eventLink = AppUtils.createEventLink(eventID)
             shareIntent.action = Intent.ACTION_SEND
 
             val finalText = "${eventTitle.capitalize()} will be taking place at $eventLocation. The time for attendance is $eventDate. \n \n \n" +
-                    "This event is brought to you by Tukio! To view the further descriptions, click the following link: $appBaseUrl$eventID"
+                    "This event is brought to you by Tukio! To view the further descriptions, click the following link: $eventLink"
 
             shareIntent.putExtra(Intent.EXTRA_TEXT, finalText)
             shareIntent.type = "text/plain"
