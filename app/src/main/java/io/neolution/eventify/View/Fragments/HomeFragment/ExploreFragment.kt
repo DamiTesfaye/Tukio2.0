@@ -15,10 +15,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
@@ -33,6 +30,7 @@ import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.View.Activities.AddEventPremActivity
+import io.neolution.eventify.View.Activities.SearchActivity
 import io.neolution.eventify.databinding.NewExploreLayoutBinding
 import java.util.*
 
@@ -60,6 +58,7 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
     private lateinit var exploreLoadingText: TextView
     private lateinit var exploreEmptyTextView: TextView
     private lateinit var exploreEmptyButton: Button
+    private lateinit var exploreSearchContainer: RelativeLayout
 
     private lateinit var onHomeFragmentsAttached: OnHomeFragmentsAttached
     lateinit var homeAdapter: HomeAdapter
@@ -83,6 +82,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
         exploreEmptyButton = binding.root.findViewById(R.id.new_explore_empty_share_event_btn)
         exploreEmptyLayout = binding.root.findViewById(R.id.new_explore_empty_layout)
         exploreEmptyTextView = binding.root.findViewById(R.id.new_explore_empty_text)
+        exploreSearchContainer = binding.root.findViewById(R.id.new_explore_search_container)
+
+        exploreSearchContainer.setOnClickListener {
+            startActivity(Intent(context!!, SearchActivity::class.java))
+        }
 
         exploreEmptyButton.setOnClickListener {
             startActivity(Intent(context!!, AddEventPremActivity::class.java))

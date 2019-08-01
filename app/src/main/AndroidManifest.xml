@@ -25,6 +25,8 @@
             android:roundIcon="@drawable/tukio_icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".View.Activities.SearchActivity">
+        </activity>
         <activity android:name=".View.Activities.EditProfileActivity">
         </activity>
         <activity android:name=".View.Activities.AddEventFinalActivity">
@@ -45,6 +47,7 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
+
         <activity
                 android:name=".View.Activities.SplashActivity"
                 android:screenOrientation="portrait"
@@ -105,6 +108,7 @@
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="Tukio Events"/>
+
         <activity
                 android:name=".View.Activities.SignUpActivity"
                 android:theme="@style/AuthThemes"/>

@@ -122,7 +122,7 @@ class HomeFragment: Fragment(){
         binding.fragHomeFineTuningLayout.visibility = VISIBLE
 
         eventViewModel.getPromotedEvents().orderBy("eventPostTime", Query.Direction.DESCENDING)
-            .addSnapshotListener(activity!!) { snapshot, _ ->
+            .addSnapshotListener { snapshot, _ ->
                 if (snapshot != null && !snapshot.isEmpty) {
 
                     val promotedEventList = mutableListOf<FullEventsModel>()
