@@ -27,10 +27,11 @@ data class EventsModel(var eventType: String?,
                        var eventGuests: HashMap<String, Any>?,
                        var eventImageLinkThumb: String?,
                        var eventPostTime: String?,
-                       var amountPaid: Long?
+                       var amountPaid: Long?,
+                       var eventMilis: Long?
 )  {
     constructor() : this("", "", "", "", "", arrayListOf<String>(),
-        "", "", "", "", "" , HashMap<String, Any>(), "", "", 0)
+        "", "", "", "", "" , HashMap<String, Any>(), "", "", 0, 0)
 
 }
 
@@ -43,7 +44,7 @@ data class FullEventsModel(var eventsModel: EventsModel,
 )  {
     constructor() : this(EventsModel("","", "", "", "", arrayListOf<String>(),
         "", "", "", "", ""
-        , HashMap<String, Any>(), "", "", 0), "")
+        , HashMap<String, Any>(), "", "", 0, 0), "")
 
 }
 
@@ -150,9 +151,11 @@ fun DocumentSnapshot.breakDocumentIntoEvntsModel(): EventsModel {
     val eventImageLinkThumb = this["eventImageLinkThumb"].toString()
     val eventPostTime = this["eventPostTime"].toString()
     val amountPaid = this["amountPaid"] as Long?
+    val eventMilis = this["eventMilis"] as Long?
 
     return EventsModel(eventType, eventTitle, eventDesc, eventLocation,
-        eventDate, eventTags, eventRegLink, userUID, eventTicketLink, eventDressCode, eventImageLink, listOfGuests, eventImageLinkThumb, eventPostTime, amountPaid)
+        eventDate, eventTags, eventRegLink, userUID, eventTicketLink, eventDressCode, eventImageLink,
+        listOfGuests, eventImageLinkThumb, eventPostTime, amountPaid, eventMilis)
 }
 
 fun DocumentSnapshot.breakDownToUserModel(): UserModel{
@@ -226,7 +229,8 @@ fun List<String>.compareLists(otherList: List<String>): Int{
 
 }
 
- fun FullEventsModel.passIntoIntent(context: Context, activity: Class<*>, startedFrom: String, userName: String, eventLocation: String): Intent{
+ fun FullEventsModel.passIntoIntent(context: Context, activity: Class<*>, startedFrom: String,
+                                    userName: String, eventLocation: String): Intent{
     val intent = Intent(context, activity)
 
     intent.putExtra("documentID", this.eventID)
@@ -266,6 +270,7 @@ fun EventsModel.toHashMap(): HashMap<String, Any?>{
     hashMap["eventImageLinkThumb"] = this.eventImageLinkThumb
     hashMap["eventPostTime"] = this.eventPostTime
     hashMap["amountPaid"] = this.amountPaid
+    hashMap["eventMilis"] = this.eventMilis
 
     return hashMap
 }

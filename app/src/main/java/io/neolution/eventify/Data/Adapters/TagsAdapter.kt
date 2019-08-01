@@ -30,7 +30,7 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
     }
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        var isSelected = false
+        var isSelected: Boolean
 
         val chipContainer = holder.itemView.findViewById<RelativeLayout>(R.id.chip_layout_container)
         val chipTextView = holder.itemView.findViewById<TextView>(R.id.chip_layout_text)
@@ -41,15 +41,34 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
 
         chipTextView.text = chipText
         chipImageView.setImageDrawable(ContextCompat.getDrawable(context, chipImage))
-        if (!isSelected) {
-            chipContainer.setOnClickListener {
+
+        if(alreadyStoredTags != null && !alreadyStoredTags.isEmpty()) {
+
+            if (alreadyStoredTags.contains(chipTextView.text.toString())) {
+
+                isSelected = true
+
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg)
                 chipTextView.setTextColor(context.resources.getColor(R.color.colorPrimary))
 
-                onChipSelected__.onChipSelected(chipTextView.text.toString())
-                isSelected = true
+            }else{
+                isSelected = false
+
+                chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg_outline)
+                chipTextView.setTextColor(context.resources.getColor(android.R.color.black))
+
             }
+
         }else{
+            isSelected = false
+
+            chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg_outline)
+            chipTextView.setTextColor(context.resources.getColor(android.R.color.black))
+        }
+
+
+        if (isSelected){
+
             chipContainer.setOnClickListener {
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg_outline)
                 chipTextView.setTextColor(context.resources.getColor(android.R.color.black))
@@ -57,16 +76,13 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
                 onChipSelected__.onChipDeselected(chipTextView.text.toString())
                 isSelected = false
             }
-        }
-
-        if(alreadyStoredTags != null && !alreadyStoredTags.isEmpty()){
-
-            if(alreadyStoredTags.contains(chipTextView.text.toString())){
-
+        }else{
+            chipContainer.setOnClickListener {
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg)
                 chipTextView.setTextColor(context.resources.getColor(R.color.colorPrimary))
 
                 onChipSelected__.onChipSelected(chipTextView.text.toString())
+                isSelected = true
             }
         }
     }

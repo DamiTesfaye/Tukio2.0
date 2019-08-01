@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="io.neolution.eventify">
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -13,6 +14,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
 
     <application
             android:name=".Init_ers.Initializer"
@@ -22,11 +25,11 @@
             android:roundIcon="@drawable/tukio_icon"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".View.Activities.EditProfileActivity">
+        </activity>
         <activity android:name=".View.Activities.AddEventFinalActivity">
         </activity>
         <activity android:name=".View.Activities.AddEventPremActivity">
-        </activity>
-        <activity android:name=".View.Activities.TagActivity">
         </activity>
         <activity
                 android:name=".View.Activities.OnBoardingActivity"
@@ -42,14 +45,6 @@
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
-
-        <activity
-                android:name=".View.Activities.PromotedEventsActivity"
-                android:screenOrientation="portrait">
-        </activity>
-        <activity
-                android:name=".View.Activities.ProfileActivity2"
-                android:screenOrientation="portrait"/>
         <activity
                 android:name=".View.Activities.SplashActivity"
                 android:screenOrientation="portrait"
@@ -64,7 +59,6 @@
         <activity
                 android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
                 android:theme="@style/Base.Theme.AppCompat"/>
-        <activity android:name=".View.Activities.AuthActivity"/>
         <activity
                 android:name=".View.Activities.HomeActivity"
                 android:launchMode="singleTop"
@@ -76,9 +70,6 @@
                 android:name=".View.Activities.TagsActivity"
                 android:screenOrientation="portrait">
         </activity>
-        <activity
-                android:name=".View.Activities.AddEventActivity"
-                android:screenOrientation="portrait"/>
         <activity
                 android:name=".View.Activities.UpdatesActivity"
                 android:screenOrientation="portrait">
@@ -104,9 +95,6 @@
         <activity
                 android:name=".View.Activities.CommentActivity"
                 android:screenOrientation="portrait"/>
-        <activity
-                android:name=".View.Activities.PostedEventsActivity"
-                android:screenOrientation="portrait"/>
 
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_icon"
@@ -117,10 +105,6 @@
         <meta-data
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="Tukio Events"/>
-
-        <activity
-                android:name=".View.Activities.AddPromotedEventActivity"
-                android:screenOrientation="portrait"/>
         <activity
                 android:name=".View.Activities.SignUpActivity"
                 android:theme="@style/AuthThemes"/>

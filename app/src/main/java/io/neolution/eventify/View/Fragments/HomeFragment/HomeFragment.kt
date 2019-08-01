@@ -15,13 +15,14 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.RelativeLayout
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
 import io.neolution.eventify.Data.Adapters.HomeAdapter
 import io.neolution.eventify.Data.ModelClasses.*
 import io.neolution.eventify.Data.ViewModels.EventsViewModel
+import io.neolution.eventify.Listeners.OnAddReminderClicked
+import io.neolution.eventify.Listeners.OnHomeFragmentsAttached
 import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.FireStoreRepo
@@ -32,17 +33,21 @@ import java.util.*
 /**
  * Created by Big-Nosed Developer on the Edge of Infinity.
  */
-class HomeFragment: Fragment() {
+class HomeFragment: Fragment(){
+
 
     lateinit var binding: FragmentHomeBinding
     lateinit var swipeLayout: SwipeRefreshLayout
     lateinit var noInternetLayout: CardView
     lateinit var eventViewModel: EventsViewModel
+    private lateinit var onHomeFragmentAttached: OnHomeFragmentsAttached
 
     private var alreadyLoaded = true
     private lateinit var listOfEvent: MutableList<FullEventsModel>
     private lateinit var lastDocumentSnapshot: DocumentSnapshot
+
     private lateinit var shareEventListener: OnShareEventClicked
+    private lateinit var onAddReminderClicked: OnAddReminderClicked
 
     private lateinit var adapter: HomeAdapter
     private lateinit var fireStoreRepoInstance: FireStoreRepo
@@ -61,9 +66,10 @@ class HomeFragment: Fragment() {
         }
 
         shareEventListener = activity!! as OnShareEventClicked
+        onAddReminderClicked = activity!! as OnAddReminderClicked
 
         listOfEvent = mutableListOf()
-        adapter = HomeAdapter(context!!, listOfEvent, activity!!, shareEventListener)
+        adapter = HomeAdapter(context!!, listOfEvent, activity!!, shareEventListener, onAddReminderClicked)
 
         binding.fragHomeRecycler.adapter = adapter
 
@@ -79,10 +85,9 @@ class HomeFragment: Fragment() {
             setHasFixedSize(true)
 
             addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
-
-                    if (!recyclerView!!.canScrollVertically(1)) {
+                    if (!recyclerView.canScrollVertically(1)) {
                         loadMoreEvents()
 
                     }
@@ -100,6 +105,9 @@ class HomeFragment: Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
+
+        onHomeFragmentAttached = context!! as OnHomeFragmentsAttached
+        onHomeFragmentAttached.onHomeFragmentAttached()
 
 //        shareEventListener = context!! as OnShareEventClicked
     }

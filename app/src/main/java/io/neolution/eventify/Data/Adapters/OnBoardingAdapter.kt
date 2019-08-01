@@ -14,5 +14,13 @@ class OnBoardingAdapter(private val listFragment: List<Fragment>, manager: Fragm
         return listFragment.size
     }
 
-
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when (position){
+            0 -> "Posted Events"
+            1 -> "Promoted Events"
+            else -> {
+              ""
+            }
+        }
+    }
 }

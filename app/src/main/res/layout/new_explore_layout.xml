@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
-
     <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
@@ -30,12 +29,19 @@
                                     android:background="@drawable/search_edit_text_bg"
                                     android:layout_height="40dp">
 
+                        <ImageView android:layout_width="20dp"
+                                   android:layout_centerVertical="true"
+                                   android:id="@+id/new_explore_search_image"
+                                   android:layout_marginStart="10dp"
+                                   app:srcCompat="@drawable/ic_search"
+                                   android:layout_height="20dp"/>
+
                         <TextView android:layout_width="wrap_content"
                                   android:text="Search Events"
                                   android:id="@+id/new_explore_seach_textview"
-                                  android:layout_alignParentStart="true"
+                                  android:layout_toEndOf="@id/new_explore_search_image"
                                   android:layout_centerVertical="true"
-                                  android:layout_marginStart="10dp"
+                                  android:layout_marginStart="5dp"
                                   android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
@@ -58,21 +64,79 @@
             <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_gravity="bottom"
+                    android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
                     android:id="@+id/new_explore_tag_recycler"
-                    android:layout_height="50dp"/>
+                    android:layout_height="45dp"/>
 
         </android.support.design.widget.AppBarLayout>
 
-        <GridView android:layout_width="match_parent"
-                  android:numColumns="4"
-                  android:horizontalSpacing="5dp"
-                  android:verticalSpacing="5dp"
-                  android:background="@color/colorPrimary"
-                  app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                  tools:listitem="@layout/explore_event_vh"
-                  android:layout_height="match_parent"/>
+        <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                android:id="@+id/new_explore_event_recycler"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                android:layout_height="match_parent">
 
-    </android.support.design.widget.CoordinatorLayout>
+        </android.support.v7.widget.RecyclerView>
 
-</layout>
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_gravity="center"
+                      android:padding="10dp"
+                      android:visibility="gone"
+                      android:id="@+id/new_explore_progress_layout"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+
+            <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="wrap_content"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:gravity="center"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="10dp"
+                      android:id="@+id/new_explore_progress_text"
+                      android:textStyle="bold"
+                      android:text="Loading Tech Events"
+                      android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_gravity="center"
+                      android:padding="10dp"
+                      android:visibility="gone"
+                      android:background="@color/colorPrimary"
+                      android:id="@+id/new_explore_empty_layout"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+
+            <ImageView android:layout_width="match_parent"
+                       android:layout_marginStart="20dp"
+                       android:layout_marginEnd="20dp"
+                       android:layout_gravity="center_horizontal"
+                       android:src="@drawable/talking"
+                       android:scaleType="centerCrop"
+                       android:layout_height="200dp"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:gravity="center"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="20dp"
+                      android:id="@+id/new_explore_empty_text"
+                      android:textStyle="bold"
+                      android:text="There are no Tech Events for now..."
+                      android:layout_height="wrap_content"/>
+
+            <Button android:layout_width="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:id="@+id/new_explore_empty_share_event_btn"
+                    android:text="Share Event"
+                    android:background="@drawable/buttonbg"
+                    android:layout_height="35dp"/>
+
+        </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>

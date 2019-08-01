@@ -11,9 +11,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import de.hdodenhof.circleimageview.CircleImageView
 import io.neolution.eventify.Data.ModelClasses.ChipModel
+import io.neolution.eventify.Listeners.OnEventTypeSelected
 import io.neolution.eventify.R
 
-class EventTypeAdapter(var chipList: MutableList<ChipModel>, val context: Context): RecyclerView.Adapter<EventTypeAdapter.ViewHolder>() {
+class EventTypeAdapter(var chipList: MutableList<ChipModel>, val context: Context, val onEventTypeSelected: OnEventTypeSelected): RecyclerView.Adapter<EventTypeAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view= LayoutInflater.from(context).inflate(R.layout.chip_layout, parent, false)
@@ -29,6 +30,10 @@ class EventTypeAdapter(var chipList: MutableList<ChipModel>, val context: Contex
 
         chipTextView.text = chipText
         chipImageView.setImageDrawable(ContextCompat.getDrawable(context, chipImage))
+
+        holder.itemView.setOnClickListener {
+            onEventTypeSelected.onEventTypeClicked(chipText)
+        }
     }
 
     override fun getItemCount() = chipList.size

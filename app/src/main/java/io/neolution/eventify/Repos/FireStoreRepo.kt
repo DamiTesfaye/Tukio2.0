@@ -267,9 +267,7 @@ class FireStoreRepo {
 
         if (userPicLink != null){
             val uri = Uri.parse(userPicLink)
-
-            var finalPicLink : String? = null
-//        var finalThumbLink: String? = null
+            var finalPicLink : String?
 
             FirebaseStorageRepo.putUserImage(uri).addOnCompleteListener { picLinkTask ->
                 if (picLinkTask.isSuccessful){

@@ -12,7 +12,7 @@
 					app:layout_constraintTop_toTopOf="parent"
 					app:layout_constraintStart_toStartOf="parent"
 					app:layout_constraintEnd_toEndOf="parent"
-
+					app:elevation="0dp"
 					android:layout_height="wrap_content">
 
 				<android.support.v7.widget.Toolbar
@@ -50,6 +50,7 @@
 				<android.support.v7.widget.RecyclerView
 						android:layout_width="match_parent"
 						android:layout_height="0dp"
+						android:background="@color/colorPrimary"
 						android:id="@+id/frag_home_recycler"
 						app:layout_constraintTop_toTopOf="parent"
 						app:layout_constraintStart_toStartOf="parent"
@@ -97,13 +98,11 @@
 				<LinearLayout android:layout_width="wrap_content"
 							  android:layout_height="wrap_content"
 							  android:padding="10dp"
-							  android:orientation="vertical"
-							  >
+							  android:orientation="vertical">
 
-
-					<ImageView android:layout_width="50dp"
-							   android:layout_height="50dp"
-							   android:src="@drawable/tukio_logo_t"
+					<ImageView android:layout_width="match_parent"
+							   android:layout_height="200dp"
+							   android:src="@drawable/talking"
 							   android:id="@+id/frag_home_empty_feed_pic"
 							   android:layout_gravity="center_horizontal"
 					/>
@@ -112,9 +111,9 @@
 							  android:layout_marginBottom="10dp"
 							  android:layout_height="wrap_content"
 							  android:layout_marginStart="25dp"
-							  android:textSize="17sp"
+							  android:textSize="15sp"
 							  android:layout_marginEnd="25dp"
-							  android:layout_marginTop="10dp"
+							  android:layout_marginTop="20dp"
 							  android:gravity="center"
 							  android:text="@string/oops_your_feed_is_empty_check_your_internet_connection_or_try_switching_up_your_interests"
 					/>

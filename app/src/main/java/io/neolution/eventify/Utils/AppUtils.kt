@@ -1,25 +1,16 @@
 package io.neolution.eventify.Utils
 
-import android.Manifest
-import android.app.Activity
 import android.app.ProgressDialog
 import android.content.Context
-import android.content.pm.PackageManager
-import android.os.Build
 import android.support.design.widget.Snackbar
-import android.support.v4.app.ActivityCompat
-import android.support.v4.app.ActivityCompat.requestPermissions
-import android.support.v4.app.FragmentActivity
 import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.TextView
-import com.google.android.gms.common.api.GoogleApiClient
+import io.neolution.eventify.Data.ModelClasses.ChipModel
 import io.neolution.eventify.R
-import io.neolution.eventify.Services.GoogleServicesClass
-import java.util.*
 
 /**
  * Created by Big-Nosed Developer on the Edge of Infinity.
@@ -86,9 +77,57 @@ class AppUtils {
             return "$APP_BASE_URL$eventId"
         }
 
+        fun createChipList(): MutableList<ChipModel>{
+            return mutableListOf(
+                ChipModel("Art", R.drawable.ic_creativity),
+                ChipModel("Trade Shows", R.drawable.ic_trade_show),
+                ChipModel("Carnivals", R.drawable.ic_mask),
+                ChipModel("Video Games", R.drawable.ic_game_controller),
+                ChipModel("Law", R.drawable.ic_auction),
+                ChipModel("Chess",R.drawable.ic_chess),
+                ChipModel("Cosplay", R.drawable.ic_cosplayer),
+                ChipModel("Exercise", R.drawable.ic_exercise),
+                ChipModel("Weddings", R.drawable.ic_rings),
+                ChipModel("Food", R.drawable.ic_apple),
+                ChipModel("Travel", R.drawable.ic_world),
+                ChipModel("Skating", R.drawable.ic_skateboard),
+                ChipModel("Tennis", R.drawable.ic_tennis_ball),
+                ChipModel("Tour", R.drawable.ic_road),
+                ChipModel("Easter", R.drawable.ic_magic_hat),
+                ChipModel("Eid-Al-Fitr", R.drawable.ic_islam),
+                ChipModel("Eid-Al-Adha", R.drawable.ic_islam),
+                ChipModel("New Year", R.drawable.ic_confetti2),
+                ChipModel("Protest", R.drawable.ic_megaphone),
+                ChipModel("Table Tennis", R.drawable.ic_ping_pong),
+                ChipModel("Christmas", R.drawable.ic_santa_hat),
+                ChipModel("Theatre", R.drawable.ic_puppet),
+                ChipModel("Philosophy", R.drawable.ic_yin_yang),
+                ChipModel("Festival", R.drawable.ic_band),
+                ChipModel("Writing", R.drawable.ic_edit_vd),
+                ChipModel("Contests", R.drawable.ic_competition),
+                ChipModel("Tech", R.drawable.ic_electronics),
+                ChipModel("Movement", R.drawable.ic_fist),
+                ChipModel("MeetUp", R.drawable.ic_reunion),
+                ChipModel("Business", R.drawable.ic_handshake),
+                ChipModel("Concerts", R.drawable.ic_stage),
+                ChipModel("Conferences", R.drawable.ic_lecture),
+                ChipModel("Parties", R.drawable.ic_confetti),
+                ChipModel("Workshops/Seminars", R.drawable.ic_analytics),
+                ChipModel("Birthdays", R.drawable.ic_birthday_cake),
+                ChipModel("Christian", R.drawable.ic_church),
+                ChipModel("Muslim", R.drawable.ic_mosque),
+                ChipModel("Football", R.drawable.ic_soccer),
+                ChipModel("Basketball", R.drawable.ic_basketball),
+                ChipModel("Tests", R.drawable.ic_test),
+                ChipModel("Examinations", R.drawable.ic_exam),
+                ChipModel("Movies", R.drawable.ic_popcorn)
+            )
+        }
 
 
     }
 
 }
+
+
 

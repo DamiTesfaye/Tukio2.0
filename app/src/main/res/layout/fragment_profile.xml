@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
+        tools:context=".View.Fragments.HomeFragment.Profile">
+
+    <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:paddingTop="20dp"
+                    android:orientation="vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="20dp"
+                    android:layout_height="wrap_content">
+
+                <ImageButton android:layout_width="wrap_content"
+                             android:background="?attr/selectableItemBackgroundBorderless"
+                             android:layout_gravity="end"
+                             android:id="@+id/profile_frag_menu_btn"
+                             app:srcCompat="@drawable/ic_more"
+                             android:layout_height="wrap_content"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="70dp"
+                        android:layout_gravity="center_horizontal"
+                        app:civ_border_color="@color/colorAccent"
+                        app:civ_border_width="2dp"
+                        android:id="@+id/profile_frag_userimage"
+                        android:src="@drawable/ic_default_user"
+                        android:layout_height="70dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:textSize="17sp"
+                        android:id="@+id/profile_frag_username"
+                        android:textStyle="bold"
+                        android:text="The Merovingian"
+                        android:layout_height="wrap_content"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/profile_frag_user_bio"
+                        android:textSize="13sp"
+                        android:text="Causality is the basic aspect of the world. Matrix or Otherwise."
+                        android:layout_height="wrap_content"/>
+
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+        <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:background="@color/colorPrimary"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabGravity="fill"
+                app:tabIndicatorHeight="2dp"
+                android:id="@+id/profile_frag_tab_layout"
+                app:tabTextColor="@android:color/black"
+                android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:id="@+id/profile_frag_viewpager"
+            android:layout_height="match_parent"/>
+
+</android.support.design.widget.CoordinatorLayout>

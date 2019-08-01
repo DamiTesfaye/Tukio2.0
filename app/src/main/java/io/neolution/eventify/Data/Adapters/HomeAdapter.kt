@@ -24,6 +24,7 @@ import io.neolution.eventify.Data.ModelClasses.FullEventsModel
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.Data.ModelClasses.initRecyclerView
 import io.neolution.eventify.Data.ModelClasses.passIntoIntent
+import io.neolution.eventify.Listeners.OnAddReminderClicked
 import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.FireStoreRepo
@@ -40,7 +41,9 @@ import io.neolution.eventify.View.Activities.UpdatesActivity
  * Created by Big-Nosed Developer on the Edge of Infinity.
  */
 class HomeAdapter(val context: Context,
-                  val listOfEvents: List<FullEventsModel>,val activity: FragmentActivity, var shareEventListener: OnShareEventClicked)
+                  val listOfEvents: List<FullEventsModel>,
+                  val activity: FragmentActivity, var shareEventListener: OnShareEventClicked,
+                  var onAddReminderClicked: OnAddReminderClicked)
     : RecyclerView.Adapter<HomeAdapter.HomeViewholder>() {
 
     private val fireStoreRepo = FireStoreRepo()
@@ -61,20 +64,25 @@ class HomeAdapter(val context: Context,
 
         var userName = ""
 
-        userInfo.addSnapshotListener(activity) { snapshot, _ ->
+        userInfo.addSnapshotListener { snapshot, _ ->
             if (snapshot != null && snapshot.exists()){
                    val userModel = snapshot.breakDownToUserModel()
                 userName = userModel.userName
                 val userPicLink = userModel.userImage
 
                 holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).background = ContextCompat.getDrawable(context, R.drawable.transparent_drawable)
-                holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).text = userName
 
+                if (userName.length <= 30){
+                    holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).text = userName
+                }else{
+                    val shortenedUsername = userName.substring(0, 30) + "..."
+                    holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).text = shortenedUsername
+                }
 
                 val imageView = holder.itemView.findViewById<CircleImageView>(R.id.new_event_vh_user_image)
 
                 val requestOptions = RequestOptions()
-                requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder))
+                requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.ic_default_user))
                 val thumbNailRequest = Glide.with(context.applicationContext).load(userModel.userThumbLink)
 
                 Glide.with(context.applicationContext)
@@ -83,7 +91,6 @@ class HomeAdapter(val context: Context,
                     .load(userPicLink)
                     .thumbnail(thumbNailRequest)
                     .into(imageView)
-
             }
         }
 
@@ -95,32 +102,35 @@ class HomeAdapter(val context: Context,
             promotedTag.visibility = GONE
         }
 
-        holder.itemView.findViewById<TextView>(R.id.new_event_vh_location_text)
-            .text = currentEvents.eventsModel.eventLocation
+        if (currentEvents.eventsModel.eventLocation.length <= 80){
+            holder.itemView.findViewById<TextView>(R.id.new_event_vh_location_text)
+                .text = currentEvents.eventsModel.eventLocation
+        }else{
+            val shortenedLocation = currentEvents.eventsModel.eventLocation.substring(0, 80) + "..."
+            holder.itemView.findViewById<TextView>(R.id.new_event_vh_location_text)
+                .text = shortenedLocation
+        }
 
+        val reminderButton = holder.itemView.findViewById<ImageButton>(R.id.new_event_vh_reminder_btn)
+        if (currentEvents.eventsModel.eventMilis == null){
+            reminderButton.visibility = GONE
+        }else{
+            reminderButton.visibility = VISIBLE
+            reminderButton.setOnClickListener {
+                onAddReminderClicked.OnAddReminderButtonClicked(currentEvents.eventsModel.eventMilis!!)
+            }
+        }
 
         holder.itemView.findViewById<ImageView>(R.id.new_event_vh_share_event).setOnClickListener {
-//
-//      //TODO: SHOULD POP OUT A BOTTOM SHEET ASKING IF THEY WANT TO USE TUK PIC OR JUST SHARING NORMALLY
-// IntentUtils.shareEvent(context = context, eventTitle = currentEvents.eventsModel.eventTitle,
-//                eventLocation =  currentEvents.eventsModel.eventLocation,
-//                eventDate = currentEvents.eventsModel.eventDate,
-//                eventID =currentEvents.eventID)
 
             shareEventListener.onShareButtonClick(eventTitle = currentEvents.eventsModel.eventTitle,
                 eventLocation = currentEvents.eventsModel.eventLocation, eventDate = currentEvents.eventsModel.eventDate,
                 eventId = currentEvents.eventID)
         }
 
-//        holder.itemView.findViewById<TextView>(R.id.explore_viewholder_event_location_see_directions).setOnClickListener {
-//
-//            GoogleServicesClass.startLocationActivity(currentEvents.eventsModel.eventLocation, context)
-//        }
-
-
         val imageView = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_event_image)
         val requestOptions = RequestOptions()
-        requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.eventify_placeholder))
+        requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.placeholder_2))
 
         val thumbNailRequest = Glide.with(context).load(currentEvents.eventsModel.eventImageLinkThumb)
         Glide.with(context.applicationContext)
@@ -130,81 +140,38 @@ class HomeAdapter(val context: Context,
             .load(currentEvents.eventsModel.eventImageLink)
             .into(imageView)
 
-//        holder.itemView.findViewById<CardView>(R.id.event_poster_container).setOnClickListener {
-//            if ( userName != "" ){
-//
-//                currentEvents.eventsModel.eventType?.let {eventType ->
-//                    if (eventType == "promoted"){
-//
-//                        if (currentEvents.eventsModel.userUID != FirebaseUtils().getUserUID(context)){
-//                            fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
-//                                .get().addOnSuccessListener { document ->
-//                                    if (document != null && document.exists()){
-//
-//                                    }else{
-//
-//                                        val timeStamp = FieldValue.serverTimestamp()
-//                                        val hashMap = HashMap<String, Any>()
-//                                        hashMap["timestamp"] = timeStamp
-//
-//                                        fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context)).set(hashMap)
-//                                    }
-//
-//                                }
-//                        }
-//
-//
-//                    }
-//                }
-//
-//                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
-//                    , userName = userName, startedFrom = this.javaClass.name)
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-//                }else{
-//                    context.startActivity(intent)
-//                }
-//            }
-//        }
+        holder.itemView.setOnClickListener {
+            if ( userName != "" ){
 
-//        holder.itemView.findViewById<TextView>(R.id.explore_viewholder_view_full_details_tv).setOnClickListener {
-//
-//            if ( userName != "" ){
-//
-//                currentEvents.eventsModel.eventType?.let {eventType ->
-//                    if (eventType == "promoted"){
-//
-//                        if (currentEvents.eventsModel.userUID != FirebaseUtils().getUserUID(context)){
-//                            fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
-//                                .get().addOnSuccessListener { document ->
-//                                    if (document != null && document.exists()){
-//
-//                                    }else{
-//
-//                                        val timeStamp = FieldValue.serverTimestamp()
-//                                        val hashMap = HashMap<String, Any>()
-//                                        hashMap["timestamp"] = timeStamp
-//
-//                                        fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context)).set(hashMap)
-//                                    }
-//
-//                            }
-//                        }
-//
-//
-//                    }
-//                }
-//
-//                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
-//                    , userName = userName, startedFrom = this.javaClass.name)
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                    context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-//                }else{
-//                    context.startActivity(intent)
-//                }
-//            }
-//
-//        }
+                currentEvents.eventsModel.eventType?.let {eventType ->
+                    if (eventType == "promoted"){
+
+                        if (currentEvents.eventsModel.userUID != FirebaseUtils().getUserUID(context)){
+                            fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
+                                .get().addOnSuccessListener { document ->
+                                    if (document != null && document.exists()){
+
+                                    }else{
+
+                                        val timeStamp = FieldValue.serverTimestamp()
+                                        val hashMap = HashMap<String, Any>()
+                                        hashMap["timestamp"] = timeStamp
+
+                                        fireStoreRepo.getPromotedEventClickedCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context)).set(hashMap)
+                                    }
+
+                                }
+                        }
+
+
+                    }
+                }
+
+                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
+                    , userName = userName, startedFrom = this.javaClass.name)
+                context.startActivity(intent)
+            }
+        }
 
         holder.itemView.findViewById<TextView>(R.id.new_event_vh_event_title_text).text = currentEvents.eventsModel.eventTitle
         holder.itemView.findViewById<TextView>(R.id.new_event_vh_date_text).text = currentEvents.eventsModel.eventDate
@@ -220,7 +187,6 @@ class HomeAdapter(val context: Context,
                 updateImageButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notification))
 
             }
-
         }
 
         updateImageButton.setOnClickListener {
@@ -235,80 +201,18 @@ class HomeAdapter(val context: Context,
             }
         }
 
-        // val chipList = mutableListOf("Entertainment", "Sports",
-        ////            "Tech", "Movements", "MeetUps" , "Business",
-        ////            "Concerts", "Conventions/Conferences", "Parties", "Galas", "Motivation",
-        ////            "Skills and Acquisitions", "Workshops/Seminars",
-        ////            "Meetings", "Birthdays", "Sports",
-        ////             "Christian", "Muslim", "Football",
-        ////            "Basketball", "Athletics",
-        ////            "School", "Convocations", "Valedictory Service" , "Relationship",
-        ////            "Festivals", "Tests", "Examination", "Extra-Credits",
-        ////            "Send-Offs")
-
         val eventTagImage = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_tag_image)
         val eventTags = currentEvents.eventsModel.eventTags
-        if (eventTags.size > 1){
-            val eventTag = eventTags[0]
-            when(eventTag){
-                "Tech", "MeetUps" -> {
-                    //TODO: FIND BETTER ICON!
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_robot))
-                }
-                "School", "Tests", "Valedictory Service", "Convocations", "Examination", "Send-Offs", "Skills and Acquisitions"-> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_school))
-                }
-                "Movements" -> {
-                    //TODO: FIND BETTER ICON!
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
-                }
-                "Christian" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_church))
-                }
-                "Sports", "Football" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_soccer))
-                }
-                "Basketball" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
-                }
-                "Athletics" -> {
-                    //TODO: FIND BETTER ICON!
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
 
-                }
-                "Muslim" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_mosque))
+        val eventTag = eventTags[0]
+        val chipTags = AppUtils.createChipList()
 
-                }
-                "Parties", "Galas" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
-                    //TODO: FIND BETTER ICON!
-                }
-
-                "Business" -> {
-                    //TODO: FIND BETTER ICON!
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
-
-                }
-
-                "Birthday" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_birthday_cake))
-                }
-
-                "Conventions/Conferences", "Workshops/Seminars", "Motivation" -> {
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_stage))
-
-                }
-                "Relationship" -> {
-                    //TODO: FIND BETTER ICON!
-                    eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_basketball))
-
-                }
+        for (chipTag in chipTags){
+            if (chipTag.chipText == eventTag){
+                eventTagImage.setImageDrawable(ContextCompat.getDrawable(context, chipTag.imageResource))
             }
         }
 
-
-//        val goingCountTV = holder.itemView.findViewById<TextView>(R.id.explore_viewholder_going_count)
         val commentCountTV = holder.itemView.findViewById<TextView>(R.id.new_event_vh_comment_count)
         val commentBtn = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_comment_button)
 

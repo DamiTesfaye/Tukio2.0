@@ -14,7 +14,6 @@ import android.widget.TextView
 import io.neolution.eventify.Data.ViewModels.AuthViewModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Utils.AppUtils
-import io.neolution.eventify.View.Fragments.AuthFragment.SignupFragments
 
 class SignUpActivity: AppCompatActivity() {
 
@@ -75,7 +74,7 @@ class SignUpActivity: AppCompatActivity() {
 
                         }, if_Successful = {
                             val intent = Intent(this, TagsActivity::class.java)
-                            intent.putExtra("startedFrom", SignupFragments::class.java.simpleName)
+                            intent.putExtra("startedFrom", SignUpActivity::class.java.simpleName)
 
                             startActivity(intent)
                             finish()

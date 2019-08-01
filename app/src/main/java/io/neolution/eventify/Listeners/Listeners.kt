@@ -29,6 +29,18 @@ interface OnHomeFragmentsAttached{
     fun onExploreFragmentAttached()
 
     fun onUpdateFragmentAttached()
+
+    fun onTrendsFragmentAttached()
+
+    fun onProfileFragmentAttached()
+}
+
+interface OnEventTypeSelected{
+    fun onEventTypeClicked(eventType: String)
+}
+
+interface OnAddReminderClicked{
+    fun OnAddReminderButtonClicked(timeInMillis: Long)
 }
 
 interface OnAudienceRangeSelected{
@@ -46,4 +58,8 @@ interface OnNameBioInputted{
 interface OnShareEventClicked{
     fun onShareButtonClick(eventTitle: String, eventId: String, eventLocation: String,
                            eventDate: String)
+}
+
+interface OnEditProfileClicked{
+    fun onEditButtonClicked()
 }
