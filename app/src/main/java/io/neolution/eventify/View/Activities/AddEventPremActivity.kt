@@ -10,12 +10,12 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.StaggeredGridLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.view.View.VISIBLE
 import android.widget.DatePicker
@@ -113,7 +113,10 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         tagBottomSheet = findViewById(R.id.add_event_prem__tag_bottom_sheet)
         bottomSheetBehavior = BottomSheetBehavior.from(tagBottomSheet)
 
-        val manager = StaggeredGridLayoutManager(7, StaggeredGridLayoutManager.HORIZONTAL)
+        val manager = StaggeredGridLayoutManager(
+            7,
+            StaggeredGridLayoutManager.HORIZONTAL
+        )
         manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
         val adapter = AddTagsAdapter(chipList, this, this)
 

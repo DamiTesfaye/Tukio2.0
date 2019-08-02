@@ -1,9 +1,6 @@
 package io.neolution.eventify.Services
 
 import android.content.Context
-import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.location.places.Places
-import android.support.v4.app.FragmentActivity
 import android.content.Intent
 import android.net.Uri
 import io.neolution.eventify.Data.ModelClasses.indicate

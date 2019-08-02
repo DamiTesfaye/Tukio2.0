@@ -1,6 +1,6 @@
 package io.neolution.eventify.Data.ViewModels
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.CollectionReference
 import io.neolution.eventify.Repos.FireStoreRepo
 

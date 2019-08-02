@@ -1,14 +1,14 @@
 package io.neolution.eventify.View.Fragments.HomeFragment
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -100,7 +100,10 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
         val chipList = AppUtils.createChipList()
 
         val adapter = EventTypeAdapter(chipList, context!!, this)
-        val manager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
+        val manager = StaggeredGridLayoutManager(
+            1,
+            StaggeredGridLayoutManager.HORIZONTAL
+        )
         manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
         recyclerView.layoutManager = manager

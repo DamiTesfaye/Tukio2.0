@@ -1,12 +1,14 @@
 package io.neolution.eventify.View.Fragments.HomeFragment
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import io.neolution.eventify.Data.Adapters.HomeAdapter
 import io.neolution.eventify.Data.ModelClasses.FullEventsModel
 import io.neolution.eventify.Data.ModelClasses.breakDocumentIntoEvntsModel
@@ -23,11 +25,17 @@ class PostedEventsFragment: Fragment() {
     private lateinit var adapter: HomeAdapter
     private lateinit var listOfEvents: MutableList<FullEventsModel>
 
+    private lateinit var loadingPostedEvents: ProgressBar
+    private lateinit var postedNoEvents: LinearLayout
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_posted_events, container, false)
 
         val shareEventListener = activity!! as OnShareEventClicked
         val onAddReminderClicked = activity!! as OnAddReminderClicked
+
+        loadingPostedEvents = view.findViewById(R.id.loading_posted_events)
+        postedNoEvents = view.findViewById(R.id.posted_events_no_events)
 
         listOfEvents = mutableListOf()
         adapter = HomeAdapter(context!!, listOfEvents, activity!!, shareEventListener, onAddReminderClicked)
@@ -51,7 +59,7 @@ class PostedEventsFragment: Fragment() {
                         val eventModel = document.breakDocumentIntoEvntsModel()
                         val documentID = document.id
 
-                        loading_posted_events.visibility = View.GONE
+                        loadingPostedEvents.visibility = View.GONE
                         listOfEvents.add(FullEventsModel(eventModel, documentID))
                         adapter.notifyDataSetChanged()
 
@@ -59,8 +67,8 @@ class PostedEventsFragment: Fragment() {
 
                 }else{
 
-                    loading_posted_events.visibility = View.GONE
-                    posted_events_no_events.visibility = View.VISIBLE
+                    loadingPostedEvents.visibility = View.GONE
+                    postedNoEvents.visibility = View.VISIBLE
 
                 }
 

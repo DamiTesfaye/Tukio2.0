@@ -1,6 +1,6 @@
 package io.neolution.eventify.Data.ViewModels
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import io.neolution.eventify.Repos.AuthRepo

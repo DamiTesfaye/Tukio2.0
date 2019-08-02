@@ -1,20 +1,18 @@
 package io.neolution.eventify.View.Activities
 
-import android.app.ActivityOptions
 import android.content.*
 import android.net.ConnectivityManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.messaging.FirebaseMessaging
 import io.neolution.eventify.Data.Adapters.HomePagerAdapter
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
@@ -26,13 +24,13 @@ import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
+import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.Utils.FirebaseUtils
 import io.neolution.eventify.Utils.IntentUtils
 import io.neolution.eventify.View.Fragments.HomeFragment.ExploreFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.HomeFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.Profile
 import io.neolution.eventify.View.Fragments.HomeFragment.UpdatesFragment
-import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEventClicked, OnAddReminderClicked, OnEditProfileClicked {
@@ -94,8 +92,8 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onHomeFragmentAttached() {
 
-        homeFab.visibility = VISIBLE
-        homeFab.apply {
+        val homefab = findViewById<FloatingActionButton>(R.id.home_fab)
+        homefab.apply {
             setOnClickListener {
 
                 startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
@@ -106,17 +104,18 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onExploreFragmentAttached() {
 
-        homeFab.visibility = GONE
+        val homefab = findViewById<FloatingActionButton>(R.id.home_fab)
+        homefab.hide()
     }
 
     override fun onUpdateFragmentAttached() {
-        supportActionBar?.show()
+
     }
 
     lateinit var adapter: HomePagerAdapter
     lateinit var broadcast: InternetBroadcast
     lateinit var filter: IntentFilter
-    lateinit var homeFab: android.support.design.widget.FloatingActionButton
+    lateinit var homeFab: FloatingActionButton
 
     private lateinit var shareEventBottomSheet: LinearLayout
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
@@ -161,7 +160,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         signOut = findViewById(R.id.profile_opt_bsheet_signout)
 
         signOut.setOnClickListener {
-            val dialog = android.support.v7.app.AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
+            val dialog = androidx.appcompat.app.AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
             dialog.setMessage("Are you sure you want to sign out??")
             dialog.setCancelable(false)
             dialog.setPositiveButton("Yes"){
@@ -219,6 +218,9 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         }
 
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
+        shareBsheetCopyLink.setOnClickListener {
+            AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
+        }
 
         val currentUserId = AuthRepo.getUserUid()
         updateUid(currentUserId)
@@ -257,7 +259,8 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
         }
 
-        home_bottom_nav_bar.setOnNavigationItemSelectedListener {
+        val bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
+        bottomNavBar.setOnNavigationItemSelectedListener {
             item ->
             when (item.itemId){
                 R.id.main_menu_home -> {

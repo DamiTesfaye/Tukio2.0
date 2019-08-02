@@ -5,16 +5,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
     >
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:background="@color/colorPrimary"
                 android:layout_height="110dp">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     android:layout_height="?attr/actionBarSize">
@@ -62,9 +62,9 @@
                 </LinearLayout>
 
 
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_gravity="bottom"
                     android:layout_marginTop="5dp"
@@ -72,16 +72,16 @@
                     android:id="@+id/new_explore_tag_recycler"
                     android:layout_height="45dp"/>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:background="@color/colorPrimary"
                 android:id="@+id/new_explore_event_recycler"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout android:layout_width="match_parent"
                       android:layout_gravity="center"
@@ -142,6 +142,6 @@
 
         </LinearLayout>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

@@ -1,14 +1,17 @@
 package io.neolution.eventify.Utils
 
 import android.app.ProgressDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
-import android.support.design.widget.Snackbar
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
+import com.google.android.material.snackbar.Snackbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import io.neolution.eventify.Data.ModelClasses.ChipModel
 import io.neolution.eventify.R
 
@@ -30,15 +33,24 @@ class AppUtils {
         const val APP_BASE_URL = "http://tuk.io.events/"
 
 
-        fun getCustomSnackBar(v: View, m: String, context: Context): Snackbar{
+        fun getCustomSnackBar(v: View, m: String, context: Context): Snackbar {
             val snackBar = Snackbar.make(v, m, Snackbar.LENGTH_LONG)
             val view = snackBar.view
             view.setBackgroundColor(ContextCompat.getColor(context, R.color.colorAccent))
-            val textView = view.findViewById<TextView>(android.support.design.R.id.snackbar_text)
+            val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
             textView.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary))
 
 
             return snackBar
+        }
+
+        fun copyTextToClipBoard(text: String, context: Context){
+            val clipBoard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clip = ClipData.newPlainText("Tukio-Event-Link", text)
+            clipBoard.primaryClip = clip
+
+            Toast.makeText(context, "Event link copied to clipboard", Toast.LENGTH_LONG)
+                .show()
         }
 
         fun instantiateProgressDialog(message: String, context: Context): ProgressDialog{
@@ -57,7 +69,10 @@ class AppUtils {
             return when (layoutManagerType){
 
                 AppUtils.STAGGERED_LAYOUT_MANAGER -> {
-                    val manager = StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL)
+                    val manager = StaggeredGridLayoutManager(
+                        1,
+                        StaggeredGridLayoutManager.HORIZONTAL
+                    )
                     manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
                     manager
                 }

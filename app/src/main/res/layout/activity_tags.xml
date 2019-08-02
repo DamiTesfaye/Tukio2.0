@@ -5,7 +5,7 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		tools:context=".View.Activities.TagsActivity">
 
-	<android.support.constraint.ConstraintLayout
+	<androidx.constraintlayout.widget.ConstraintLayout
 
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
@@ -69,7 +69,7 @@
                      android:id="@+id/tags_circular_progress_bar"
 					 android:layout_height="70dp"/>
 
-		<android.support.v7.widget.RecyclerView
+		<androidx.recyclerview.widget.RecyclerView
 				android:layout_width="match_parent"
 				app:layout_constraintStart_toStartOf="parent"
 				android:layout_centerVertical="true"
@@ -114,6 +114,6 @@
 	</RelativeLayout>
 
 
-	</android.support.constraint.ConstraintLayout>
+	</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -4,11 +4,11 @@ import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.ViewPager
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import io.neolution.eventify.Data.Adapters.OnBoardingAdapter
 import io.neolution.eventify.R
 import io.neolution.eventify.View.Fragments.OnBoardingFragment.NotificationFragment

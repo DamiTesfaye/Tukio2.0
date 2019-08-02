@@ -6,16 +6,16 @@
         tools:context=".View.Activities.FullDetailsFromLinkActivity"
 >
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
 
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <android.support.design.widget.AppBarLayout
+        <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp">
 
-            <android.support.design.widget.CollapsingToolbarLayout
+            <com.google.android.material.appbar.CollapsingToolbarLayout
                     android:layout_width="match_parent"
                     app:layout_scrollFlags="exitUntilCollapsed|scroll"
                     app:title=""
@@ -29,7 +29,7 @@
                            android:scaleType="centerCrop"
                            android:layout_height="match_parent"/>
 
-                <android.support.v7.widget.Toolbar
+                <androidx.appcompat.widget.Toolbar
                         android:layout_width="match_parent"
                         app:layout_collapseMode="pin"
                         android:layout_height="?attr/actionBarSize">
@@ -61,7 +61,7 @@
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.Toolbar>
+                </androidx.appcompat.widget.Toolbar>
 
                 <RelativeLayout android:layout_width="match_parent"
                                 android:layout_height="match_parent">
@@ -111,11 +111,11 @@
 
                 </RelativeLayout>
 
-            </android.support.design.widget.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-        </android.support.design.widget.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:visibility="visible"
                 android:background="@color/colorPrimary"
@@ -260,7 +260,7 @@
                           android:text="@string/guests_invitees"
                           android:layout_height="wrap_content"/>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp"
@@ -342,8 +342,8 @@
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>

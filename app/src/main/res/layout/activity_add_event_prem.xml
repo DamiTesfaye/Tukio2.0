@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.design.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -35,14 +35,14 @@
                   android:text="These are the important aspects of your event!"
                   android:layout_height="wrap_content"/>
 
-        <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content">
+        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                               android:layout_height="wrap_content">
 
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="vertical"
                           android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_marginTop="17dp"
                         app:hintAnimationEnabled="true"
@@ -51,7 +51,7 @@
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:backgroundTint="@android:color/black"
                             android:fontFamily="@font/font_family"
@@ -59,9 +59,9 @@
                             android:textSize="15sp"
                             android:layout_height="wrap_content"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_marginTop="15dp"
                         android:id="@+id/add_event_prem_desc_layout"
@@ -70,7 +70,7 @@
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputEditText
+                    <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:backgroundTint="@android:color/black"
                             android:fontFamily="@font/font_family"
@@ -78,7 +78,7 @@
                             android:textSize="15sp"
                             android:layout_height="wrap_content"/>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
@@ -87,7 +87,7 @@
                               android:layout_marginTop="15dp"
                               android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
 
                             app:hintAnimationEnabled="true"
@@ -98,7 +98,7 @@
                             android:textColorHint="@android:color/darker_gray"
                             android:layout_height="wrap_content">
 
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:backgroundTint="@android:color/black"
                                 android:fontFamily="@font/font_family"
@@ -106,7 +106,7 @@
                                 android:id="@+id/add_event_prem_date_edit"
                                 android:layout_height="wrap_content"/>
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton android:layout_width="35dp"
                                  android:layout_gravity="center_vertical"
@@ -125,7 +125,7 @@
                               android:layout_marginTop="15dp"
                               android:layout_height="wrap_content">
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             app:hintAnimationEnabled="true"
                             android:layout_weight="1"
@@ -135,7 +135,7 @@
                             android:textColorHint="@android:color/darker_gray"
                             android:layout_height="wrap_content">
 
-                        <android.support.design.widget.TextInputEditText
+                        <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:backgroundTint="@android:color/black"
                                 android:fontFamily="@font/font_family"
@@ -143,7 +143,7 @@
                                 android:textSize="15sp"
                                 android:layout_height="wrap_content"/>
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <ImageButton android:layout_width="35dp"
                                  android:layout_gravity="center_vertical"
@@ -232,7 +232,7 @@
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <RelativeLayout android:layout_width="match_parent"
                         android:layout_marginTop="70dp"
@@ -256,5 +256,5 @@
             layout="@layout/add_tag_bottomsheet"
             android:id="@+id/add_event_prem__tag_bottom_sheet"/>
 
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

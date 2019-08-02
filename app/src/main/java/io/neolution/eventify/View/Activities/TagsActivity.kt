@@ -1,12 +1,12 @@
 package io.neolution.eventify.View.Activities
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.view.View.*
 import io.neolution.eventify.Data.Adapters.TagsAdapter
@@ -86,7 +86,10 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
                     adapter = TagsAdapter(chipList, this, userTags, this)
 
                     val recyclerView = binding.tagsContainer
-                    val manager = StaggeredGridLayoutManager(8, StaggeredGridLayoutManager.HORIZONTAL)
+                    val manager = StaggeredGridLayoutManager(
+                        8,
+                        StaggeredGridLayoutManager.HORIZONTAL
+                    )
                     manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
                     recyclerView.apply{
@@ -102,7 +105,10 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
                     adapter = TagsAdapter(chipList, this, null, this)
 
                     val recyclerView = binding.tagsContainer
-                    val manager = StaggeredGridLayoutManager(8, StaggeredGridLayoutManager.HORIZONTAL)
+                    val manager = StaggeredGridLayoutManager(
+                        8,
+                        StaggeredGridLayoutManager.HORIZONTAL
+                    )
                     manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
                     recyclerView.apply{

@@ -1,6 +1,6 @@
 package io.neolution.eventify.Data.ViewModels
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import io.neolution.eventify.Data.LiveDatas.AccountLiveData
 import io.neolution.eventify.Repos.FireStoreRepo
 

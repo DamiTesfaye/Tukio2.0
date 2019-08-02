@@ -1,10 +1,10 @@
 package io.neolution.eventify.View.Fragments.HomeFragment
 
-import android.databinding.DataBindingUtil
+import androidx.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.widget.SwipeRefreshLayout
+import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -108,7 +108,7 @@ class UpdatesFragment: Fragment() {
                 if (list.isEmpty()){
                     progressBar.visibility = GONE
                     binding.fragUpdateRecycler.visibility = GONE
-                    frag_update_empty_feed_layout.visibility = VISIBLE
+                    binding.fragUpdateEmptyFeedLayout.visibility = VISIBLE
 
                     if (swipeLayout.isRefreshing){
                         swipeLayout.isRefreshing = false
@@ -117,7 +117,7 @@ class UpdatesFragment: Fragment() {
 
                     binding.fragUpdateRecycler.visibility = VISIBLE
                     progressBar.visibility = GONE
-                    frag_update_empty_feed_layout.visibility = GONE
+                    binding.fragUpdateEmptyFeedLayout.visibility = GONE
 
                     if (swipeLayout.isRefreshing){
                         swipeLayout.isRefreshing = false

@@ -1,6 +1,6 @@
 package io.neolution.eventify.Data.LiveDatas
 
-import android.arch.lifecycle.LiveData
+import androidx.lifecycle.LiveData
 import io.neolution.eventify.Data.ModelClasses.UserModel
 import io.neolution.eventify.Repos.FireStoreRepo
 

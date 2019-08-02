@@ -1,11 +1,14 @@
 package io.neolution.eventify.View.Activities
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
+import android.content.ContentValues
 import android.content.Context
-import android.support.v7.app.AppCompatActivity
+import android.net.Uri
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -15,10 +18,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
@@ -29,16 +29,53 @@ import io.neolution.eventify.Listeners.OnAddReminderClicked
 import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.FireStoreRepo
+import io.neolution.eventify.Utils.AppUtils
+import io.neolution.eventify.Utils.IntentUtils
 import io.neolution.eventify.View.Fragments.HomeFragment.ExploreFragment
 import java.util.*
 
 class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventClicked {
 
     override fun onShareButtonClick(eventTitle: String, eventId: String, eventLocation: String, eventDate: String) {
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
+        eventTitleToBeShared = eventTitle
+        eventDateToBeShared = eventDate
+        eventLocationToBeShared = eventLocation
+        eventIDToBeShared = eventId
     }
 
     override fun OnAddReminderButtonClicked(timeInMillis: Long) {
+
+        var calName: String = ""
+        var calId: String = ""
+
+        val projection = arrayOf("_id", "name")
+        val calendars = Uri.parse("content://calendar/calendars")
+
+        val managedCursor = managedQuery(
+            calendars, projection,
+            "selected=1", null, null
+        )
+
+        if (managedCursor.moveToFirst()) {
+
+            val nameColumn = managedCursor.getColumnIndex("name")
+            val idColumn = managedCursor.getColumnIndex("_id")
+            do {
+                calName = managedCursor.getString(nameColumn)
+                calId = managedCursor.getString(idColumn)
+            } while (managedCursor.moveToNext())
+        }
+
+        val event = ContentValues()
+        event.put("calendar_id", calId)
+        event.put("title", "Event Title")
+        event.put("description", "Event Desc")
+        event.put("eventLocation", "Event Location")
+
+        Toast.makeText(this, "This Event has been added to your calendar", Toast.LENGTH_LONG)
+            .show()
 
     }
 
@@ -60,11 +97,50 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
     private lateinit var lastDocumentSnapshot: DocumentSnapshot
     private lateinit var listOfEvent: MutableList<FullEventsModel>
 
+    private lateinit var closeShareEventBottomSheetBtn: ImageButton
+    private lateinit var shareBsheetTukPicBtn: LinearLayout
+    private lateinit var shareBsheetSocialMedia: LinearLayout
+    private lateinit var shareBsheetCopyLink: LinearLayout
+
+    private lateinit var shareEventBottomSheet: LinearLayout
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
+
+    private lateinit var eventTitleToBeShared: String
+    private lateinit var eventIDToBeShared: String
+    private lateinit var eventDateToBeShared: String
+    private lateinit var eventLocationToBeShared: String
+
     private var currentSearchType: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
+
+        shareEventBottomSheet = findViewById(R.id.profile_options_bottomsheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(shareEventBottomSheet)
+
+        shareBsheetTukPicBtn = findViewById(R.id.share_bsheet_tukpic)
+        shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
+        shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
+
+        shareBsheetTukPicBtn.setOnClickListener {
+
+        }
+
+        shareBsheetCopyLink.setOnClickListener {
+            AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
+        }
+
+        shareBsheetSocialMedia.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            IntentUtils.shareEvent(context = this, eventDate = eventDateToBeShared, eventLocation = eventLocationToBeShared,
+                eventTitle = eventTitleToBeShared, eventID = eventIDToBeShared)
+        }
+
+        closeShareEventBottomSheetBtn = findViewById(R.id.share_bsheet_close)
+        closeShareEventBottomSheetBtn.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
 
         backBtn = findViewById(R.id.search_activity_back_btn)
         searchEditText = findViewById(R.id.search_activity_edit_text)
