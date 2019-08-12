@@ -1,5 +1,6 @@
 package io.neolution.eventify.View.Activities
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.textfield.TextInputEditText
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
@@ -43,6 +45,8 @@ class SignInActivity: AppCompatActivity() {
 
             if (emailText.isNotEmpty() && passwordText.isNotEmpty()){
 
+                closeKeyboard()
+
                 signInContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
                 signInText.visibility = GONE
                 signInProgress.visibility = VISIBLE
@@ -70,6 +74,16 @@ class SignInActivity: AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun closeKeyboard(){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = currentFocus
+        if (view == null){
+            view = View(this)
+        }
+
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }

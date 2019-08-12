@@ -179,7 +179,7 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
 
                 if (canBeSubmitted){
                     if (p0 != null){
-                        if (p1 == EditorInfo.IME_ACTION_DONE && p2!!.action == KeyEvent.ACTION_DOWN){
+                        if (p1 == EditorInfo.IME_NULL && p2!!.action == KeyEvent.ACTION_DOWN){
                             closeKeyboard()
                             val searchText = p0.text.toString()
                             searchEvents(searchText)
@@ -227,12 +227,8 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
 
         currentSearchType = searchString
 
-        listOfEvent.clear()
-        adapter.notifyDataSetChanged()
-
         searchLayout.visibility = GONE
         searchingLayout.visibility = VISIBLE
-        searchRecycler.visibility = GONE
         emptyLayout.visibility = GONE
 
         var finalPromotedEventsList: MutableList<FullEventsModel>
@@ -270,7 +266,7 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
                     }
 
 
-                    eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING).limit(6).addSnapshotListener (this) { snapshot2, _ ->
+                    eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING).limit(6).addSnapshotListener{ snapshot2, _ ->
 
                         if (snapshot2 != null && !snapshot2.isEmpty){
 
@@ -318,6 +314,9 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
                             searchRecycler.visibility = VISIBLE
                             searchingLayout.visibility = GONE
 
+                            Toast.makeText(this, "$listOfEvent", Toast.LENGTH_LONG)
+                                .show()
+
                         }
 
                         if (listOfEvent.isEmpty()){
@@ -330,7 +329,7 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
 
                 } else {
 
-                    eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING).limit(6).addSnapshotListener (this) { snapshot2, _ ->
+                    eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING).limit(6).addSnapshotListener{ snapshot2, _ ->
 
                         if (snapshot2 != null && !snapshot2.isEmpty){
 

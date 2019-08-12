@@ -51,6 +51,8 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg)
                 chipTextView.setTextColor(context.resources.getColor(R.color.colorPrimary))
 
+                onChipSelected__.onChipSelected(chipTextView.text.toString())
+
             }else{
                 isSelected = false
 

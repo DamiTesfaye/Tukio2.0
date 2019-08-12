@@ -34,9 +34,9 @@
                     app:civ_border_overlay="true"
                     android:id="@+id/new_event_vh_user_image"
                     app:civ_border_width="1dp"
-                    app:civ_fill_color="@color/colorAccent"
+                    app:civ_fill_color="@color/colorPrimary"
                     android:src="@drawable/ic_default_user"
-                    app:civ_border_color="@color/colorAccent"
+                    app:civ_border_color="@color/colorPrimary"
                     android:layout_height="25dp"/>
 
             <TextView android:layout_width="wrap_content"

@@ -104,8 +104,6 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onExploreFragmentAttached() {
 
-        val homefab = findViewById<FloatingActionButton>(R.id.home_fab)
-        homefab.hide()
     }
 
     override fun onUpdateFragmentAttached() {

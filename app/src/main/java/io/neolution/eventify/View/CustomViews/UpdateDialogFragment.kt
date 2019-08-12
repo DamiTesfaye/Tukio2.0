@@ -42,7 +42,7 @@ class UpdateDialogFragment: DialogFragment() {
         return view
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
         OnUpdatesAdded = (context as OnUpdatesAdded)
@@ -52,8 +52,8 @@ class UpdateDialogFragment: DialogFragment() {
         super.onStart()
 
         val dialog = dialog
-        dialog.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog!!.window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog!!.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
 }

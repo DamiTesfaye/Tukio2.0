@@ -62,15 +62,17 @@ class Profile : Fragment() {
                 userBioTextView.text = userModel.userBio
 
                 val requestOptions = RequestOptions()
-                requestOptions.placeholder(ContextCompat.getDrawable(context!!, R.drawable.ic_default_user))
-                val thumbNailRequest = Glide.with(context!!.applicationContext).load(userModel.userThumbLink)
+                if (context != null){
+                    requestOptions.placeholder(ContextCompat.getDrawable(context!!.applicationContext, R.drawable.ic_default_user))
+                    val thumbNailRequest = Glide.with(context!!.applicationContext).load(userModel.userThumbLink)
 
-                Glide.with(context!!.applicationContext)
-                    .setDefaultRequestOptions(requestOptions)
-                    .asDrawable()
-                    .load(userModel.userImage)
-                    .thumbnail(thumbNailRequest)
-                    .into(userImage)
+                    Glide.with(context!!.applicationContext)
+                        .setDefaultRequestOptions(requestOptions)
+                        .asDrawable()
+                        .load(userModel.userImage)
+                        .thumbnail(thumbNailRequest)
+                        .into(userImage)
+                }
             }
         }
 

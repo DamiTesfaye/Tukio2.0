@@ -25,6 +25,16 @@
         <item name="buttonStyle">@style/ButtonTextViewStyle</item>
     </style>
 
+    <style name="EventDetailsTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:navigationBarColor">@color/colorAccent</item>
+        <item name="buttonStyle">@style/ButtonTextViewStyle</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>

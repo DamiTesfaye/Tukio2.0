@@ -103,10 +103,10 @@ class HomeFragment: Fragment(){
         return binding.root
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        onHomeFragmentAttached = context!! as OnHomeFragmentsAttached
+        onHomeFragmentAttached = context as OnHomeFragmentsAttached
         onHomeFragmentAttached.onHomeFragmentAttached()
 
 //        shareEventListener = context!! as OnShareEventClicked
@@ -153,230 +153,235 @@ class HomeFragment: Fragment(){
                     }
 
 
-                    fireStoreRepoInstance.getCurrentUserDocumentPath()
-                        .addSnapshotListener(activity!!) { userSnapshot, _ ->
+                    if (activity != null){
+                        fireStoreRepoInstance.getCurrentUserDocumentPath()
+                            .addSnapshotListener(activity!!) { userSnapshot, _ ->
 
-                            if (userSnapshot != null && userSnapshot.exists()) {
-                                val userModel = userSnapshot.breakDownToUserModel()
-                                val userTags = userModel.tags
+                                if (userSnapshot != null && userSnapshot.exists()) {
+                                    val userModel = userSnapshot.breakDownToUserModel()
+                                    val userTags = userModel.tags
 
-                                if (userTags != null) {
+                                    if (userTags != null) {
 
-                                    eventViewModel.getEventDocuments()
-                                        .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
-                                        .addSnapshotListener(activity!!) { querySnapshot, _ ->
+                                        eventViewModel.getEventDocuments()
+                                            .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
+                                            .addSnapshotListener(activity!!) { querySnapshot, _ ->
 
-                                            if (querySnapshot != null && !querySnapshot.isEmpty) {
+                                                if (querySnapshot != null && !querySnapshot.isEmpty) {
 
-                                                if (alreadyLoaded) {
-                                                    lastDocumentSnapshot =
-                                                        querySnapshot.documents[querySnapshot.size() - 1]
+                                                    if (alreadyLoaded) {
+                                                        lastDocumentSnapshot =
+                                                            querySnapshot.documents[querySnapshot.size() - 1]
 
-                                                }
+                                                    }
 
-                                                for (document in querySnapshot.documentChanges) {
+                                                    for (document in querySnapshot.documentChanges) {
 
-                                                    if (document.type == DocumentChange.Type.ADDED) {
-                                                        val eventModel = document.document.breakDocumentIntoEvntsModel()
-                                                        val eventID = document.document.id
+                                                        if (document.type == DocumentChange.Type.ADDED) {
+                                                            val eventModel = document.document.breakDocumentIntoEvntsModel()
+                                                            val eventID = document.document.id
 
-                                                        if (eventModel.eventTags.compareLists(userTags) > 0) {
+                                                            if (eventModel.eventTags.compareLists(userTags) > 0) {
 
-                                                            if (alreadyLoaded) {
+                                                                if (alreadyLoaded) {
 
-                                                                if (!listOfEvent.contains(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                    if (!listOfEvent.contains(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                ) {
-                                                                    listOfEvent.add(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                    ) {
+                                                                        listOfEvent.add(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                    adapter.notifyDataSetChanged()
+                                                                        adapter.notifyDataSetChanged()
 
-                                                                }
+                                                                    }
 
-                                                            } else {
+                                                                } else {
 
-                                                                if (!listOfEvent.contains(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                    if (!listOfEvent.contains(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                ) {
-                                                                    listOfEvent.add(
-                                                                        0,
-                                                                        FullEventsModel(eventModel, eventID)
-                                                                    )
-                                                                    adapter.notifyDataSetChanged()
+                                                                    ) {
+                                                                        listOfEvent.add(
+                                                                            0,
+                                                                            FullEventsModel(eventModel, eventID)
+                                                                        )
+                                                                        adapter.notifyDataSetChanged()
+
+                                                                    }
 
                                                                 }
 
                                                             }
 
                                                         }
-
-                                                    }
-                                                }
-
-                                                if (swipeLayout.isRefreshing) {
-                                                    swipeLayout.isRefreshing = false
-                                                }
-
-                                                binding.fragHomeFineTuningLayout.visibility = GONE
-                                                binding.fragHomeRecycler.visibility = VISIBLE
-
-
-                                                if (listOfEvent.isEmpty()) {
-                                                    loadMoreEvents()
-
-
-                                                } else {
-                                                    if (finalPromotedEventsList != null) {
-                                                        listOfEvent.addPromotedEventsIntoNormalEvents(
-                                                            finalPromotedEventsList!!
-                                                        )
-                                                        adapter.notifyDataSetChanged()
                                                     }
 
+                                                    if (swipeLayout.isRefreshing) {
+                                                        swipeLayout.isRefreshing = false
+                                                    }
+
+                                                    binding.fragHomeFineTuningLayout.visibility = GONE
+                                                    binding.fragHomeRecycler.visibility = VISIBLE
+
+
+                                                    if (listOfEvent.isEmpty()) {
+                                                        loadMoreEvents()
+
+
+                                                    } else {
+                                                        if (finalPromotedEventsList != null) {
+                                                            listOfEvent.addPromotedEventsIntoNormalEvents(
+                                                                finalPromotedEventsList!!
+                                                            )
+                                                            adapter.notifyDataSetChanged()
+                                                        }
+
+                                                    }
+
+                                                    alreadyLoaded = false
+
                                                 }
-
-                                                alreadyLoaded = false
-
                                             }
-                                        }
 
-                                } else {
+                                    } else {
 
-                                    noInternetLayout.visibility = VISIBLE
-                                    binding.fragHomeFineTuningLayout.visibility = GONE
-                                    binding.fragHomeRecycler.visibility = GONE
+                                        noInternetLayout.visibility = VISIBLE
+                                        binding.fragHomeFineTuningLayout.visibility = GONE
+                                        binding.fragHomeRecycler.visibility = GONE
+
+                                    }
 
                                 }
-
                             }
-                        }
+                    }
 
                 } else {
 
-                    fireStoreRepoInstance.getCurrentUserDocumentPath()
-                        .addSnapshotListener(activity!!) { userSnapshot, _ ->
 
-                            if (userSnapshot != null && userSnapshot.exists()) {
-                                val userModel = userSnapshot.breakDownToUserModel()
-                                val userTags = userModel.tags
+                    if (activity != null){
+                        fireStoreRepoInstance.getCurrentUserDocumentPath()
+                            .addSnapshotListener(activity!!) { userSnapshot, _ ->
 
-                                if (userTags != null) {
+                                if (userSnapshot != null && userSnapshot.exists()) {
+                                    val userModel = userSnapshot.breakDownToUserModel()
+                                    val userTags = userModel.tags
 
-                                    eventViewModel.getEventDocuments()
-                                        .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
-                                        .addSnapshotListener(activity!!) { querySnapshot, _ ->
+                                    if (userTags != null) {
 
-                                            if (querySnapshot != null && !querySnapshot.isEmpty) {
+                                        eventViewModel.getEventDocuments()
+                                            .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
+                                            .addSnapshotListener(activity!!) { querySnapshot, _ ->
 
-                                                if (alreadyLoaded) {
-                                                    lastDocumentSnapshot =
-                                                        querySnapshot.documents[querySnapshot.size() - 1]
-                                                }
+                                                if (querySnapshot != null && !querySnapshot.isEmpty) {
 
-                                                for (document in querySnapshot.documentChanges) {
+                                                    if (alreadyLoaded) {
+                                                        lastDocumentSnapshot =
+                                                            querySnapshot.documents[querySnapshot.size() - 1]
+                                                    }
 
-                                                    if (document.type == DocumentChange.Type.ADDED) {
-                                                        val eventModel = document.document.breakDocumentIntoEvntsModel()
-                                                        val eventID = document.document.id
+                                                    for (document in querySnapshot.documentChanges) {
 
-                                                        if (eventModel.eventTags.compareLists(userTags) > 0) {
+                                                        if (document.type == DocumentChange.Type.ADDED) {
+                                                            val eventModel = document.document.breakDocumentIntoEvntsModel()
+                                                            val eventID = document.document.id
 
-                                                            if (alreadyLoaded) {
+                                                            if (eventModel.eventTags.compareLists(userTags) > 0) {
 
-                                                                if (!listOfEvent.contains(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                if (alreadyLoaded) {
+
+                                                                    if (!listOfEvent.contains(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                ) {
-                                                                    listOfEvent.add(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                    ) {
+                                                                        listOfEvent.add(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                    adapter.notifyDataSetChanged()
+                                                                        adapter.notifyDataSetChanged()
 
-                                                                    binding.fragHomeFineTuningLayout.visibility = GONE
-                                                                    binding.fragHomeRecycler.visibility = VISIBLE
+                                                                        binding.fragHomeFineTuningLayout.visibility = GONE
+                                                                        binding.fragHomeRecycler.visibility = VISIBLE
 
-                                                                }
+                                                                    }
 
-                                                            } else {
+                                                                } else {
 
-                                                                if (!listOfEvent.contains(
-                                                                        FullEventsModel(
-                                                                            eventModel,
-                                                                            eventID
+                                                                    if (!listOfEvent.contains(
+                                                                            FullEventsModel(
+                                                                                eventModel,
+                                                                                eventID
+                                                                            )
                                                                         )
-                                                                    )
-                                                                ) {
-                                                                    listOfEvent.add(
-                                                                        0,
-                                                                        FullEventsModel(eventModel, eventID)
-                                                                    )
-                                                                    adapter.notifyDataSetChanged()
+                                                                    ) {
+                                                                        listOfEvent.add(
+                                                                            0,
+                                                                            FullEventsModel(eventModel, eventID)
+                                                                        )
+                                                                        adapter.notifyDataSetChanged()
+
+                                                                    }
 
                                                                 }
 
                                                             }
-
                                                         }
+
                                                     }
 
-                                                }
-
-                                                if (swipeLayout.isRefreshing) {
-                                                    swipeLayout.isRefreshing = false
-                                                }
-
-
-
-
-                                                if (listOfEvent.isEmpty()) {
-                                                    binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
-                                                    binding.fragHomeFineTuningLayout.visibility = GONE
-                                                    binding.fragHomeRecycler.visibility = GONE
-
-
-                                                } else {
-                                                    if (finalPromotedEventsList != null) {
-                                                        listOfEvent.addPromotedEventsIntoNormalEvents(
-                                                            finalPromotedEventsList!!
-                                                        )
-                                                        adapter.notifyDataSetChanged()
+                                                    if (swipeLayout.isRefreshing) {
+                                                        swipeLayout.isRefreshing = false
                                                     }
 
+
+
+
+                                                    if (listOfEvent.isEmpty()) {
+                                                        binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
+                                                        binding.fragHomeFineTuningLayout.visibility = GONE
+                                                        binding.fragHomeRecycler.visibility = GONE
+
+
+                                                    } else {
+                                                        if (finalPromotedEventsList != null) {
+                                                            listOfEvent.addPromotedEventsIntoNormalEvents(
+                                                                finalPromotedEventsList!!
+                                                            )
+                                                            adapter.notifyDataSetChanged()
+                                                        }
+
+                                                    }
+
+                                                    alreadyLoaded = false
+
                                                 }
-
-                                                alreadyLoaded = false
-
                                             }
-                                        }
 
-                                } else {
+                                    } else {
 
-                                    noInternetLayout.visibility = VISIBLE
-                                    binding.fragHomeFineTuningLayout.visibility = GONE
-                                    binding.fragHomeRecycler.visibility = GONE
+                                        noInternetLayout.visibility = VISIBLE
+                                        binding.fragHomeFineTuningLayout.visibility = GONE
+                                        binding.fragHomeRecycler.visibility = GONE
 
+                                    }
                                 }
-                            }
 
-                        }
+                            }
+                    }
                 }
             }
     }

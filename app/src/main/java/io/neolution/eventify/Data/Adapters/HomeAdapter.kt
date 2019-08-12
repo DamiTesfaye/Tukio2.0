@@ -30,6 +30,7 @@ import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.Utils.DateFormatterUtil
 import io.neolution.eventify.Utils.FirebaseUtils
 import io.neolution.eventify.View.Activities.CommentActivity
+import io.neolution.eventify.View.Activities.EventDetailsActivity
 import io.neolution.eventify.View.Activities.FullDetails
 import io.neolution.eventify.View.Activities.UpdatesActivity
 
@@ -137,6 +138,8 @@ class HomeAdapter(val context: Context,
             .into(imageView)
 
         holder.itemView.setOnClickListener {
+
+            //TODO: MOVE THIS OFF THE MAIN THREAD
             if ( userName != "" ){
 
                 currentEvents.eventsModel.eventType?.let {eventType ->
@@ -163,9 +166,12 @@ class HomeAdapter(val context: Context,
                     }
                 }
 
-                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
-                    , userName = userName, startedFrom = this.javaClass.name)
+                val intent = Intent(context, EventDetailsActivity::class.java)
                 context.startActivity(intent)
+
+//                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
+//                    , userName = userName, startedFrom = this.javaClass.name)
+//                context.startActivity(intent)
             }
         }
 

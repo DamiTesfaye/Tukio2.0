@@ -137,10 +137,10 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             val eventTitle = add_event_prem_title_edit.text.toString().trim()
             val eventDesc = add_event_prem_desc_edit.text.toString().trim()
             val eventDate = add_event_prem_date_edit.text.toString().trim()
-            val eventLocation = add_event_prem_location_edit.toString().trim()
+            val eventLocation = add_event_prem_location_edit.text.toString().trim()
 
-            if (eventTitle != "" || eventDate != "" || eventDesc != "" ||
-                eventLocation != "" || eventTag != null || eventPicUri != null || eventFinalDateLong != null){
+            if (eventTitle.isNotEmpty() || eventDate.isNotEmpty() || eventDesc.isNotEmpty() ||
+                eventLocation.isNotEmpty() || eventTag != null || eventPicUri != null || eventFinalDateLong != null){
                 val dialog = AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
                 dialog.setMessage("Do you want to discard your changes?")
                 dialog.setPositiveButton("DISCARD") { _, _ ->
@@ -315,17 +315,17 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         val eventTitle = add_event_prem_title_edit.text.toString().trim()
         val eventDesc = add_event_prem_desc_edit.text.toString().trim()
         val eventDate = add_event_prem_date_edit.text.toString().trim()
-        val eventLocation = add_event_prem_location_edit.toString().trim()
+        val eventLocation = add_event_prem_location_edit.text.toString().trim()
 
-        if (eventTitle != "" || eventDate != "" || eventDesc != "" ||
-            eventLocation != "" || eventTag != null || eventPicUri != null || eventFinalDateLong != null){
+        if (eventTitle.isNotEmpty() || eventDate.isNotEmpty() || eventDesc.isNotEmpty() ||
+            eventLocation.isNotEmpty() || eventTag != null || eventPicUri != null || eventFinalDateLong != null){
             val dialog = AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
             dialog.setMessage("Do you want to discard your changes?")
-            dialog.setPositiveButton("YES") { _, _ ->
+            dialog.setPositiveButton("DISCARD") { _, _ ->
                 finish()
             }
 
-            dialog.setNegativeButton("NO") { dialogInterface, _ ->
+            dialog.setNegativeButton("CANCEL") { dialogInterface, _ ->
 
                 dialogInterface.dismiss()
             }

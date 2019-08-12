@@ -1,5 +1,6 @@
 package io.neolution.eventify.View.Activities
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import io.neolution.eventify.Data.ModelClasses.EventsModel
 import io.neolution.eventify.R
@@ -32,9 +34,13 @@ class AddEventFinalActivity : AppCompatActivity() {
 
     private lateinit var specialGuest: HashMap<String, Any>
     private lateinit var eventType: String
+    private var promoted = false
+    private var amountPaid = 0L
 
     private lateinit var addGuestBottomSheet: LinearLayout
     private lateinit var addGuestLayout: LinearLayout
+    private lateinit var promoteEvent: RelativeLayout
+
     private lateinit var fireStoreRepo: FireStoreRepo
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
 
@@ -44,6 +50,13 @@ class AddEventFinalActivity : AppCompatActivity() {
 
         addGuestBottomSheet = findViewById(R.id.add_guest_bsheet)
         addGuestLayout = findViewById(R.id.add_event_final_guest_container)
+        promoteEvent = findViewById(R.id.add_event_final_promote_event_container)
+        promoteEvent.setOnClickListener {
+
+            val intent = Intent(this, PromoteEventActivity::class.java)
+            startActivityForResult(intent, 2030)
+        }
+
         specialGuest = HashMap()
         fireStoreRepo = FireStoreRepo()
 
@@ -133,9 +146,7 @@ class AddEventFinalActivity : AppCompatActivity() {
                 eventDesc = eventDesc, eventDate = eventDate, eventImageLink = eventPicUri.toString(), eventImageLinkThumb = "",
                 eventLocation = eventLocation, eventDressCode = eventDressCode, eventRegLink = eventRegLink, eventTags = listOf(eventTag),
                 eventMilis = eventMillis, eventGuests = specialGuest, eventPostTime = eventPostTime.toString(), eventTicketLink = "",
-                userUID = AuthRepo.getUserUid(),amountPaid = 0)
-
-
+                userUID = AuthRepo.getUserUid(),amountPaid = amountPaid)
 
             fireStoreRepo.postEvent(this, eventModel, {
                 startActivity(Intent(this, HomeActivity::class.java))
@@ -173,6 +184,46 @@ class AddEventFinalActivity : AppCompatActivity() {
             alert.show()
         }else{
             finish()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK){
+            if (requestCode == 2030){
+                if (data != null){
+                    val amountPaidFromExtra = data.extras.getLong("promotedEvent")
+                    amountPaid = amountPaidFromExtra
+                    when(amountPaidFromExtra){
+                        0L -> {
+
+                        }
+
+                        1000L -> {
+                            eventType = "promoted"
+
+                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                            add_event_final_promote_event_text.text = ("Big Audience Plan: N1,000.000")
+                        }
+
+                        5000L -> {
+                            eventType = "promoted"
+                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                            add_event_final_promote_event_text.text = ("Medium Audience Plan: N5,000.000")
+                        }
+
+                        10000L -> {
+                            eventType = "promoted"
+                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                            add_event_final_promote_event_text.text = ("Large Audience Plan: N10,000.000")
+                        }
+                    }
+                }
+            }
         }
     }
 }
