@@ -226,6 +226,8 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
     private fun searchEvents(searchString: String){
 
         currentSearchType = searchString
+        listOfEvent.clear()
+        adapter.notifyDataSetChanged()
 
         searchLayout.visibility = GONE
         searchingLayout.visibility = VISIBLE

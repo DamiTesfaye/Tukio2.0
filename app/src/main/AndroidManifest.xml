@@ -27,9 +27,12 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory">
-        <activity android:name=".View.Activities.ImageViewingActivity"
-                  android:screenOrientation="portrait"
-                  android:theme="@style/ViewImageTheme">
+        <activity android:name=".View.Activities.AuthActivity">
+        </activity>
+        <activity
+                android:name=".View.Activities.ImageViewingActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/ViewImageTheme">
         </activity>
         <activity
                 android:name=".View.Activities.EventDetailsActivity"

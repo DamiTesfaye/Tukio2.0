@@ -57,7 +57,6 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
 
     private lateinit var exploreLoadingText: TextView
     private lateinit var exploreEmptyTextView: TextView
-    private lateinit var exploreEmptyButton: Button
     private lateinit var exploreSearchContainer: RelativeLayout
 
     private lateinit var onHomeFragmentsAttached: OnHomeFragmentsAttached
@@ -79,17 +78,12 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
         exploreLoadingLayout = binding.root.findViewById(R.id.new_explore_progress_layout)
         exploreLoadingText = binding.root.findViewById(R.id.new_explore_progress_text)
 
-        exploreEmptyButton = binding.root.findViewById(R.id.new_explore_empty_share_event_btn)
         exploreEmptyLayout = binding.root.findViewById(R.id.new_explore_empty_layout)
         exploreEmptyTextView = binding.root.findViewById(R.id.new_explore_empty_text)
         exploreSearchContainer = binding.root.findViewById(R.id.new_explore_search_container)
 
         exploreSearchContainer.setOnClickListener {
             startActivity(Intent(context!!, SearchActivity::class.java))
-        }
-
-        exploreEmptyButton.setOnClickListener {
-            startActivity(Intent(context!!, AddEventPremActivity::class.java))
         }
 
         eventRecycler.setHasFixedSize(true)

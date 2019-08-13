@@ -48,7 +48,6 @@ class PostedEventsFragment: Fragment() {
         recyclerView.adapter = adapter
 
         val eventViewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
-
         eventViewModel.getEventDocuments().whereEqualTo("userUID", AuthRepo.getUserUid())
             .addSnapshotListener { snapshot, _ ->
 

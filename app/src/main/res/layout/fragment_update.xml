@@ -51,10 +51,10 @@
                         app:layout_constraintBottom_toBottomOf="parent">
 
 
-			<ImageView android:layout_width="70dp"
-			           android:layout_height="70dp"
-			           app:srcCompat="@drawable/ic_notification"
-			           android:tint="@color/colorAccent"
+			<ImageView android:layout_width="200dp"
+			           android:layout_height="200dp"
+			           app:srcCompat="@drawable/search_empty"
+
 			           android:id="@+id/frag_update_empty_feed_pic"
 			           android:layout_centerHorizontal="true"
 			/>

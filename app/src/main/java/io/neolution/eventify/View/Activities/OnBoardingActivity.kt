@@ -1,18 +1,17 @@
 package io.neolution.eventify.View.Activities
 
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import io.neolution.eventify.Data.Adapters.OnBoardingAdapter
 import io.neolution.eventify.R
 import io.neolution.eventify.View.Fragments.OnBoardingFragment.NotificationFragment
 import io.neolution.eventify.View.Fragments.OnBoardingFragment.PersonalisedFeedFragment
+import io.neolution.eventify.View.Fragments.OnBoardingFragment.TrendsFragment
 import io.neolution.eventify.View.Fragments.OnBoardingFragment.UpdatesFragment
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 
@@ -28,6 +27,7 @@ class OnBoardingActivity : AppCompatActivity() {
         list.add(PersonalisedFeedFragment())
         list.add(UpdatesFragment())
         list.add(NotificationFragment())
+        list.add(TrendsFragment())
 
         val adapter = OnBoardingAdapter(list, supportFragmentManager)
         get_started_viewpager.adapter = adapter
@@ -50,6 +50,8 @@ class OnBoardingActivity : AppCompatActivity() {
                             R.drawable.unselected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
+                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
                     }
 
                     1 -> {
@@ -59,6 +61,8 @@ class OnBoardingActivity : AppCompatActivity() {
                             R.drawable.selected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
+                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
                     }
 
                     2 -> {
@@ -67,6 +71,18 @@ class OnBoardingActivity : AppCompatActivity() {
                         second_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.selected_indicator))
+                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
+                    }
+                    3 -> {
+                        first_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
+                        second_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
+                        third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
+                            R.drawable.unselected_indicator))
+                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.selected_indicator))
                     }
                 }
@@ -80,11 +96,7 @@ class OnBoardingActivity : AppCompatActivity() {
             val saved = editor.commit()
 
             if (saved){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startActivity(Intent(this, SignUpActivity::class.java))
-                }else{
-                    startActivity(Intent(this, SignUpActivity::class.java))
-                }
+                startActivity(Intent(this, AuthActivity::class.java))
                 finish()
             }
 

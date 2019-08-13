@@ -28,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
         }else if (sharedPrefs.getString("startup", "") ==  "started" && authInstance.currentUser == null){
             Handler().postDelayed(
                 {
-                    startActivity(Intent(this, SignInActivity::class.java))
+                    startActivity(Intent(this, AuthActivity::class.java))
                     finish()
                 }, 1500
             )

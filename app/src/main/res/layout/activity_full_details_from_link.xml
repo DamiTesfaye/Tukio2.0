@@ -23,7 +23,7 @@
                     android:layout_height="match_parent">
 
                 <ImageView android:layout_width="match_parent"
-                           android:src="@drawable/eventify_placeholder"
+                           android:src="@drawable/placeholder_2"
                            android:foreground="#6e000000"
                            android:id="@+id/activity_full_details__from_link_event_poster"
                            android:scaleType="centerCrop"

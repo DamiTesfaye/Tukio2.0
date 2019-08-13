@@ -44,7 +44,15 @@
                 android:layout_toEndOf="@id/second_indicator"
                 android:layout_margin="3dp"
                 android:layout_height="7dp"/>
-        
+
+        <ImageView
+                android:layout_width="7dp"
+                android:id="@+id/fourth_indicator"
+                android:src="@drawable/unselected_indicator"
+                android:layout_toEndOf="@id/third_indicator"
+                android:layout_margin="3dp"
+                android:layout_height="7dp"/>
+
     </RelativeLayout>
     
     
@@ -58,9 +66,9 @@
             android:layout_marginEnd="20dp"
             android:textColor="@color/colorPrimary"
             android:id="@+id/get_started_button"
-            android:text="Get Started"
+            android:text="Get Started!"
             android:background="@drawable/buttonbg"
-            android:layout_height="40dp"/>
+            android:layout_height="45dp"/>
 
     <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"

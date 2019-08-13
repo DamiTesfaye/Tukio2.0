@@ -63,3 +63,9 @@ interface OnShareEventClicked{
 interface OnEditProfileClicked{
     fun onEditButtonClicked()
 }
+
+interface OnAuthLevelClicked{
+    fun goSignUp()
+
+    fun goSignIn()
+}

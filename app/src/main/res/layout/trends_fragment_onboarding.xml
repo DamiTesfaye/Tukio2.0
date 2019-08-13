@@ -4,8 +4,8 @@
         android:layout_width="match_parent"
         android:background="@color/colorPrimary"
         android:orientation="vertical"
-        android:layout_gravity="center"
         android:paddingBottom="10dp"
+        android:layout_gravity="center"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_height="wrap_content">
 
@@ -13,16 +13,16 @@
             android:layout_width="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            app:srcCompat="@drawable/trends_image"
             android:layout_height="200dp"
-            app:srcCompat="@drawable/personaliseii"
     />
 
     <TextView
             android:layout_width="wrap_content"
             android:textSize="25sp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:textStyle="bold"
-            android:text="Personalised Events"
+            android:text="Be Trendy"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -31,11 +31,11 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="A feed of events tailored just to your liking!"
+            android:text="Say on top of all moving trends and hot stuff!"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>

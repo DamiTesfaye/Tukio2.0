@@ -20,7 +20,7 @@
                    android:layout_marginEnd="10dp"
                    android:layout_marginTop="10dp"
                    android:layout_gravity="center_horizontal"
-                   android:src="@drawable/talking"
+                   app:srcCompat="@drawable/search_empty"
                    android:layout_height="200dp"/>
         
         <TextView android:layout_width="wrap_content"

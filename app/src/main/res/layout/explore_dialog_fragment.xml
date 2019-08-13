@@ -14,7 +14,7 @@
                 android:layout_width="60dp"
                 android:layout_margin="10dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/update_stock_image"
+                android:src="@drawable/search_empty"
                 android:layout_height="60dp"/>
 
         <TextView android:layout_width="wrap_content"
