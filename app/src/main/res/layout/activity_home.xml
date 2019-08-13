@@ -24,7 +24,6 @@
 				android:background="@color/colorPrimary"
 				android:layout_gravity="bottom"
 				app:itemIconTint="@color/bottom_bar_bg"
-				app:itemTextColor="@android:color/black"
 				app:menu="@menu/main_menu"
 				app:labelVisibilityMode="unlabeled"
 				app:elevation="5dp"

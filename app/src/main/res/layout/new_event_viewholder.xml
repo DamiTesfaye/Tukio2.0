@@ -77,10 +77,9 @@
                          app:layout_constraintEnd_toStartOf="@id/new_event_vh_share_event"
                          app:layout_constraintTop_toTopOf="parent"
                          android:id="@+id/new_event_vh_event_updates"
-                       android:contentDescription="Check Event Updates"
+                        android:contentDescription="Check Event Updates"
                          app:srcCompat="@drawable/ic_notification"
                          android:layout_marginEnd="7dp"
-                         android:tint="@color/colorPrimary"
                          android:layout_marginTop="15dp"
                          android:layout_height="25dp"/>
 
@@ -108,13 +107,34 @@
 
             <TextView android:layout_width="wrap_content"
                       android:textSize="15sp"
-                      android:text=""
+                      android:text="40"
                       android:id="@+id/new_event_vh_comment_count"
                       android:textColor="@color/colorPrimary"
                       app:layout_constraintTop_toTopOf="@id/new_event_vh_comment_button"
                       app:layout_constraintBottom_toBottomOf="@id/new_event_vh_comment_button"
                       app:layout_constraintStart_toEndOf="@id/new_event_vh_comment_button"
                       android:layout_marginStart="8dp"
+                      android:layout_height="wrap_content"/>
+
+            <ImageView android:layout_width="20dp"
+                       app:layout_constraintTop_toTopOf="@id/new_event_vh_comment_button"
+                       app:layout_constraintStart_toEndOf="@id/new_event_vh_comment_count"
+                       android:layout_marginStart="10dp"
+                       android:contentDescription="Will Attend"
+                       android:id="@+id/new_event_vh_attend_button"
+                       app:srcCompat="@drawable/ic_pin_unpinned"
+                       android:layout_marginBottom="40dp"
+                       android:layout_height="20dp"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="15sp"
+                      android:text="40"
+                      android:id="@+id/new_event_vh_attend_count"
+                      android:textColor="@color/colorPrimary"
+                      app:layout_constraintTop_toTopOf="@id/new_event_vh_attend_button"
+                      app:layout_constraintBottom_toBottomOf="@id/new_event_vh_attend_button"
+                      app:layout_constraintStart_toEndOf="@id/new_event_vh_attend_button"
+                      android:layout_marginStart="5dp"
                       android:layout_height="wrap_content"/>
 
             <ImageView android:layout_width="12dp"

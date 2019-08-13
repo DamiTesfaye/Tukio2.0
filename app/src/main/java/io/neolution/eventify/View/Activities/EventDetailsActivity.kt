@@ -202,7 +202,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
                 if ( packageName != null ) {
 
-                    val url = if(!eventRegLink.startsWith("http://") || !eventRegLink.startsWith("https://"))"http://$eventRegLink" else eventRegLink
+                    val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
                     val builder = CustomTabsIntent.Builder()
                     builder.setToolbarColor(ContextCompat.getColor(this, io.neolution.eventify.R.color.colorPrimary))
 
@@ -211,7 +211,7 @@ class EventDetailsActivity : AppCompatActivity() {
                     intent.launchUrl(this, Uri.parse(url))
                 }else{
 
-                    val url = if(!eventRegLink.startsWith("http://")|| !eventRegLink.startsWith("https://"))"http://$eventRegLink" else eventRegLink
+                    val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                     val chooser = Intent.createChooser(intent, "Open url using..")
                     startActivity(chooser)

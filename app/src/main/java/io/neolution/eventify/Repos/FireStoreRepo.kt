@@ -6,6 +6,7 @@ import android.net.Uri
 import androidx.core.content.ContextCompat
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
@@ -101,7 +102,7 @@ class FireStoreRepo {
 
     fun likeDislikeEvent(context: Context, eventID: String, view: View){
 
-        val button = view as ImageButton
+        val button = view as ImageView
 
         getEventDocumentRefererenceById(eventID).collection("Likes")
             .document(AuthRepo.getUserUid()).get().addOnSuccessListener {
@@ -109,7 +110,7 @@ class FireStoreRepo {
 
                     getEventDocumentRefererenceById(eventID).collection("Likes")
                         .document(AuthRepo.getUserUid()).delete().addOnSuccessListener {
-                            button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_going))
+                            button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_unpinned))
                         }
 
                 } else {
@@ -120,7 +121,7 @@ class FireStoreRepo {
 
                     getEventDocumentRefererenceById(eventID).collection("Likes")
                         .document(AuthRepo.getUserUid()).set(hashMap).addOnSuccessListener {
-                            button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_going_two))
+                            button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_pinned))
                         }
 
                 }

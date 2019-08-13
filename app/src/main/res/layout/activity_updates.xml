@@ -53,15 +53,15 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="70dp"
-                   app:srcCompat="@drawable/ic_notification"
+        <ImageView android:layout_width="200dp"
+                   app:srcCompat="@drawable/search_empty"
                    android:layout_margin="5dp"
-                   android:tint="@color/colorAccent"
                    android:layout_gravity="center_horizontal"
-                   android:layout_height="70dp"/>
+                   android:layout_height="200dp"/>
 
         <TextView android:layout_width="wrap_content"
                   android:textSize="15sp"
+                  android:layout_marginTop="7dp"
                   android:text="@string/no_updates_at_the_moment_check_back_later"
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"

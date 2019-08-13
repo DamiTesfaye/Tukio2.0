@@ -193,33 +193,33 @@ class AddEventFinalActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == 2030){
                 if (data != null){
+                    val paymentStatus = data.extras.getString("paymentStatus")
                     val amountPaidFromExtra = data.extras.getLong("promotedEvent")
                     amountPaid = amountPaidFromExtra
-                    when(amountPaidFromExtra){
-                        0L -> {
+                    if(paymentStatus == "success"){
+                        when(amountPaidFromExtra){
 
-                        }
+                            1000L -> {
+                                eventType = "promoted"
 
-                        1000L -> {
-                            eventType = "promoted"
+                                add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                                add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                                add_event_final_promote_event_text.text = ("Big Audience Plan: N1,000.000")
+                            }
 
-                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                            add_event_final_promote_event_text.text = ("Big Audience Plan: N1,000.000")
-                        }
+                            5000L -> {
+                                eventType = "promoted"
+                                add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                                add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                                add_event_final_promote_event_text.text = ("Medium Audience Plan: N5,000.000")
+                            }
 
-                        5000L -> {
-                            eventType = "promoted"
-                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                            add_event_final_promote_event_text.text = ("Medium Audience Plan: N5,000.000")
-                        }
-
-                        10000L -> {
-                            eventType = "promoted"
-                            add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                            add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                            add_event_final_promote_event_text.text = ("Large Audience Plan: N10,000.000")
+                            10000L -> {
+                                eventType = "promoted"
+                                add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                                add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                                add_event_final_promote_event_text.text = ("Large Audience Plan: N10,000.000")
+                            }
                         }
                     }
                 }

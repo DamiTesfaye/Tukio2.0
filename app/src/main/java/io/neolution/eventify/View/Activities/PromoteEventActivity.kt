@@ -100,7 +100,8 @@ class PromoteEventActivity : AppCompatActivity() {
                 dialog.setPositiveButton("DISCARD") { _, _ ->
 
                     val intent = Intent()
-                    intent.putExtra("promotedEvent", 0)
+                    intent.putExtra("promotedEvent", 0L)
+                    intent.putExtra("paymentStatus", "failed")
                     setResult(Activity.RESULT_OK, intent)
 
                     finish()
@@ -116,7 +117,7 @@ class PromoteEventActivity : AppCompatActivity() {
 
             }else{
                 val intent = Intent()
-                intent.putExtra("promotedEvent", 0)
+                intent.putExtra("promotedEvent", 0L)
                 setResult(Activity.RESULT_OK, intent)
 
                 finish()
@@ -263,7 +264,8 @@ class PromoteEventActivity : AppCompatActivity() {
                 override fun onSuccess(transaction: Transaction?) {
 
                     val intent = Intent()
-                    intent.putExtra("promotedEvent", amount)
+                    intent.putExtra("paymentStatus", "success")
+                    intent.putExtra("promotedEvent", amount.toLong())
                     setResult(Activity.RESULT_OK, intent)
 
                     finish()
@@ -340,7 +342,8 @@ class PromoteEventActivity : AppCompatActivity() {
     override fun onBackPressed() {
 
         val intent = Intent()
-        intent.putExtra("promotedEvent", 0)
+        intent.putExtra("promotedEvent", 0L)
+        intent.putExtra("paymentStatus", "failed")
         setResult(Activity.RESULT_OK, intent)
 
         finish()

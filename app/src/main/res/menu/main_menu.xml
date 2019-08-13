@@ -4,29 +4,33 @@
 
 	<item android:id="@+id/main_menu_home"
 	      android:title="Home"
-	      android:icon="@drawable/ic_home"
+	      android:icon="@drawable/ic_new_home"
+		  android:iconTint="@android:color/darker_gray"
 	/>
 
 	<item android:id="@+id/main_menu_trends"
 		  android:title="Trends"
-		  android:icon="@drawable/ic_trends"
+		  android:icon="@drawable/ic_fire"
+		  android:iconTint="@android:color/darker_gray"
 	/>
 
 	<item android:id="@+id/main_menu_explore"
 	      android:title="Explore"
-	      android:icon="@drawable/ic_explore_tool"
-
+	      android:icon="@drawable/ic_new_explore"
+		  android:iconTint="@android:color/darker_gray"
 	/>
 
 	<item android:id="@+id/main_menu_update"
 	      android:title="Updates"
-	      android:icon="@drawable/ic_notification"
+	      android:icon="@drawable/ic_new_notification"
+		  android:iconTint="@android:color/darker_gray"
 
 	/>
 
 	<item android:id="@+id/main_menu_profile"
 		  android:title="Profile"
-		  android:icon="@drawable/ic_user"
+		  android:icon="@drawable/ic_new_user"
+		  android:iconTint="@android:color/darker_gray"
 
 	/>
 

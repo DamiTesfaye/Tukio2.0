@@ -1,9 +1,7 @@
 package io.neolution.eventify.Data.Adapters
 
-import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -31,7 +29,6 @@ import io.neolution.eventify.Utils.DateFormatterUtil
 import io.neolution.eventify.Utils.FirebaseUtils
 import io.neolution.eventify.View.Activities.CommentActivity
 import io.neolution.eventify.View.Activities.EventDetailsActivity
-import io.neolution.eventify.View.Activities.FullDetails
 import io.neolution.eventify.View.Activities.UpdatesActivity
 
 /**
@@ -168,8 +165,6 @@ class HomeAdapter(val context: Context,
                     }
                 }
 
-
-
                 val intent = listOfEvents[position].passIntoIntent(context, EventDetailsActivity::class.java, eventLocation = currentEvents.eventsModel.eventLocation
                     , userName = userName, startedFrom = this.javaClass.name)
                 context.startActivity(intent)
@@ -197,11 +192,8 @@ class HomeAdapter(val context: Context,
             val intent = Intent(context, UpdatesActivity::class.java)
             intent.putExtra("documentID", currentEvents.eventID)
             intent.putExtra("posterID",currentEvents.eventsModel.userUID)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-            }else{
-                context.startActivity(intent)
-            }
+            context.startActivity(intent)
+
         }
 
         val eventTagImage = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_tag_image)
@@ -233,35 +225,35 @@ class HomeAdapter(val context: Context,
             context.startActivity(intent)
         }
 
-//        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID)
-//            .addSnapshotListener { snapshot, _ ->
-//
-//                if (snapshot!= null && !snapshot.isEmpty  ){
-//                    goingCountTV.text = snapshot.size().toString()
-//                }else{
-//                    goingCountTV.text = "0"
-//                }
-//
-//            }
 
+        val willAttendButton = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_attend_button)
+        val attendanceCount = holder.itemView.findViewById<TextView>(R.id.new_event_vh_attend_count)
+        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID)
+            .addSnapshotListener { snapshot, _ ->
 
-//        val button = holder.itemView.findViewById<ImageButton>(R.id.explore_viewholder_going_btn)
-//        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
-//            .addSnapshotListener { snapshot, _ ->
-//                if (snapshot != null && snapshot.exists()){
-//                    button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_going_two))
-//                }else{
-//                    button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_going))
-//                }
-//            }
-//
-//
-//        button.setOnClickListener {
-//            fireStoreRepo.likeDislikeEvent(context, currentEvents.eventID, it)
-//        }
+                if (snapshot!= null && !snapshot.isEmpty  ){
+                    attendanceCount.text = snapshot.size().toString()
+                }else{
+                    attendanceCount.text = "0"
+                }
+
+            }
+
+        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
+            .addSnapshotListener { snapshot, _ ->
+                if (snapshot != null && snapshot.exists()){
+                    willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_pinned))
+                }else{
+                    willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_unpinned))
+                }
+            }
+
+        willAttendButton.setOnClickListener {
+            fireStoreRepo.likeDislikeEvent(context, currentEvents.eventID, it)
+        }
+
 
         val postTime = currentEvents.eventsModel.eventPostTime
-
         if (postTime!= null && postTime != "null"){
 
             val longTimeValue = postTime.toLong()
