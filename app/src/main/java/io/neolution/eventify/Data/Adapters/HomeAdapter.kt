@@ -56,6 +56,8 @@ class HomeAdapter(val context: Context,
 
     override fun onBindViewHolder(holder: HomeAdapter.HomeViewholder, position: Int) {
 
+        holder.setIsRecyclable(false)
+
         val currentEvents = listOfEvents[position]
         val userInfo = fireStoreRepo.getUserAccountDetailsFromUid(currentEvents.eventsModel.userUID)
 
@@ -166,12 +168,11 @@ class HomeAdapter(val context: Context,
                     }
                 }
 
-                val intent = Intent(context, EventDetailsActivity::class.java)
-                context.startActivity(intent)
 
-//                val intent = listOfEvents[position].passIntoIntent(context, FullDetails::class.java, eventLocation = currentEvents.eventsModel.eventLocation
-//                    , userName = userName, startedFrom = this.javaClass.name)
-//                context.startActivity(intent)
+
+                val intent = listOfEvents[position].passIntoIntent(context, EventDetailsActivity::class.java, eventLocation = currentEvents.eventsModel.eventLocation
+                    , userName = userName, startedFrom = this.javaClass.name)
+                context.startActivity(intent)
             }
         }
 
@@ -229,11 +230,7 @@ class HomeAdapter(val context: Context,
         commentBtn.setOnClickListener {
             val intent = Intent(context, CommentActivity::class.java)
             intent.putExtra("eventID", currentEvents.eventID)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                context.startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(activity).toBundle())
-            }else{
-                context.startActivity(intent)
-            }
+            context.startActivity(intent)
         }
 
 //        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID)

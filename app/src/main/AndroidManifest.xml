@@ -27,24 +27,34 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory">
-        <activity android:name=".View.Activities.EventDetailsActivity"
-        android:screenOrientation="portrait"
-        android:theme="@style/EventDetailsTheme">
+        <activity android:name=".View.Activities.ImageViewingActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/ViewImageTheme">
         </activity>
-        <activity android:name=".View.Activities.PromoteEventActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".View.Activities.EventDetailsActivity"
+                android:screenOrientation="portrait"
+                android:theme="@style/EventDetailsTheme">
         </activity>
-        <activity android:name=".View.Activities.SearchActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".View.Activities.PromoteEventActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".View.Activities.EditProfileActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".View.Activities.SearchActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".View.Activities.AddEventFinalActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".View.Activities.EditProfileActivity"
+                android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".View.Activities.AddEventPremActivity"
-        android:screenOrientation="portrait">
+        <activity
+                android:name=".View.Activities.AddEventFinalActivity"
+                android:screenOrientation="portrait">
+        </activity>
+        <activity
+                android:name=".View.Activities.AddEventPremActivity"
+                android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".View.Activities.OnBoardingActivity"

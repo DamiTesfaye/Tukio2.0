@@ -45,6 +45,16 @@
         <item name="buttonStyle">@style/ButtonTextViewStyle</item>
         <item name="android:background">@drawable/screen_2</item>
     </style>
+
+    <style name="ViewImageTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@android:color/black</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <item name="buttonStyle">@style/ButtonTextViewStyle</item>
+    </style>
     
     <style name="MyTimePickerDialogTheme" parent="@style/Theme.AppCompat.Light.Dialog">
         <item name="android:textColor">@color/colorAccent</item>

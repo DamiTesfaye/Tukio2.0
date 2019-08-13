@@ -11,11 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import io.neolution.eventify.Data.Adapters.OnBoardingAdapter
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
+import io.neolution.eventify.Data.ViewModels.EventsViewModel
 import io.neolution.eventify.Listeners.OnEditProfileClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
@@ -35,6 +37,8 @@ class Profile : Fragment() {
         val userImage = view.findViewById<CircleImageView>(R.id.profile_frag_userimage)
         val userNameTextView = view.findViewById<TextView>(R.id.profile_frag_username)
         val userBioTextView = view.findViewById<TextView>(R.id.profile_frag_user_bio)
+        val postedEventsNum = view.findViewById<TextView>(R.id.profile_frag_posted_events_num)
+        val promotedEventsNum = view.findViewById<TextView>(R.id.profile_frag_promoted_events_num)
 
         val list = mutableListOf<Fragment>()
         list.add(PostedEventsFragment())
@@ -75,6 +79,27 @@ class Profile : Fragment() {
                 }
             }
         }
+
+        val eventViewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
+        eventViewModel.getEventDocuments().whereEqualTo("userUID", AuthRepo.getUserUid())
+            .addSnapshotListener { snapshot, _ ->
+
+                if (snapshot != null && !snapshot.isEmpty) {
+                    postedEventsNum.text = ("Posted Events: ${snapshot.documents.size}")
+                }else{
+                    postedEventsNum.text = ("Posted Events: 0")
+                }
+            }
+
+        eventViewModel.getPromotedEvents().whereEqualTo("userUID", AuthRepo.getUserUid())
+            .addSnapshotListener { snapshot, _ ->
+
+                if (snapshot != null && !snapshot.isEmpty) {
+                    promotedEventsNum.text = ("Promoted Events: ${snapshot.documents.size}")
+                }else{
+                    promotedEventsNum.text = ("Promoted Events: 0")
+                }
+            }
 
         return view
     }

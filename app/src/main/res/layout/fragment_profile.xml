@@ -30,24 +30,56 @@
                              android:background="?attr/selectableItemBackgroundBorderless"
                              android:layout_gravity="end"
                              android:id="@+id/profile_frag_menu_btn"
-                             app:srcCompat="@drawable/ic_more"
+                             app:srcCompat="@drawable/ic_settings_black_24dp"
                              android:layout_height="wrap_content"/>
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                        android:layout_width="70dp"
-                        android:layout_gravity="center_horizontal"
-                        app:civ_border_color="@color/colorAccent"
-                        app:civ_border_width="2dp"
-                        android:id="@+id/profile_frag_userimage"
-                        android:src="@drawable/ic_default_user"
-                        android:layout_height="70dp"/>
+                <LinearLayout android:layout_width="match_parent"
+                              android:orientation="horizontal"
+                              android:layout_height="wrap_content">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_width="60dp"
+                            android:layout_gravity="center_vertical"
+                            app:civ_border_color="@color/colorAccent"
+                            app:civ_border_width="2dp"
+                            android:id="@+id/profile_frag_userimage"
+                            android:src="@drawable/ic_default_user"
+                            android:layout_height="60dp"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_gravity="center_vertical"
+                              android:gravity="center"
+                              android:id="@+id/profile_frag_posted_events_num"
+                              android:background="@drawable/buttonbg_outline"
+                              android:text=""
+                              android:layout_marginStart="15dp"
+                              android:paddingStart="15dp"
+                              android:textSize="12sp"
+                              android:paddingEnd="15dp"
+                              android:layout_height="30dp"/>
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_gravity="center_vertical"
+                              android:gravity="center"
+                              android:id="@+id/profile_frag_promoted_events_num"
+                              android:background="@drawable/buttonbg_outline"
+                              android:text=""
+                              android:layout_marginStart="10dp"
+                              android:paddingStart="15dp"
+                              android:textSize="12sp"
+                              android:paddingEnd="15dp"
+                              android:layout_height="30dp"/>
+
+                </LinearLayout>
+
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:gravity="center"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginTop="10dp"
-                        android:textSize="17sp"
+                        android:textSize="20sp"
+                        android:layout_marginStart="10dp"
                         android:id="@+id/profile_frag_username"
                         android:textStyle="bold"
                         android:text="The Merovingian"
@@ -56,10 +88,11 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:gravity="center"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_gravity="center_vertical"
                         android:id="@+id/profile_frag_user_bio"
-                        android:textSize="13sp"
-                        android:text="Causality is the basic aspect of the world. Matrix or Otherwise."
+                        android:textSize="15sp"
+                        android:layout_marginBottom="5dp"
+                        android:text="Causality if the very essence of human action!"
                         android:layout_height="wrap_content"/>
 
 

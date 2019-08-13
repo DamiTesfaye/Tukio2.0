@@ -242,9 +242,11 @@ fun List<String>.compareLists(otherList: List<String>): Int{
     intent.putExtra("eventTicketLink", this.eventsModel.eventTicketLink)
     intent.putExtra("eventDate", this.eventsModel.eventDate)
     intent.putExtra("eventDressCode", this.eventsModel.eventDressCode)
+     intent.putExtra("eventImageThumb", this.eventsModel.eventImageLinkThumb)
     intent.putExtra("eventImageLink", this.eventsModel.eventImageLink)
      intent.putExtra("eventType", this.eventsModel.eventType)
     intent.putExtra("userName", userName)
+     intent.putExtra("eventMilis", this.eventsModel.eventMilis)
 
     return intent
 

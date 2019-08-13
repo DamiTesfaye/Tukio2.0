@@ -15,4 +15,19 @@
             app:showAsAction="ifRoom"
             android:iconTint="@color/colorPrimary"/>
 
+    <item
+            android:id="@+id/full_details_action_comment"
+            android:title="Comments"
+            android:icon="@drawable/ic_comment"
+            android:iconTint="@color/colorPrimary"
+            app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/full_details_action_more_info"
+        android:title="More Details"
+        android:icon="@drawable/ic_info"
+        app:showAsAction="ifRoom"
+    />
+
 </menu>

@@ -4,8 +4,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
->
+        tools:context=".View.Activities.EventDetailsActivity"
+        android:layout_height="match_parent">
 
     <FrameLayout
             android:layout_width="match_parent"
@@ -30,7 +30,8 @@
             <ImageButton android:layout_width="wrap_content"
                          android:layout_alignParentTop="true"
                          android:layout_alignParentStart="true"
-                         android:layout_margin="10dp"
+                         android:layout_marginStart="10dp"
+                         android:layout_marginTop="40dp"
                          android:tint="@android:color/white"
                          android:id="@+id/event_details_back"
                          app:srcCompat="@drawable/ic_back"
@@ -40,49 +41,83 @@
             <ImageView android:layout_width="20dp"
                          android:layout_alignParentEnd="true"
                          android:layout_alignParentTop="true"
-                         android:layout_margin="10dp"
+                         android:layout_marginEnd="15dp"
+                         android:layout_marginTop="40dp"
                          android:id="@+id/event_details_share_btn"
                          android:background="?attr/selectableItemBackgroundBorderless"
                          app:srcCompat="@drawable/ic_share_new"
                          android:layout_height="20dp"/>
 
-            <ImageView android:layout_width="20dp"
-                         android:layout_alignParentTop="true"
-                         android:layout_marginEnd="2dp"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         android:layout_toStartOf="@id/event_details_share_btn"
-                         app:srcCompat="@drawable/ic_reminder"
-                         android:layout_marginStart="10dp"
-                         android:id="@+id/event_details_remind_btn"
-                         android:layout_marginTop="10dp"
-                         android:layout_height="20dp"/>
+            <TextView android:layout_width="wrap_content"
+                      android:background="@drawable/buttonbg_white_outline_trans_bg"
+                      android:layout_centerHorizontal="true"
+                      android:layout_marginTop="100dp"
+                      android:paddingStart="30dp"
+                      android:paddingEnd="30dp"
+                      android:id="@+id/event_details_view_image_text"
+                      android:text="View Image"
+                      android:textSize="15sp"
+                      android:gravity="center"
+                      android:textColor="@color/colorPrimary"
+                      android:layout_height="35dp"/>
 
             <ImageView android:layout_width="20dp"
-                         android:layout_alignParentTop="true"
-                         android:tint="@color/colorPrimary"
-                         android:background="?attr/selectableItemBackgroundBorderless"
-                         app:srcCompat="@drawable/ic_comment"
-                         android:layout_toStartOf="@id/event_details_remind_btn"
-                         android:layout_marginTop="10dp"
-                         android:layout_marginEnd="2dp"
-                         android:layout_height="20dp"/>
+                       android:layout_alignParentTop="true"
+                       android:tint="@color/colorPrimary"
+                       android:id="@+id/event_details_comment"
+                       android:background="?attr/selectableItemBackgroundBorderless"
+                       app:srcCompat="@drawable/ic_comment"
+                       android:contentDescription="Event Comments"
+                       android:layout_toStartOf="@id/event_details_share_btn"
+                       android:layout_marginTop="40dp"
+                       android:layout_marginEnd="15dp"
+                       android:layout_height="20dp"/>
+
+            <ImageView android:layout_width="20dp"
+                       android:layout_alignParentTop="true"
+                       android:tint="@color/colorPrimary"
+                       android:id="@+id/event_details_update"
+                       android:background="?attr/selectableItemBackgroundBorderless"
+                       app:srcCompat="@drawable/ic_notification"
+                       android:contentDescription="Event Comments"
+                       android:layout_toStartOf="@id/event_details_comment"
+                       android:layout_marginTop="40dp"
+                       android:layout_marginEnd="15dp"
+                       android:layout_height="20dp"/>
+
+            <ImageView android:layout_width="20dp"
+                       android:background="?attr/selectableItemBackgroundBorderless"
+                       app:srcCompat="@drawable/ic_info"
+                       android:id="@+id/event_details_more_details"
+                       android:layout_alignParentTop="true"
+                       android:layout_marginTop="30dp"
+                       android:visibility="gone"
+                       android:layout_toStartOf="@id/event_details_update"
+                       android:layout_marginEnd="10dp"
+                       android:layout_height="20dp"/>
 
             <androidx.core.widget.NestedScrollView
                     android:layout_width="match_parent"
                     android:scrollbarStyle="outsideOverlay"
+                    android:scrollIndicators="start"
+                    android:fadeScrollbars="true"
+                    android:id="@+id/event_details_scrollview"
+                    android:scrollbarAlwaysDrawVerticalTrack="true"
+                    android:scrollbarDefaultDelayBeforeFade="2000"
                     android:scrollbarSize="5dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/event_details_view_image_text"
                     android:layout_height="match_parent">
 
                 <LinearLayout android:layout_width="match_parent"
                               android:orientation="vertical"
+                              android:layout_marginTop="20dp"
                               android:layout_height="match_parent">
 
                     <androidx.cardview.widget.CardView
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
                             app:cardCornerRadius="5dp"
-                            android:layout_marginTop="50dp"
                             app:cardPreventCornerOverlap="true"
                             android:id="@+id/event_details_primary_details"
                             android:background="@android:color/white"
@@ -92,7 +127,6 @@
                         <LinearLayout
                                 android:layout_width="match_parent"
                                 android:orientation="vertical"
-                                android:padding="5dp"
                                 android:layout_height="wrap_content">
 
                             <TextView android:layout_width="wrap_content"
@@ -108,13 +142,14 @@
                                       android:textSize="20sp"
                                       android:layout_gravity="center_horizontal"
                                       android:gravity="center"
+                                      android:id="@+id/event_details_event_title"
                                       android:layout_marginTop="10dp"
                                       android:textStyle="bold"
-                                      android:text="Tech Inspire: A DSC Event"
+                                      android:text=""
                                       android:layout_height="wrap_content"/>
 
                             <LinearLayout android:layout_width="match_parent"
-                                          android:padding="5dp"
+                                          android:padding="7dp"
                                           android:layout_marginTop="5dp"
                                           android:orientation="horizontal"
                                           android:layout_height="wrap_content">
@@ -125,17 +160,20 @@
                                            android:layout_gravity="center_vertical"
                                            android:layout_height="20dp"/>
 
-                                <TextView android:layout_width="wrap_content"
+                                <TextView android:layout_width="match_parent"
                                           android:textSize="15sp"
+                                          android:textColor="@color/colorAccent"
+                                          android:background="?attr/selectableItemBackground"
+                                          android:id="@+id/event_details_location"
                                           android:layout_marginStart="10dp"
-                                          android:text="Block Of Classrooms, Federal University Of Technology, Lagos."
+                                          android:text=""
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
 
                             <LinearLayout android:layout_width="match_parent"
                                           android:padding="7dp"
-                                          android:layout_marginTop="5dp"
+                                          android:layout_marginTop="2dp"
                                           android:orientation="horizontal"
                                           android:layout_height="wrap_content">
 
@@ -147,8 +185,9 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:textSize="15sp"
+                                          android:id="@+id/event_details_date"
                                           android:layout_marginStart="10dp"
-                                          android:text="25th of December, 2019"
+                                          android:text=""
                                           android:layout_height="wrap_content"/>
 
                                 <RelativeLayout android:layout_width="match_parent"
@@ -157,6 +196,9 @@
                                     <ImageView android:layout_width="25dp"
                                                  android:layout_gravity="end"
                                                  android:layout_alignParentEnd="true"
+                                               android:visibility="gone"
+                                                android:contentDescription="Set Reminder"
+                                               android:id="@+id/event_details_reminder_btn"
                                                  android:background="?attr/selectableItemBackgroundBorderless"
                                                  app:srcCompat="@drawable/ic_reminder"
                                                  android:tint="@android:color/black"
@@ -165,6 +207,25 @@
                                 </RelativeLayout>
 
                             </LinearLayout>
+
+                            <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:visibility="gone"
+                                    android:id="@+id/event_details_promoted_label"
+                                    android:background="@drawable/darker_to_lighter_bg"
+                                    android:layout_height="40dp">
+
+                                <TextView android:layout_width="wrap_content"
+                                          android:textSize="17sp"
+                                          android:layout_centerVertical="true"
+                                          android:layout_alignParentEnd="true"
+                                          android:layout_marginEnd="20dp"
+                                          android:textColor="@color/colorPrimary"
+                                          android:text="Promoted"
+                                          android:textStyle="bold"
+                                          android:layout_height="wrap_content"/>
+
+                            </RelativeLayout>
 
                         </LinearLayout>
 
@@ -191,7 +252,7 @@
 
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
-                                      android:layout_marginTop="5dp"
+                                      android:layout_marginTop="10dp"
                                       android:text="Event Description"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
@@ -210,8 +271,9 @@
 
                                 <TextView android:layout_width="wrap_content"
                                           android:textSize="15sp"
+                                          android:id="@+id/event_details_description"
                                           android:layout_marginStart="10dp"
-                                          android:text="An event aimed at inspiring the tech newbies and stregthening the code veterans."
+                                          android:text=""
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -238,7 +300,8 @@
                                 <TextView android:layout_width="wrap_content"
                                           android:textSize="15sp"
                                           android:layout_marginStart="10dp"
-                                          android:text="Blue Trousers, White Shirt and Red Caps"
+                                          android:id="@+id/event_details_dress_code"
+                                          android:text="No Dress Code"
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -262,11 +325,13 @@
                                            android:layout_gravity="center_vertical"
                                            android:layout_height="20dp"/>
 
-                                <TextView android:layout_width="wrap_content"
+                                <TextView android:layout_width="match_parent"
                                           android:textSize="15sp"
                                           android:textColor="@color/colorAccent"
                                           android:layout_marginStart="10dp"
-                                          android:text="http://bit.ly/registerTheFuckHere"
+                                          android:background="?attr/selectableItemBackground"
+                                          android:id="@+id/event_details_reg_link"
+                                          android:text="No Registration Link"
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -278,9 +343,20 @@
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
+                            <TextView android:layout_width="wrap_content"
+                                      android:textSize="17sp"
+                                      android:id="@+id/event_details_no_special_guests_text"
+                                      android:layout_marginTop="10dp"
+                                      android:layout_marginBottom="10dp"
+                                      android:text="No special guests for this event.."
+                                      android:layout_gravity="center_horizontal"
+                                      android:layout_height="wrap_content"/>
+
                             <androidx.recyclerview.widget.RecyclerView
                                     android:layout_width="match_parent"
                                     android:layout_marginTop="10dp"
+                                    android:visibility="gone"
+                                    android:id="@+id/event_details_guest_recycler"
                                     android:layout_marginBottom="10dp"
                                     android:layout_height="70dp"/>
 
@@ -292,7 +368,8 @@
                             android:layout_marginStart="10dp"
                             android:layout_marginEnd="10dp"
                             android:background="@drawable/buttonbg_white"
-                            android:text="GET TICKETS"
+                            android:text="NO TICKETS FOR THIS EVENT"
+                            android:id="@+id/event_details_tickets_btn"
                             android:textColor="@color/colorAccent"
                             android:layout_marginBottom="10dp"
                             android:layout_height="40dp"/>
@@ -304,5 +381,10 @@
         </RelativeLayout>
 
     </FrameLayout>
+
+    <include
+        layout="@layout/profile_options_bottomsheet"
+        android:id="@+id/event_details_share_bottomsheet"
+    />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

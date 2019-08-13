@@ -10,6 +10,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -92,13 +93,12 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onHomeFragmentAttached() {
 
-        val homefab = findViewById<FloatingActionButton>(R.id.home_fab)
-        homefab.apply {
+        findViewById<FloatingActionButton>(R.id.home_fab)?.apply {
             setOnClickListener {
 
                 startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
             }
-            setImageDrawable(resources.getDrawable(io.neolution.eventify.R.drawable.ic_add_black_24dp))
+            setImageDrawable(ContextCompat.getDrawable(this@HomeActivity, io.neolution.eventify.R.drawable.ic_add_black_24dp))
         }
     }
 
@@ -218,6 +218,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
         shareBsheetCopyLink.setOnClickListener {
             AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         val currentUserId = AuthRepo.getUserUid()
@@ -359,6 +360,8 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
         }
     }
+
+
 }
 
 
