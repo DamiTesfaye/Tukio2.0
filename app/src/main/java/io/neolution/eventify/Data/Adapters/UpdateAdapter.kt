@@ -50,7 +50,6 @@ class FullUpdateAdapter(val context: Context, val listOfUpdates: MutableList<Ful
         holder.itemView.findViewById<TextView>(R.id.update_viewholder_update_tv).text = listOfUpdates[position].updatesModel.updateTitle
         holder.itemView.findViewById<TextView>(R.id.update_viewholder_update_desc_tv).text = listOfUpdates[position].updatesModel.updateDesc
 
-
         holder.itemView.findViewById<TextView>(R.id.update_viewholder_update_event_tv).visibility = VISIBLE
         holder.itemView.findViewById<TextView>(R.id.update_viewholder_update_event_tv).text = listOfUpdates[position].eventName
     }

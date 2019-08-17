@@ -33,8 +33,8 @@
                   android:layout_height="wrap_content"/>
 
         <TextView android:layout_width="wrap_content"
-                  android:textSize="15sp"
-                  android:text="Additional information that is crucial to this event. This is purely optional"
+                  android:textSize="13sp"
+                  android:text="Additional information that is helpful to the attendees or you can just post what you have already"
                   android:paddingEnd="20dp"
                   android:layout_height="wrap_content"/>
 
@@ -78,6 +78,26 @@
                             android:backgroundTint="@android:color/black"
                             android:fontFamily="@font/font_family"
                             android:id="@+id/add_event_final_reglink_edit"
+                            android:textSize="15sp"
+                            android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="5dp"
+                        app:hintAnimationEnabled="true"
+                        android:hint="Ticket Link (optional)"
+                        android:id="@+id/add_event_final_ticket_layout"
+                        android:textColorHint="@android:color/darker_gray"
+                        android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:backgroundTint="@android:color/black"
+                            android:fontFamily="@font/font_family"
+                            android:id="@+id/add_event_final_ticket_edit"
                             android:textSize="15sp"
                             android:layout_height="wrap_content"/>
 

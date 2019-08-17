@@ -38,7 +38,16 @@ class AboutActivity : AppCompatActivity() {
         }
 
         about_share.setOnClickListener {
-            //TODO: SHARE A TEXT INVITING PEOPLE TO DOWNLOAD THIS APP WITH A LINK TO GOOGLE PLAY AND THE WEBSITE
+
+            val shareIntent = Intent()
+            shareIntent.action = Intent.ACTION_SEND
+
+            val finalText = "Do you know you can now find out about events happening in your area that match your interests? \n \n  \n " +
+                    "Download Tukio now to do exactly just that! @ https://tinyurl.com/DownloadTukio"
+
+            shareIntent.putExtra(Intent.EXTRA_TEXT, finalText)
+            shareIntent.type = "text/plain"
+            startActivity(Intent.createChooser(shareIntent, "Share Event!!"))
         }
 
     }

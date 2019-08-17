@@ -35,6 +35,7 @@
                   android:layout_marginTop="10dp"
                   android:layout_marginStart="10dp"
                   android:textSize="20sp"
+
                   android:layout_toEndOf="@id/share_bsheet_close"
                   android:textStyle="bold"
                   android:layout_below="@id/share_bsheet_sep"
@@ -47,8 +48,9 @@
                   android:layout_toEndOf="@id/share_bsheet_close"
                   android:layout_marginStart="10dp"
                   android:layout_marginBottom="10dp"
+                  android:paddingEnd="40dp"
                   android:textSize="15sp"
-                  android:text="We recommend the TukPic feature. Try it out!"
+                  android:text="We have an exciting feature coming out in this area. Stay Tuned!"
                   android:layout_below="@id/share_bsheet_label"
                   android:layout_height="wrap_content"/>
 
@@ -62,6 +64,7 @@
 
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="horizontal"
+                      android:visibility="gone"
                       android:id="@+id/share_bsheet_tukpic"
                       android:background="?attr/selectableItemBackground"
                       android:layout_height="50dp">
@@ -85,6 +88,7 @@
 
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="horizontal"
+                      android:layout_marginTop="10dp"
                       android:id="@+id/share_bsheet_socialmedia"
                       android:background="?attr/selectableItemBackground"
                       android:layout_height="50dp">

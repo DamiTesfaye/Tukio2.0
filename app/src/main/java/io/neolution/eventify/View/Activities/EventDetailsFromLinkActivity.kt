@@ -4,10 +4,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +16,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.neolution.eventify.Data.Adapters.GuestsAdapter
+import io.neolution.eventify.Data.ModelClasses.EventsModel
 import io.neolution.eventify.Data.ModelClasses.GuestModel
-import io.neolution.eventify.Data.ModelClasses.breakDocumentIntoEvntsModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
@@ -29,7 +26,7 @@ import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.Utils.IntentUtils
 import kotlinx.android.synthetic.main.activity_event_details.*
 
-class EventDetailsActivity : AppCompatActivity() {
+class EventDetailsFromLinkActivity : AppCompatActivity() {
 
     private lateinit var eventTitleText: TextView
     private lateinit var eventLocationText: TextView
@@ -93,6 +90,7 @@ class EventDetailsActivity : AppCompatActivity() {
         backBtn = findViewById(R.id.event_details_back)
         viewImageText = findViewById(R.id.event_details_view_image_text)
         backBtn.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
 
@@ -112,9 +110,16 @@ class EventDetailsActivity : AppCompatActivity() {
         shareEventTukpic = findViewById(R.id.share_bsheet_tukpic)
         closeShareBottomSheet = findViewById(R.id.share_bsheet_close)
 
-        val bundle = intent.extras
         fireStoreRepo = FireStoreRepo()
-        bindData(bundle)
+
+        val appLinkIntent = intent
+        val appLinkData = appLinkIntent.data
+
+        if(appLinkIntent != null && appLinkData.lastPathSegment != null){
+            documentID = appLinkData.lastPathSegment
+            bindData(documentID)
+        }
+
 
         shareBtn.setOnClickListener {
             bottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
@@ -165,141 +170,138 @@ class EventDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun bindData(bundle: Bundle){
+    private fun bindData(documentID: String) {
+        fireStoreRepo.getEventDocumentRefererenceById(documentID).addSnapshotListener { snapshot, _ ->
+            if (snapshot != null && snapshot.exists()) {
+                val eventModel = snapshot.toObject(EventsModel::class.java)
 
-        val eventType = bundle.getString("eventType")
-        if (eventType ==  "promoted")promotedLabel.visibility = VISIBLE
-        if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
-            moreDetailsBtn.visibility = VISIBLE
-        }
+                val eventType = eventModel!!.eventType
+                if (eventType ==  "promoted")promotedLabel.visibility = View.VISIBLE
+                if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
+                    moreDetailsBtn.visibility = View.VISIBLE
+                }
 
-        documentID = bundle.getString("documentID")
-        posterUID = bundle.getString("posterUID")
-        eventDate = bundle.getString("eventDate")
-        eventLocation = bundle.getString("eventLocation")
-        eventTitle = bundle.getString("eventTitle")
-        eventDesc = bundle.getString("eventDesc")
-        eventDressCode = bundle.getString("eventDressCode")
-        eventRegLink = bundle.getString("eventRegLink")
-        eventImageLink = bundle.getString("eventImageLink")
-        eventImageThumbLink = bundle.getString("eventImageThumb")
-        eventMilis = bundle.getLong("eventMilis")
-        eventTicketLink = bundle.getString("eventTicketLink")
+                posterUID = eventModel.userUID
+                eventDate = eventModel.eventDate
+                eventLocation = eventModel.eventLocation
+                eventTitle = eventModel.eventTitle
+                eventDesc = eventModel.eventDesc
+                eventDressCode = eventModel.eventDressCode!!
+                eventRegLink = eventModel.eventRegLink!!
+                eventImageLink = eventModel.eventImageLink
+                eventImageThumbLink = eventModel.eventImageLinkThumb!!
+                eventMilis = eventModel.eventMilis
+                eventTicketLink = eventModel.eventTicketLink!!
 
-        Log.e(EventDetailsActivity::class.java.simpleName, eventMilis.toString())
+                eventDateText.text = eventDate
+                eventTitleText.text = eventTitle
+                event_details_ticket_link.text = if (eventTicketLink.isNotEmpty()) eventTicketLink else "There is no ticketing platform for this event"
+                eventDescriptionText.text = eventDesc
+                eventDressCodeText.text = if (eventDressCode.isNotEmpty()) eventDressCode else "There is no dress code for this event!"
+                eventRegLinkText.text = if (eventRegLink.isNotEmpty()) eventRegLink else "There is no online registration for this event!"
+                eventLocationText.text = eventLocation
+                eventLocationText.setOnClickListener {
+                    GoogleServicesClass.startLocationActivity(eventLocation, this)
+                }
 
-        eventDateText.text = eventDate
-        eventTitleText.text = eventTitle
-        event_details_ticket_link.text = if (eventTicketLink.isNotEmpty()) eventTicketLink else "There is no ticketing platform for this event"
-        eventDescriptionText.text = eventDesc
-        eventDressCodeText.text = if (eventDressCode.isNotEmpty()) eventDressCode else "There is no dress code for this event!"
-        eventRegLinkText.text = if (eventRegLink.isNotEmpty()) eventRegLink else "There is no online registration for this event!"
-        eventLocationText.text = eventLocation
-        eventLocationText.setOnClickListener {
-            GoogleServicesClass.startLocationActivity(eventLocation, this)
-        }
+                eventRegLinkText.setOnClickListener {
+                    val packageName = CustomTabsHelper.getPackageNameToUse(this)
 
-        eventRegLinkText.setOnClickListener {
-            val packageName = CustomTabsHelper.getPackageNameToUse(this)
+                    if (eventRegLink.isNotEmpty()){
 
-            if (eventRegLink.isNotEmpty()){
+                        if ( packageName != null ) {
 
-                if ( packageName != null ) {
+                            val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
+                            val builder = CustomTabsIntent.Builder()
+                            builder.setToolbarColor(ContextCompat.getColor(this, io.neolution.eventify.R.color.colorPrimary))
+                            builder.setShowTitle(true)
 
-                    val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
-                    val builder = CustomTabsIntent.Builder()
-                    builder.setToolbarColor(ContextCompat.getColor(this, io.neolution.eventify.R.color.colorPrimary))
-                    builder.setShowTitle(true)
+                            val intent = builder.build()
+                            intent.intent.setPackage(packageName)
+                            intent.launchUrl(this, Uri.parse(url))
+                        }else{
 
-                    val intent = builder.build()
-                    intent.intent.setPackage(packageName)
-                    intent.launchUrl(this, Uri.parse(url))
+                            val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            val chooser = Intent.createChooser(intent, "Open url using..")
+                            startActivity(chooser)
+                        }
+                    }
+                }
+
+                event_details_ticket_link.setOnClickListener {
+                    val packageName = CustomTabsHelper.getPackageNameToUse(this)
+
+                    if (eventTicketLink.isNotEmpty()){
+
+                        if ( packageName != null ) {
+
+                            val url = if(!eventTicketLink.contains("http")&& !eventTicketLink.contains("https"))"http://$eventTicketLink" else eventTicketLink
+                            val builder = CustomTabsIntent.Builder()
+                            builder.setToolbarColor(ContextCompat.getColor(this, io.neolution.eventify.R.color.colorPrimary))
+                            builder.setShowTitle(true)
+
+                            val intent = builder.build()
+                            intent.intent.setPackage(packageName)
+                            intent.launchUrl(this, Uri.parse(url))
+                        }else{
+
+                            val url = if(!eventTicketLink.contains("http")&& !eventTicketLink.contains("https"))"http://$eventTicketLink" else eventTicketLink
+                            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                            val chooser = Intent.createChooser(intent, "Open url using..")
+                            startActivity(chooser)
+                        }
+                    }
+                }
+
+                if (eventMilis != null && eventMilis != 0L){
+                    reminderBtn.visibility = View.VISIBLE
+                    reminderBtn.setOnClickListener {
+                        var calName: String = ""
+                        var calId: String = ""
+
+                        val projection = arrayOf("_id", "name")
+                        val calendars = Uri.parse("content://calendar/calendars")
+
+                        val managedCursor = managedQuery(
+                            calendars, projection,
+                            "selected=1", null, null
+                        )
+
+                        if (managedCursor.moveToFirst()) {
+
+                            val nameColumn = managedCursor.getColumnIndex("name")
+                            val idColumn = managedCursor.getColumnIndex("_id")
+                            do {
+                                calName = managedCursor.getString(nameColumn)
+                                calId = managedCursor.getString(idColumn)
+                            } while (managedCursor.moveToNext())
+                        }
+
+                        val event = ContentValues()
+                        event.put("calendar_id", calId)
+                        event.put("title", "Event Title")
+                        event.put("description", "Event Desc")
+                        event.put("eventLocation", "Event Location")
+
+                        Toast.makeText(this, "This Event has been added to your calendar", Toast.LENGTH_LONG)
+                            .show()
+                    }
                 }else{
-
-                    val url = if(!eventRegLink.contains("http")&& !eventRegLink.contains("https"))"http://$eventRegLink" else eventRegLink
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    val chooser = Intent.createChooser(intent, "Open url using..")
-                    startActivity(chooser)
-                }
-            }
-        }
-
-        event_details_ticket_link.setOnClickListener {
-            val packageName = CustomTabsHelper.getPackageNameToUse(this)
-
-            if (eventTicketLink.isNotEmpty()){
-
-                if ( packageName != null ) {
-
-                    val url = if(!eventTicketLink.contains("http")&& !eventTicketLink.contains("https"))"http://$eventTicketLink" else eventTicketLink
-                    val builder = CustomTabsIntent.Builder()
-                    builder.setToolbarColor(ContextCompat.getColor(this, io.neolution.eventify.R.color.colorPrimary))
-                    builder.setShowTitle(true)
-
-                    val intent = builder.build()
-                    intent.intent.setPackage(packageName)
-                    intent.launchUrl(this, Uri.parse(url))
-                }else{
-
-                    val url = if(!eventTicketLink.contains("http")&& !eventTicketLink.contains("https"))"http://$eventTicketLink" else eventTicketLink
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    val chooser = Intent.createChooser(intent, "Open url using..")
-                    startActivity(chooser)
-                }
-            }
-        }
-
-        if (eventMilis != null && eventMilis != 0L){
-            reminderBtn.visibility = VISIBLE
-            reminderBtn.setOnClickListener {
-                var calName: String = ""
-                var calId: String = ""
-
-                val projection = arrayOf("_id", "name")
-                val calendars = Uri.parse("content://calendar/calendars")
-
-                val managedCursor = managedQuery(
-                    calendars, projection,
-                    "selected=1", null, null
-                )
-
-                if (managedCursor.moveToFirst()) {
-
-                    val nameColumn = managedCursor.getColumnIndex("name")
-                    val idColumn = managedCursor.getColumnIndex("_id")
-                    do {
-                        calName = managedCursor.getString(nameColumn)
-                        calId = managedCursor.getString(idColumn)
-                    } while (managedCursor.moveToNext())
+                    reminderBtn.visibility = View.GONE
                 }
 
-                val event = ContentValues()
-                event.put("calendar_id", calId)
-                event.put("title", "Event Title")
-                event.put("description", "Event Desc")
-                event.put("eventLocation", "Event Location")
+                val requestOptions = RequestOptions()
+                requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.placeholder_2))
 
-                Toast.makeText(this, "This Event has been added to your calendar", Toast.LENGTH_LONG)
-                    .show()
-            }
-        }else{
-            reminderBtn.visibility = GONE
-        }
+                val thumbNailRequest = Glide.with(this).load(eventImageThumbLink)
+                Glide.with(this.applicationContext)
+                    .setDefaultRequestOptions(requestOptions)
+                    .asDrawable()
+                    .load(eventImageLink)
+                    .thumbnail(thumbNailRequest)
+                    .into(eventImageView)
 
-        val requestOptions = RequestOptions()
-        requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.placeholder_2))
-
-        val thumbNailRequest = Glide.with(this).load(eventImageThumbLink)
-        Glide.with(this.applicationContext)
-            .setDefaultRequestOptions(requestOptions)
-            .asDrawable()
-            .load(eventImageLink)
-            .thumbnail(thumbNailRequest)
-            .into(eventImageView)
-
-        fireStoreRepo.getEventDocumentRefererenceById(documentID).addSnapshotListener { snapshot, exception ->
-            if (snapshot!= null && snapshot.exists()){
-                val eventModel = snapshot.breakDocumentIntoEvntsModel()
                 val mapOfGuests = eventModel.eventGuests
 
                 if ( mapOfGuests != null && !mapOfGuests.isEmpty()){
@@ -315,11 +317,19 @@ class EventDetailsActivity : AppCompatActivity() {
                     specialGuestsRecycler.adapter = adapter
 
                 }else{
-                    specialGuestsRecycler.visibility = GONE
-                    noSpecialGuests.visibility = VISIBLE
+                    specialGuestsRecycler.visibility = View.GONE
+                    noSpecialGuests.visibility = View.VISIBLE
                 }
-            }
-        }
 
+            }
+
+        }
     }
+
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, HomeActivity::class.java))
+        finish()
+    }
+
 }

@@ -57,6 +57,9 @@ dependencies {
     implementation 'id.zelory:compressor:2.1.0' //Compressor
     implementation 'co.paystack.android:paystack:3.0.10' //PayStack
     implementation 'androidx.browser:browser:1.0.0' //Chrome Custom Tabs
+    implementation "com.xwray:groupie:2.4.0"//Groupie
+    implementation "com.xwray:groupie-kotlin-android-extensions:2.4.0"
+
 
     //Google
     implementation 'com.google.firebase:firebase-core:17.0.1'

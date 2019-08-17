@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.Toast
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldValue
@@ -111,6 +112,8 @@ class FireStoreRepo {
                     getEventDocumentRefererenceById(eventID).collection("Likes")
                         .document(AuthRepo.getUserUid()).delete().addOnSuccessListener {
                             button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_unpinned))
+                            Toast.makeText(context, "You will no more get updates about this event!", Toast.LENGTH_LONG)
+                                .show()
                         }
 
                 } else {
@@ -122,6 +125,8 @@ class FireStoreRepo {
                     getEventDocumentRefererenceById(eventID).collection("Likes")
                         .document(AuthRepo.getUserUid()).set(hashMap).addOnSuccessListener {
                             button.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_pinned))
+                            Toast.makeText(context, "You will now get updates about this event!", Toast.LENGTH_LONG)
+                                .show()
                         }
 
                 }

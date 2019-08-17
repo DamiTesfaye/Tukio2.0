@@ -45,13 +45,6 @@
                 android:layout_margin="3dp"
                 android:layout_height="7dp"/>
 
-        <ImageView
-                android:layout_width="7dp"
-                android:id="@+id/fourth_indicator"
-                android:src="@drawable/unselected_indicator"
-                android:layout_toEndOf="@id/third_indicator"
-                android:layout_margin="3dp"
-                android:layout_height="7dp"/>
 
     </RelativeLayout>
     

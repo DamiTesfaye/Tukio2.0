@@ -103,30 +103,7 @@
                 android:name=".View.Activities.UpdatesActivity"
                 android:screenOrientation="portrait">
         </activity>
-        <activity
-                android:name=".View.Activities.FullDetails"
-                android:screenOrientation="portrait"/>
-        <activity
-                android:name=".View.Activities.FullDetailsFromLinkActivity"
-                android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-
-                <data
-                        android:host="tuk.io.events"
-                        android:pathPrefix="/"
-                        android:scheme="http"/>
-
-                <data
-                        android:host="http://tukio.exceptos/events/"
-                        android:pathPrefix="/"
-                        android:scheme="http"/>
-
-            </intent-filter>
-        </activity>
         <activity
                 android:name=".View.Activities.CommentActivity"
                 android:screenOrientation="portrait"/>
@@ -147,6 +124,24 @@
         <activity
                 android:name=".View.Activities.SignInActivity"
                 android:theme="@style/AuthThemes"/>
+        <activity android:name=".View.Activities.EventDetailsFromLinkActivity"
+                  android:screenOrientation="portrait"
+                  android:theme="@style/EventDetailsTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data
+                        android:host="tuk.io.events"
+                        android:pathPrefix="/"
+                        android:scheme="http"/>
+
+            </intent-filter>
+
+        </activity>
 
         <service android:name=".Services.MessagingService">
             <intent-filter>

@@ -141,15 +141,21 @@ class AddEventFinalActivity : AppCompatActivity() {
             val eventDressCode = add_event_final_dresscode_edit.text.toString().trim()
             val eventRegLink = add_event_final_reglink_edit.text.toString().trim()
             val eventPostTime = System.currentTimeMillis()
+            val eventTicketLink = add_event_final_ticket_edit.text.toString().trim()
 
             val eventModel = EventsModel(eventType = eventType, eventTitle = eventTitle,
                 eventDesc = eventDesc, eventDate = eventDate, eventImageLink = eventPicUri.toString(), eventImageLinkThumb = "",
                 eventLocation = eventLocation, eventDressCode = eventDressCode, eventRegLink = eventRegLink, eventTags = listOf(eventTag),
-                eventMilis = eventMillis, eventGuests = specialGuest, eventPostTime = eventPostTime.toString(), eventTicketLink = "",
+                eventMilis = eventMillis, eventGuests = specialGuest, eventPostTime = eventPostTime.toString(), eventTicketLink = eventTicketLink,
                 userUID = AuthRepo.getUserUid(),amountPaid = amountPaid)
 
             fireStoreRepo.postEvent(this, eventModel, {
+
+                val v = findViewById<View>(android.R.id.content)
+                AppUtils.getCustomSnackBar(v, "Your event has been shared!", this).show()
+
                 startActivity(Intent(this, HomeActivity::class.java))
+                finish()
             }, {
 
                 add_event_final_share_event_text.visibility = VISIBLE

@@ -63,7 +63,12 @@ class Profile : Fragment() {
             if (snapshot != null && snapshot.exists()){
                 val userModel = snapshot.breakDownToUserModel()
                 userNameTextView.text= userModel.userName
-                userBioTextView.text = userModel.userBio
+                if (userModel.userBio.isEmpty()){
+                    userBioTextView.setTextColor(ContextCompat.getColor(context!!, android.R.color.darker_gray))
+                    userBioTextView.text = "No Bio Set."
+                }else{
+                    userBioTextView.text = userModel.userBio
+                }
 
                 val requestOptions = RequestOptions()
                 if (context != null){

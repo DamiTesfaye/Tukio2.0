@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        app:behavior_hideable="true"
+        android:background="#FFFFFF"
+        app:behavior_peekHeight="0dp"
+        app:layout_behavior="@string/bottom_sheet_behavior"
+        android:layout_height="wrap_content">
+
+    <RelativeLayout android:layout_width="match_parent"
+                    android:background="@drawable/bottomsheet_top"
+                    android:layout_height="wrap_content">
+
+        <View android:layout_width="200dp"
+              android:background="@drawable/buttonbg"
+              android:layout_marginTop="5dp"
+              android:layout_alignParentTop="true"
+              android:layout_centerHorizontal="true"
+              android:layout_gravity="center_horizontal"
+              android:layout_marginBottom="10dp"
+              android:layout_height="5dp"/>
+
+        <ImageButton android:layout_width="35dp"
+                     android:layout_centerVertical="true"
+                     android:layout_marginStart="10dp"
+                     android:id="@+id/add_update_bsheet_close"
+                     android:background="?attr/selectableItemBackgroundBorderless"
+                     app:srcCompat="@drawable/ic_close_black_24dp"
+                     android:layout_height="35dp"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_marginTop="25dp"
+                  android:layout_marginStart="15dp"
+                  android:textSize="20sp"
+                  android:layout_toEndOf="@id/add_update_bsheet_close"
+                  android:textStyle="bold"
+                  android:id="@+id/add_update_bsheet_label"
+                  android:textColor="@android:color/black"
+                  android:text="Add Event Update"
+                  android:layout_height="wrap_content"/>
+
+        <TextView android:layout_width="wrap_content"
+                  android:layout_toEndOf="@id/add_update_bsheet_close"
+                  android:layout_below="@id/add_update_bsheet_label"
+                  android:layout_marginStart="15dp"
+                  android:textSize="15sp"
+                  android:layout_marginTop="2dp"
+                  android:layout_marginBottom="5dp"
+                  android:text="The update title and the description of the update"
+                  android:paddingEnd="10dp"
+                  android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:hintAnimationEnabled="true"
+            android:hint="Update Title"
+            android:id="@+id/add_update_bsheet_guest_name_layout"
+            android:textColorHint="@android:color/black"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:backgroundTint="@android:color/black"
+                android:fontFamily="@font/font_family"
+                android:id="@+id/add_update_bsheet_guest_name_edit"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="30dp"
+            app:hintAnimationEnabled="true"
+            android:hint="Update Description"
+            android:id="@+id/add_update_bsheet_guest_desc_layout"
+            android:textColorHint="@android:color/black"
+            android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:backgroundTint="@android:color/black"
+                android:fontFamily="@font/font_family"
+                android:id="@+id/add_update_bsheet_guest_desc_edit"
+                android:textSize="15sp"
+                android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RelativeLayout android:layout_width="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textSize="17sp"
+            android:id="@+id/add_update_bsheet_add_guest_layout"
+            android:background="@drawable/buttonbg"
+            android:text="Add Update"
+            android:layout_marginBottom="50dp"
+                    android:layout_height="40dp">
+
+
+
+        <TextView android:layout_width="match_parent"
+                  android:textSize="17sp"
+                  android:textStyle="bold"
+                  android:layout_centerInParent="true"
+                  android:gravity="center"
+                  android:id="@+id/add_update_bsheet_add_guest_text"
+                  android:textColor="@color/colorPrimary"
+                  android:text="Add Update"
+                  android:layout_height="match_parent"/>
+
+        <ProgressBar android:layout_width="20dp"
+                     android:indeterminateTint="@color/colorAccent"
+                     android:layout_centerInParent="true"
+                        android:visibility="gone"
+                     android:id="@+id/add_update_bsheet_add_guest_progress_bar"
+                     android:layout_height="20dp"/>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

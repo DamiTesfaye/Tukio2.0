@@ -30,7 +30,7 @@ class AppUtils {
         const val LINEAR_LAYOUT_MANAGER = "linear_layout_manager"
 
         const val GOOGLE_MAPS_BASE_URL = "geo:0,0?q="
-        const val APP_BASE_URL = "http://tukio.exceptos/events/"
+        const val APP_BASE_URL = "http://tuk.io.events/"
 
 
         fun getCustomSnackBar(v: View, m: String, context: Context): Snackbar {

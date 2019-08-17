@@ -48,6 +48,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
 
         if (tagsArray.size <= 5){
             tagsArray.add(chipText)
+        }else{
 
         }
     }

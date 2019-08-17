@@ -27,7 +27,6 @@ class OnBoardingActivity : AppCompatActivity() {
         list.add(PersonalisedFeedFragment())
         list.add(UpdatesFragment())
         list.add(NotificationFragment())
-        list.add(TrendsFragment())
 
         val adapter = OnBoardingAdapter(list, supportFragmentManager)
         get_started_viewpager.adapter = adapter
@@ -50,8 +49,6 @@ class OnBoardingActivity : AppCompatActivity() {
                             R.drawable.unselected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
-                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
-                            R.drawable.unselected_indicator))
                     }
 
                     1 -> {
@@ -60,8 +57,6 @@ class OnBoardingActivity : AppCompatActivity() {
                         second_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.selected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
-                            R.drawable.unselected_indicator))
-                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
                     }
 
@@ -72,8 +67,6 @@ class OnBoardingActivity : AppCompatActivity() {
                             R.drawable.unselected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.selected_indicator))
-                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
-                            R.drawable.unselected_indicator))
                     }
                     3 -> {
                         first_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
@@ -82,8 +75,6 @@ class OnBoardingActivity : AppCompatActivity() {
                             R.drawable.unselected_indicator))
                         third_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
                             R.drawable.unselected_indicator))
-                        fourth_indicator.setImageDrawable(ContextCompat.getDrawable(this@OnBoardingActivity,
-                            R.drawable.selected_indicator))
                     }
                 }
             }

@@ -3,7 +3,6 @@ package io.neolution.eventify.View.Fragments.HomeFragment
 import androidx.databinding.DataBindingUtil
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import androidx.core.content.ContextCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import android.view.LayoutInflater
 import android.view.View
@@ -11,24 +10,28 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.Section
+import com.xwray.groupie.ViewHolder
 import io.neolution.eventify.Data.Adapters.FullUpdateAdapter
-import io.neolution.eventify.Data.Adapters.UpdateAdapter
+import io.neolution.eventify.Data.Adapters.SectionGroup
+import io.neolution.eventify.Data.Adapters.UpdateGroup
 import io.neolution.eventify.Data.ModelClasses.FullUpdateModel
-import io.neolution.eventify.Data.ModelClasses.UpdatesModel
 import io.neolution.eventify.Data.ModelClasses.breakDocumentIntoEvntsModel
 import io.neolution.eventify.Data.ModelClasses.breakDownToUpdatesModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
 import io.neolution.eventify.Utils.AppUtils
-import io.neolution.eventify.View.Activities.HomeActivity
 import io.neolution.eventify.databinding.FragmentUpdateBinding
-import kotlinx.android.synthetic.main.fragment_update.*
 
 /**
  * Created by Big-Nosed Developer on the Edge of Infinity.
  */
 class UpdatesFragment: Fragment() {
+
+    inner class MyViewHolder(val view: View): ViewHolder(view)
 
     lateinit var binding: FragmentUpdateBinding
     lateinit var progressBar: ProgressBar
@@ -36,6 +39,7 @@ class UpdatesFragment: Fragment() {
 
     lateinit var firestoreRepo: FireStoreRepo
     lateinit var list: MutableList<FullUpdateModel>
+    private val listOfPinnedEventsIds = mutableListOf<QuickUpdateModel>()
     lateinit var adapter: FullUpdateAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,7 +51,7 @@ class UpdatesFragment: Fragment() {
 
         swipeLayout.setOnRefreshListener {
 
-            loadUpdates()
+            startLoadUpdates()
 
         }
 
@@ -55,18 +59,19 @@ class UpdatesFragment: Fragment() {
             layoutManager = manager
         }
 
-         firestoreRepo = FireStoreRepo()
-         list = mutableListOf()
-         adapter = FullUpdateAdapter(context!!, list )
+        firestoreRepo = FireStoreRepo()
+        list = mutableListOf()
+
+        adapter = FullUpdateAdapter(context!!, list )
 
         binding.fragUpdateRecycler.adapter = adapter
 
-        loadUpdates()
+        startLoadUpdates()
 
         return binding.root
     }
 
-    private fun loadUpdates() {
+    private fun startLoadUpdates() {
         progressBar.visibility = VISIBLE
 
         firestoreRepo.getEventPosts().addSnapshotListener { eventPostsSnapshot, _ ->
@@ -129,15 +134,55 @@ class UpdatesFragment: Fragment() {
         }
     }
 
+    private fun loadUpdates(listOfPinnedEventsIds: MutableList<QuickUpdateModel>) {
+        for (model in listOfPinnedEventsIds){
+
+            Toast.makeText(context!!, "$model", Toast.LENGTH_LONG)
+                .show()
+
+            firestoreRepo.getDocumentUpdatesPath(model.eventId).addSnapshotListener { updateSnapshot, _ ->
+                if (updateSnapshot != null && !updateSnapshot.isEmpty){
+                    for (updateDoc in updateSnapshot.documents){
+
+                        val updateModel = updateDoc.breakDownToUpdatesModel()
+                        val eventName = model.eventName
+
+                        val finalModel = FullUpdateModel(updateModel, eventName)
+
+                        Toast.makeText(context!!, "$finalModel", Toast.LENGTH_LONG)
+                            .show()
+
+                        if(!list.contains(finalModel)){
+                            list.add(finalModel)
+                            adapter.notifyDataSetChanged()
+
+                            if (swipeLayout.isRefreshing){
+                                swipeLayout.isRefreshing = false
+                            }
+
+                        }
+
+                    }
+                }
+            }
+
+
+
+        }
+
+    }
+
     override fun onStart() {
         super.onStart()
 
-        loadUpdates()
+        startLoadUpdates()
     }
 
     override fun onResume() {
         super.onResume()
 
-        loadUpdates()
+        startLoadUpdates()
     }
 }
+
+data class QuickUpdateModel(val eventName: String, val eventId: String)

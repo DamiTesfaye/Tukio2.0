@@ -344,6 +344,37 @@
 
                             </LinearLayout>
 
+
+                            <TextView android:layout_width="wrap_content"
+                                      android:textSize="12sp"
+                                      android:layout_marginTop="10dp"
+                                      android:text="Ticket Link"
+                                      android:textStyle="bold"
+                                      android:layout_height="wrap_content"/>
+
+                            <LinearLayout android:layout_width="match_parent"
+                                          android:padding="5dp"
+                                          android:layout_marginTop="5dp"
+                                          android:orientation="horizontal"
+                                          android:layout_height="wrap_content">
+
+                                <ImageView android:layout_width="20dp"
+                                           app:srcCompat="@drawable/ic_ticket"
+                                           android:tint="@android:color/black"
+                                           android:layout_gravity="center_vertical"
+                                           android:layout_height="20dp"/>
+
+                                <TextView android:layout_width="match_parent"
+                                          android:textSize="15sp"
+                                          android:textColor="@color/colorAccent"
+                                          android:layout_marginStart="10dp"
+                                          android:background="?attr/selectableItemBackground"
+                                          android:id="@+id/event_details_ticket_link"
+                                          android:text="No Ticket Link"
+                                          android:layout_height="wrap_content"/>
+
+                            </LinearLayout>
+
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="10dp"
@@ -371,16 +402,6 @@
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
-
-                    <Button android:layout_width="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/buttonbg_white"
-                            android:text="NO TICKETS FOR THIS EVENT"
-                            android:id="@+id/event_details_tickets_btn"
-                            android:textColor="@color/colorAccent"
-                            android:layout_marginBottom="10dp"
-                            android:layout_height="40dp"/>
 
                 </LinearLayout>
 
