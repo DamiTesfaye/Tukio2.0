@@ -18,6 +18,7 @@ class OnBoardingAdapter(private val listFragment: List<Fragment>, manager: Fragm
         return when (position){
             0 -> "Posted Events"
             1 -> "Promoted Events"
+            2 -> "Pinned Events"
             else -> {
               ""
             }

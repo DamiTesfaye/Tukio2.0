@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
@@ -34,7 +35,7 @@ class Profile : Fragment() {
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_profile, container, false)
 
-        val userImage = view.findViewById<CircleImageView>(R.id.profile_frag_userimage)
+        val userImage = view.findViewById<ImageView>(R.id.profile_frag_userimage)
         val userNameTextView = view.findViewById<TextView>(R.id.profile_frag_username)
         val userBioTextView = view.findViewById<TextView>(R.id.profile_frag_user_bio)
         val postedEventsNum = view.findViewById<TextView>(R.id.profile_frag_posted_events_num)
@@ -43,6 +44,7 @@ class Profile : Fragment() {
         val list = mutableListOf<Fragment>()
         list.add(PostedEventsFragment())
         list.add(PromotedEventsFragment())
+        list.add(PinnedEventsFragment())
 
         val profileTabLayout = view.findViewById<TabLayout>(R.id.profile_frag_tab_layout)
         val moreImageButton = view.findViewById<ImageButton>(R.id.profile_frag_menu_btn)
@@ -72,7 +74,7 @@ class Profile : Fragment() {
 
                 val requestOptions = RequestOptions()
                 if (context != null){
-                    requestOptions.placeholder(ContextCompat.getDrawable(context!!.applicationContext, R.drawable.ic_default_user))
+                    requestOptions.placeholder(ContextCompat.getDrawable(context!!.applicationContext, R.drawable.ic_male_placeholder))
                     val thumbNailRequest = Glide.with(context!!.applicationContext).load(userModel.userThumbLink)
 
                     Glide.with(context!!.applicationContext)
@@ -90,9 +92,9 @@ class Profile : Fragment() {
             .addSnapshotListener { snapshot, _ ->
 
                 if (snapshot != null && !snapshot.isEmpty) {
-                    postedEventsNum.text = ("Posted Events: ${snapshot.documents.size}")
+                    postedEventsNum.text = (snapshot.documents.size).toString()
                 }else{
-                    postedEventsNum.text = ("Posted Events: 0")
+                    postedEventsNum.text = ("0")
                 }
             }
 
@@ -100,9 +102,9 @@ class Profile : Fragment() {
             .addSnapshotListener { snapshot, _ ->
 
                 if (snapshot != null && !snapshot.isEmpty) {
-                    promotedEventsNum.text = ("Promoted Events: ${snapshot.documents.size}")
+                    promotedEventsNum.text = (snapshot.documents.size).toString()
                 }else{
-                    promotedEventsNum.text = ("Promoted Events: 0")
+                    promotedEventsNum.text = ("0")
                 }
             }
 

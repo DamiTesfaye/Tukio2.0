@@ -34,7 +34,7 @@
                   android:layout_centerVertical="true"
                   android:textSize="23sp"
                   android:textColor="#000"
-                  android:text="Event Comments"
+                  android:text="@string/event_comments"
 
         />
 
@@ -127,7 +127,7 @@
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"
                   android:layout_marginTop="10dp"
-                  android:text="No comments yet, you can add yours below"
+                  android:text="@string/no_comments_yet_you_can_add_yours_below"
                   android:layout_height="wrap_content"/>
 
 

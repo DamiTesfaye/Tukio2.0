@@ -22,7 +22,7 @@
             android:textSize="25sp"
             android:layout_marginTop="30dp"
             android:textStyle="bold"
-            android:text="Be Trendy"
+            android:text="@string/be_trendy"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -35,7 +35,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="Say on top of all moving trends and hot stuff!"
+            android:text="@string/say_on_top_of_all_moving_trends_and_hot_stuff"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>

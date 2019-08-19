@@ -17,7 +17,7 @@
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent"
                    android:id="@+id/guest_viewholder_label"
-                   app:srcCompat="@drawable/ic_person_black_24dp"
+                   app:srcCompat="@drawable/ic_male_placeholder"
                   android:layout_height="wrap_content"/>
 
         <TextView android:layout_width="0dp"

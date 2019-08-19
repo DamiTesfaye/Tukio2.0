@@ -17,12 +17,9 @@ import io.neolution.eventify.Data.Adapters.UpdateAdapter
 import io.neolution.eventify.Data.ModelClasses.UpdatesModel
 import io.neolution.eventify.Data.ModelClasses.indicate
 import io.neolution.eventify.Data.ModelClasses.toHashMap
-import io.neolution.eventify.Listeners.OnUpdatesAdded
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
-import io.neolution.eventify.Utils.AppUtils
-import io.neolution.eventify.View.CustomViews.UpdateDialogFragment
 
 class UpdatesActivity : AppCompatActivity() {
 

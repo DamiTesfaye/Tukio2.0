@@ -41,7 +41,7 @@
                   android:layout_below="@id/share_bsheet_sep"
                   android:id="@+id/share_bsheet_label"
                   android:textColor="@android:color/black"
-                  android:text="Share Via:"
+                  android:text="@string/share_via"
                   android:layout_height="wrap_content"/>
 
         <TextView android:layout_width="wrap_content"
@@ -49,8 +49,9 @@
                   android:layout_marginStart="10dp"
                   android:layout_marginBottom="10dp"
                   android:paddingEnd="40dp"
+                  android:paddingStart="0dp"
                   android:textSize="15sp"
-                  android:text="We have an exciting feature coming out in this area. Stay Tuned!"
+                  android:text="@string/we_have_an_exciting_feature_coming_out_in_this_area_stay_tuned"
                   android:layout_below="@id/share_bsheet_label"
                   android:layout_height="wrap_content"/>
 
@@ -105,7 +106,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="Social Media"
+                    android:text="@string/social_media"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -129,7 +130,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="Copy Link"
+                    android:text="@string/copy_link"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>

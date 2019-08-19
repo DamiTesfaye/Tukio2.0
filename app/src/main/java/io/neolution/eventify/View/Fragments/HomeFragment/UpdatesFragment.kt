@@ -74,10 +74,9 @@ class UpdatesFragment: Fragment() {
     private fun startLoadUpdates() {
         progressBar.visibility = VISIBLE
 
-        firestoreRepo.getEventPosts().addSnapshotListener { eventPostsSnapshot, _ ->
+        firestoreRepo.getEventPosts().addSnapshotListener(activity!!) { eventPostsSnapshot, _ ->
             if (eventPostsSnapshot != null && !eventPostsSnapshot.isEmpty){
                 for (eventDoc in eventPostsSnapshot.documents){
-
                     val eventModel = eventDoc.breakDocumentIntoEvntsModel()
 
                     firestoreRepo.getDocumentLikesCollection(eventDoc.id).document(AuthRepo.getUserUid()).get().addOnSuccessListener {documentTask ->

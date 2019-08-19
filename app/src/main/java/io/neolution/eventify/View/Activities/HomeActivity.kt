@@ -134,6 +134,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     private lateinit var editProfile: LinearLayout
     private lateinit var changeInterests: LinearLayout
     private lateinit var signOut: LinearLayout
+    private lateinit var aboutUs: LinearLayout
 
     var registered = false
 
@@ -156,6 +157,10 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         editProfile = findViewById(R.id.profile_opt_bsheet_edit_profile)
         changeInterests = findViewById(R.id.profile_opt_bsheet_change_interests)
         signOut = findViewById(R.id.profile_opt_bsheet_signout)
+        aboutUs = findViewById(R.id.profile_opt_bsheet_about_us)
+        aboutUs.setOnClickListener {
+            startActivity(Intent(this, AboutActivity::class.java))
+        }
 
         signOut.setOnClickListener {
             val dialog = androidx.appcompat.app.AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)

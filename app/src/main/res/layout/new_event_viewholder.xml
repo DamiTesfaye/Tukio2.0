@@ -108,7 +108,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:textSize="15sp"
-                      android:text="0"
+                      android:text="@string/_0"
                       android:id="@+id/new_event_vh_comment_count"
                       android:textColor="@color/colorPrimary"
                       app:layout_constraintTop_toTopOf="@id/new_event_vh_comment_button"
@@ -121,7 +121,7 @@
                        app:layout_constraintTop_toTopOf="@id/new_event_vh_comment_button"
                        app:layout_constraintStart_toEndOf="@id/new_event_vh_comment_count"
                        android:layout_marginStart="10dp"
-                       android:contentDescription="Will Attend"
+                       android:contentDescription="Pin Event"
                        android:id="@+id/new_event_vh_attend_button"
                        app:srcCompat="@drawable/ic_pin_unpinned"
                        android:layout_marginBottom="40dp"
@@ -129,7 +129,7 @@
 
             <TextView android:layout_width="wrap_content"
                       android:textSize="15sp"
-                      android:text="0"
+                      android:text="@string/_0"
                       android:id="@+id/new_event_vh_attend_count"
                       android:textColor="@color/colorPrimary"
                       app:layout_constraintTop_toTopOf="@id/new_event_vh_attend_button"
@@ -227,7 +227,7 @@
                       android:gravity="center"
                       android:background="@drawable/buttonbgtrans"
                       android:textColor="@color/colorPrimary"
-                      android:text="Promoted"
+                      android:text="@string/promoted"
                       android:layout_height="30dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

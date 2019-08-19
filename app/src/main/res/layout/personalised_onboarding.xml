@@ -22,7 +22,7 @@
             android:textSize="25sp"
             android:layout_marginTop="40dp"
             android:textStyle="bold"
-            android:text="Personalised Events"
+            android:text="@string/personalised_events"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -35,7 +35,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="A feed of events tailored just to your liking!"
+            android:text="@string/a_feed_of_events_tailored_just_to_your_liking"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>

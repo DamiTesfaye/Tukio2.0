@@ -45,7 +45,7 @@
                           android:fontFamily="@font/font_family"
                           android:textColor="@android:color/black"
                           android:background="@android:color/transparent"
-                          android:hint="Search event title.."
+                          android:hint="@string/search_event_title"
                           android:layout_height="match_parent"/>
 
                 <ImageButton
@@ -86,7 +86,7 @@
                   android:layout_height="wrap_content">
 
         <ImageView android:layout_width="70dp"
-                   app:srcCompat="@drawable/ic_search"
+                   app:srcCompat="@drawable/ic_search_events"
                    android:tint="@android:color/darker_gray"
                    android:layout_gravity="center_horizontal"
                    android:layout_height="70dp"/>
@@ -95,7 +95,7 @@
                   android:layout_gravity="center_horizontal"
                   android:layout_marginTop="10dp"
                   android:textColor="@android:color/darker_gray"
-                  android:text="Type in your keyword and get searching!"
+                  android:text="@string/type_in_your_keyword_and_get_searching"
                   android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -122,7 +122,7 @@
                   android:layout_marginTop="20dp"
                   android:layout_gravity="center_horizontal"
                   android:textColor="@android:color/black"
-                  android:text="Searching.."
+                  android:text="@string/searching"
                   android:layout_height="wrap_content"/>
 
     </LinearLayout>
@@ -147,7 +147,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_gravity="center_horizontal"
                   android:textColor="@android:color/black"
-                  android:text="Sorry, no matches for your entry.. for now"
+                  android:text="@string/sorry_no_matches_for_your_entry_for_now"
                   android:layout_height="wrap_content"/>
 
     </LinearLayout>

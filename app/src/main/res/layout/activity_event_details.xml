@@ -55,7 +55,7 @@
                       android:paddingStart="30dp"
                       android:paddingEnd="30dp"
                       android:id="@+id/event_details_view_image_text"
-                      android:text="View Image"
+                      android:text="@string/view_image"
                       android:textSize="15sp"
                       android:gravity="center"
                       android:textColor="@color/colorPrimary"
@@ -143,7 +143,7 @@
                                       android:layout_marginTop="5dp"
                                       android:textColor="@color/colorAccent"
                                       android:textSize="15sp"
-                                      android:text="Primary Details"
+                                      android:text="@string/primary_details"
                                       android:layout_height="wrap_content"/>
 
                             <TextView android:layout_width="wrap_content"
@@ -229,7 +229,7 @@
                                           android:layout_alignParentEnd="true"
                                           android:layout_marginEnd="20dp"
                                           android:textColor="@color/colorPrimary"
-                                          android:text="Promoted"
+                                          android:text="@string/promoted"
                                           android:textStyle="bold"
                                           android:layout_height="wrap_content"/>
 
@@ -254,14 +254,14 @@
                                       android:gravity="center"
                                       android:textSize="15sp"
                                       android:layout_marginTop="5dp"
-                                      android:text="Supplementary Details"
+                                      android:text="@string/supplementary_details"
                                       android:textColor="@color/colorAccent"
                                       android:layout_height="wrap_content"/>
 
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="10dp"
-                                      android:text="Event Description"
+                                      android:text="@string/event_description"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
@@ -289,7 +289,7 @@
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="5dp"
-                                      android:text="Dress Code"
+                                      android:text="@string/dress_code"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
@@ -309,7 +309,7 @@
                                           android:textSize="15sp"
                                           android:layout_marginStart="10dp"
                                           android:id="@+id/event_details_dress_code"
-                                          android:text="No Dress Code"
+                                          android:text="@string/no_dress_code"
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -317,7 +317,7 @@
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="10dp"
-                                      android:text="Registration Link"
+                                      android:text="@string/registration_link"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
@@ -339,7 +339,7 @@
                                           android:layout_marginStart="10dp"
                                           android:background="?attr/selectableItemBackground"
                                           android:id="@+id/event_details_reg_link"
-                                          android:text="No Registration Link"
+                                          android:text="@string/no_registration_link"
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -348,7 +348,7 @@
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="10dp"
-                                      android:text="Ticket Link"
+                                      android:text="@string/ticket_link"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
@@ -370,7 +370,7 @@
                                           android:layout_marginStart="10dp"
                                           android:background="?attr/selectableItemBackground"
                                           android:id="@+id/event_details_ticket_link"
-                                          android:text="No Ticket Link"
+                                          android:text="@string/no_ticket_link"
                                           android:layout_height="wrap_content"/>
 
                             </LinearLayout>
@@ -378,7 +378,7 @@
                             <TextView android:layout_width="wrap_content"
                                       android:textSize="12sp"
                                       android:layout_marginTop="10dp"
-                                      android:text="Special Guests"
+                                      android:text="@string/special_guests"
                                       android:textStyle="bold"
                                       android:layout_height="wrap_content"/>
 
@@ -387,7 +387,7 @@
                                       android:id="@+id/event_details_no_special_guests_text"
                                       android:layout_marginTop="10dp"
                                       android:layout_marginBottom="10dp"
-                                      android:text="No special guests for this event.."
+                                      android:text="@string/no_special_guests_for_this_event"
                                       android:layout_gravity="center_horizontal"
                                       android:layout_height="wrap_content"/>
 

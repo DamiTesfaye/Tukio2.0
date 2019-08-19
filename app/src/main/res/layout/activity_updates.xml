@@ -28,7 +28,7 @@
                       android:layout_marginStart="20dp"
                       android:layout_centerVertical="true"
                       android:textSize="22sp"
-                      android:text="Event Updates"
+                      android:text="@string/event_updates"
 
                       android:layout_toEndOf="@id/activity_updates_close_imgbtn"
                       android:layout_height="wrap_content"/>

@@ -28,14 +28,15 @@
         <TextView android:layout_width="wrap_content"
                   android:textSize="20sp"
                   android:layout_marginTop="10dp"
-                  android:text="Additional Information"
+                  android:text="@string/additional_information"
                   android:textStyle="bold"
                   android:layout_height="wrap_content"/>
 
         <TextView android:layout_width="wrap_content"
                   android:textSize="13sp"
-                  android:text="Additional information that is helpful to the attendees or you can just post what you have already"
+                  android:text="@string/additional_information_that_is_helpful_to_the_attendees_or_you_can_just_post_what_you_have_already"
                   android:paddingEnd="20dp"
+                  android:paddingStart="0dp"
                   android:layout_height="wrap_content"/>
 
         <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
@@ -49,7 +50,7 @@
                         android:layout_width="match_parent"
                         android:layout_marginTop="30dp"
                         app:hintAnimationEnabled="true"
-                        android:hint="Dress Code (optional)"
+                        android:hint="@string/dress_code_optional"
                         android:id="@+id/add_event_final_dresscode_layout"
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
@@ -68,7 +69,7 @@
                         android:layout_width="match_parent"
                         android:layout_marginTop="5dp"
                         app:hintAnimationEnabled="true"
-                        android:hint="Registration Link (optional)"
+                        android:hint="@string/registration_link_optional"
                         android:id="@+id/add_event_final_reglink_layout"
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
@@ -88,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_marginTop="5dp"
                         app:hintAnimationEnabled="true"
-                        android:hint="Ticket Link (optional)"
+                        android:hint="@string/ticket_link_optional"
                         android:id="@+id/add_event_final_ticket_layout"
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
@@ -111,7 +112,7 @@
 
                     <TextView android:layout_width="wrap_content"
                               android:paddingTop="5dp"
-                              android:text="Special Guests (optional)"
+                              android:text="@string/special_guests_optional"
                               android:textColor="@android:color/black"
                               android:textStyle="bold"
                               android:layout_height="wrap_content"/>
@@ -148,7 +149,7 @@
                                   android:textColor="@color/colorAccent"
                                   android:id="@+id/add_event_final_add_guest_text"
                                   android:layout_centerInParent="true"
-                                  android:text="Add a special guest"
+                                  android:text="@string/add_a_special_guest"
                                   android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
@@ -171,7 +172,7 @@
 
                     <TextView
                             android:layout_width="wrap_content"
-                            android:text="Promote"
+                            android:text="@string/promote"
                             android:textStyle="bold"
                             android:id="@+id/add_event_final_promote_event_text"
                             android:textColor="@color/colorAccent"
@@ -204,7 +205,7 @@
                       android:textStyle="bold"
                       android:textColor="@color/colorPrimary"
                       android:layout_centerInParent="true"
-                      android:text="Share Event!"
+                      android:text="@string/share_event"
                       android:gravity="center"
                       android:layout_height="match_parent"/>
 

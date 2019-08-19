@@ -28,7 +28,7 @@
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"
                   android:textSize="15sp"
-                  android:text="Oh, you haven't posted any events yet!"
+                  android:text="@string/oh_you_haven_t_posted_any_events_yet"
                   android:layout_height="wrap_content"/>
         
     </LinearLayout>

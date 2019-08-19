@@ -24,7 +24,7 @@
             android:textSize="25sp"
             android:layout_marginTop="30dp"
             android:textStyle="bold"
-            android:text="Stay On Track!"
+            android:text="@string/stay_on_track"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="Events can now be added directly to your calendar!"
+            android:text="@string/events_can_now_be_added_directly_to_your_calendar"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>

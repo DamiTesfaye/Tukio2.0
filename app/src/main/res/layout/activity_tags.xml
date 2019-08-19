@@ -39,7 +39,7 @@
 			  android:textSize="25sp"
 			  android:textStyle="bold"
 			  android:layout_marginStart="20dp"
-			  android:text="Select Interests"
+			  android:text="@string/select_interests"
 
 		/>
 
@@ -103,7 +103,7 @@
 					 android:layout_height="25dp"/>
 
 		<TextView android:layout_width="match_parent"
-				  android:text="Save Interests"
+				  android:text="@string/save_interests"
 				  android:gravity="center"
 				  android:textStyle="bold"
 				  android:textSize="15sp"

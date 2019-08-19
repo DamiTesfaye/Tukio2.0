@@ -54,40 +54,6 @@
 			layout="@layout/share_event_bottomsheet"
 			app:layout_behavior="@string/bottom_sheet_behavior"
 			android:id="@+id/share_event_bottomsheet"/>
-
-
-	<RelativeLayout android:layout_width="wrap_content"
-                  android:orientation="horizontal"
-                    android:visibility="invisible"
-                  android:padding="10dp"
-                    android:id="@+id/loading_more_layout"
-                    android:elevation="5dp"
-                  android:layout_gravity="center_horizontal|bottom"
-                  android:layout_marginBottom="70dp"
-                  android:background="@drawable/buttonbg"
-                  android:layout_height="wrap_content">
-        
-        <ProgressBar android:layout_width="35dp"
-                     android:id="@+id/loading_more"
-                     android:indeterminateTint="@color/colorPrimary"
-                     android:layout_height="35dp"/>
-        
-        <TextView android:layout_width="wrap_content"
-                  android:layout_gravity="center_vertical"
-                  android:textSize="15sp"
-                  android:layout_toEndOf="@id/loading_more"
-                  android:layout_centerVertical="true"
-                  android:layout_marginStart="10dp"
-                  android:layout_marginEnd="15dp"
-                  android:textColor="@color/colorPrimary"
-                  android:text="Loading more"
-                  android:id="@+id/loading_more_text"
-                  android:layout_height="wrap_content"/>
-        
-    </RelativeLayout>
-
-
-    
 	
 	</androidx.coordinatorlayout.widget.CoordinatorLayout>
 

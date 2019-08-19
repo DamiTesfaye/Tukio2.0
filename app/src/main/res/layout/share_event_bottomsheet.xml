@@ -100,7 +100,6 @@
 
         <LinearLayout android:layout_width="match_parent"
                       android:orientation="horizontal"
-                      android:layout_marginBottom="?attr/actionBarSize"
                       android:id="@+id/profile_opt_bsheet_signout"
                       android:background="?attr/selectableItemBackground"
                       android:layout_height="50dp">
@@ -118,6 +117,31 @@
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
                     android:text="Sign Out"
+                    android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:orientation="horizontal"
+                      android:layout_marginBottom="?attr/actionBarSize"
+                      android:id="@+id/profile_opt_bsheet_about_us"
+                      android:background="?attr/selectableItemBackground"
+                      android:layout_height="50dp">
+
+            <ImageView android:layout_width="wrap_content"
+                       app:srcCompat="@drawable/ic_info"
+                       android:layout_gravity="center_vertical"
+                       android:layout_marginStart="10dp"
+                       android:tint="@android:color/black"
+                       android:layout_height="wrap_content"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:textSize="17sp"
+                    android:textColor="@android:color/black"
+                    android:text="About Us"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>

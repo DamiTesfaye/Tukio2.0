@@ -19,9 +19,9 @@
         (optional)
     </string>
     <string name="link_to_buy_tickets_optional">Link to buy tickets</string>
-    <string name="registration_link_optional">Registration link</string>
+    <string name="registration_link_optional">Registration link(optional)</string>
     <string name="dress_code">Dress code(optional)</string>
-    <string name="add_event_date">Add event date</string>
+    <string name="add_event_date">Event date</string>
     <string name="event_location">Event location</string>
     <string name="add_the_event_image_poster">Add the event image/poster</string>
     <string name="event_description">Event description..</string>
@@ -68,7 +68,7 @@
     <string name="channel_desc">Bringing your events happening around you instantaneously</string>
     <string name="title_activity_maps2">Map</string>
     <string name="select_the_tags_you_are_most_interested_in_this_tags_will_influence_your_events_feed_only_5_tags_can_be_added">
-        Select the tags you are most interested in. This tags will influence your events feed! Only 5 tags can be added!
+        This tags will influence your events feed! Only 5 tags can be added!
     </string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account, Sign Up</string>
     <string name="let_s_get_started">Let\'s Get Started!</string>
@@ -88,7 +88,7 @@
         right price, your events can reach everyone in your area
     </string>
     <string name="sorry_there_are_no_updates_to_events_that_you_re_going_to_at_the_moment_you_can_try_reloading">Sorry,
-        There are no updates to events that you\'re going to at the moment! You can try reloading..
+        You should see updates from events that you\'ve pinned here. Try reloading…
     </string>
     <string name="promoted_instro">After filling your event details, you will select your audience range each having its
         own price tag. \n \n \nThen you\'ll fill in your card details and the selected price tag will be deducted from
@@ -99,4 +99,137 @@
         there\'s
         something that is missing or something that is not quite right, feel free to contact us below!
     </string>
+    <string name="updates">Updates</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="additional_information_that_is_helpful_to_the_attendees_or_you_can_just_post_what_you_have_already">
+        Additional information that is helpful to the attendees or you can just post what you have already
+    </string>
+    <string name="dress_code_optional">Dress Code (optional)</string>
+    <string name="ticket_link_optional">Ticket Link (optional)</string>
+    <string name="special_guests_optional">Special Guests (optional)</string>
+    <string name="add_a_special_guest">Add a special guest</string>
+    <string name="promote">Promote</string>
+    <string name="share_event">Share Event!</string>
+    <string name="share_your_event">Share Your Event!</string>
+    <string name="these_are_the_important_aspects_of_your_event">These are the important aspects of your event!</string>
+    <string name="select_tag">Select Tag</string>
+    <string name="add_event_poster">Add Event Poster</string>
+    <string name="you_re_almost_done">You\'re Almost Done!</string>
+    <string name="event_comments">Event Comments</string>
+    <string name="no_comments_yet_you_can_add_yours_below">No comments yet, you can add yours below</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="bio_optional">Bio (optional)</string>
+    <string name="save_details">Save Details</string>
+    <string name="view_image">View Image</string>
+    <string name="primary_details">Primary Details</string>
+    <string name="supplementary_details">Supplementary Details</string>
+    <string name="no_dress_code">No Dress Code</string>
+    <string name="no_registration_link">No Registration Link</string>
+    <string name="no_ticket_link">No Ticket Link</string>
+    <string name="special_guests">Special Guests</string>
+    <string name="no_special_guests_for_this_event">No special guests for this event..</string>
+    <string name="event_poster">Event Poster</string>
+    <string name="get_started">Get Started!</string>
+    <string name="ooh_you_haven_t_pinned_any_events_yet">Ooh, You haven\'t pinned any events yet!</string>
+    <string name="oh_you_haven_t_posted_any_events_yet">Oh, you haven\'t posted any events yet!</string>
+    <string name="promote_your_event">Promote your event</string>
+    <string name="let_s_get_your_events_to_everyone_and_make_it_trend">Let\'s get your events to everyone and make it
+        trend!
+    </string>
+    <string name="account_number">Account Number</string>
+    <string name="expiry_year">Expiry Year</string>
+    <string name="expiry_month">Expiry Month</string>
+    <string name="cvc">CVC</string>
+    <string name="select_promoting_plan">Select Promoting Plan</string>
+    <string name="promote_event">Promote Event</string>
+    <string name="get_your_event_trending_in_your_area_with_just_a_few_steps_with_your_promoted_event_reach_dependent_in_your_chosen_plan">
+        Get your event trending in your area with just a few steps with your promoted event reach dependent in your
+        chosen plan..
+    </string>
+    <string name="done">DONE</string>
+    <string name="ooh_you_haven_t_promoted_any_events_yet">Ooh, You haven\'t promoted any events yet!</string>
+    <string name="search_event_title">Search event title..</string>
+    <string name="type_in_your_keyword_and_get_searching">Type in your keyword and get searching!</string>
+    <string name="searching">Searching..</string>
+    <string name="sorry_no_matches_for_your_entry_for_now">Sorry, no matches for your entry.. for now</string>
+    <string name="select_interests">Select Interests</string>
+    <string name="save_interests">Save Interests</string>
+    <string name="event_updates">Event Updates</string>
+    <string name="add_special_guest">Add Special Guest</string>
+    <string name="the_guest_s_name_and_a_bio_that_describes_them_explicitly">The guest\'s name and a bio that describes
+        them explicitly
+    </string>
+    <string name="guest_s_name">Guest\'s Name</string>
+    <string name="guest_s_description">Guest\'s Description</string>
+    <string name="add_guest">Add Guest</string>
+    <string name="add_tag">Add Tag</string>
+    <string name="select_one_tag_that_perfectly_describes_your_event">Select one tag that perfectly describes your
+        event
+    </string>
+    <string name="add_event_update">Add Event Update</string>
+    <string name="the_update_title_and_the_description_of_the_update">The update title and the description of the
+        update
+    </string>
+    <string name="update_title">Update Title</string>
+    <string name="update_description">Update Description</string>
+    <string name="add_update">Add Update</string>
+    <string name="getting_ready_to_explore">Getting ready to explore..</string>
+    <string name="home">Home</string>
+    <string name="change_interests">Change Interests</string>
+    <string name="posted_events">Posted Events</string>
+    <string name="promoted_events">Promoted Events</string>
+    <string name="_0">0</string>
+    <string name="email_address">Email Address</string>
+    <string name="username">Username</string>
+    <string name="bio">Bio</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="tag_subjects_you_are_interested_in">Tag subjects you are interested in</string>
+    <string name="there_are_no_tech_events_for_now">There are no Tech Events for now...</string>
+    <string name="click_one_of_the_tags_to_check_out_events_in_that_area">Click one of the tags to check out events in
+        that area!
+    </string>
+    <string name="loading_tech_events">Loading Tech Events</string>
+    <string name="search_events">Search Events</string>
+    <string name="explore">Explore</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="sign_in_to_continue">Sign in to continue!</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="you_re_new_here_sign_up">You\'re new here?. Sign Up!</string>
+    <string name="create_an_account">Create An Account,</string>
+    <string name="let_s_get_you_started">Let\'s get you started!</string>
+    <string name="short_bio_optional">Short Bio (optional)</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_a_part_of_us_sign_in">Already a part of us? Sign In!</string>
+    <string name="stay_on_track">Stay On Track!</string>
+    <string name="events_can_now_be_added_directly_to_your_calendar">Events can now be added directly to your
+        calendar!
+    </string>
+    <string name="personalised_events">Personalised Events</string>
+    <string name="a_feed_of_events_tailored_just_to_your_liking">A feed of events tailored just to your liking!</string>
+    <string name="share_via">Share Via:</string>
+    <string name="we_have_an_exciting_feature_coming_out_in_this_area_stay_tuned">We have an exciting feature coming out
+        in this area. Stay Tuned!
+    </string>
+    <string name="social_media">Social Media</string>
+    <string name="copy_link">Copy Link</string>
+    <string name="large_audience">Large Audience:</string>
+    <string name="your_event_has_a_chance_of_appearing_on_the_feed_of_any_user">Your event has a chance of appearing on
+        the feed of any user!
+    </string>
+    <string name="medium_audience">Medium Audience:</string>
+    <string name="your_event_has_a_chance_of_appearing_on_the_feed_of_most_users">Your event has a chance of appearing
+        on the feed of most users!
+    </string>
+    <string name="small_audience">Small Audience:</string>
+    <string name="your_event_has_a_chance_of_appearing_on_the_feed_of_a_few_users">Your event has a chance of appearing
+        on the feed of a few users!
+    </string>
+    <string name="choose_plan">Choose Plan</string>
+    <string name="be_trendy">Be Trendy</string>
+    <string name="say_on_top_of_all_moving_trends_and_hot_stuff">Say on top of all moving trends and hot stuff!</string>
+    <string name="stay_updated">Stay Updated!</string>
+    <string name="last_minute_changes_and_live_updates">Last minute changes and Live Updates!</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
 </resources>

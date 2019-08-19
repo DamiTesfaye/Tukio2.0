@@ -31,19 +31,19 @@
                       android:textSize="20sp"
                       android:textStyle="bold"
                       android:layout_marginTop="10dp"
-                      android:text="Promote your event"
+                      android:text="@string/promote_your_event"
                       android:layout_height="wrap_content"/>
 
             <TextView android:layout_width="wrap_content"
                       android:textSize="15sp"
-                      android:text="Let's get your event trending.."
+                      android:text="@string/let_s_get_your_events_to_everyone_and_make_it_trend"
                       android:layout_height="wrap_content"/>
 
             <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_marginTop="30dp"
                     app:hintAnimationEnabled="true"
-                    android:hint="Account Number"
+                    android:hint="@string/account_number"
                     android:id="@+id/promote_event_acc_number_layout"
                     android:textColorHint="@android:color/darker_gray"
                     android:layout_height="wrap_content">
@@ -69,7 +69,7 @@
 
                         app:hintAnimationEnabled="true"
                         android:layout_weight="1"
-                        android:hint="Expiry Year"
+                        android:hint="@string/expiry_year"
                         android:id="@+id/promote_event_exp_year_layout"
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
@@ -91,7 +91,7 @@
                         android:layout_width="wrap_content"
                         app:hintAnimationEnabled="true"
                         android:layout_weight="1"
-                        android:hint="Expiry Month"
+                        android:hint="@string/expiry_month"
                         android:id="@+id/promote_event_exp_month_layout"
                         android:textColorHint="@android:color/darker_gray"
                         android:layout_height="wrap_content">
@@ -114,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
                     app:hintAnimationEnabled="true"
-                    android:hint="CVV"
+                    android:hint="@string/cvc"
                     android:id="@+id/promote_event_cvv_layout"
                     android:textColorHint="@android:color/darker_gray"
                     android:layout_height="wrap_content">
@@ -160,7 +160,7 @@
                           android:textSize="15sp"
                           android:id="@+id/promote_event_add_plan_text"
                           android:textColor="@color/colorAccent"
-                          android:text="Select Promoting Plan"
+                          android:text="@string/select_promoting_plan"
                           android:layout_height="wrap_content"/>
 
             </RelativeLayout>
@@ -193,7 +193,7 @@
                           android:textStyle="bold"
                           android:textColor="@color/colorPrimary"
                           android:layout_centerInParent="true"
-                          android:text="Promote Event"
+                          android:text="@string/promote_event"
                           android:gravity="center"
                           android:layout_height="match_parent"/>
 
@@ -232,14 +232,14 @@
                       android:textSize="15sp"
                       android:textColor="@android:color/black"
                       android:id="@+id/promote_event_instro"
-                      android:text="Get your event trending in your area with just a few steps with your promoted event reach dependent in your chosen plan.."
+                      android:text="@string/get_your_event_trending_in_your_area_with_just_a_few_steps_with_your_promoted_event_reach_dependent_in_your_chosen_plan"
                       android:gravity="center"
                       android:layout_height="wrap_content"/>
 
             <Button android:layout_width="match_parent"
                     android:background="@drawable/buttonbg"
                     android:layout_marginTop="30dp"
-                    android:text="DONE"
+                    android:text="@string/done"
                     android:id="@+id/promote_event_done_btn"
                     android:layout_height="35dp"/>
 

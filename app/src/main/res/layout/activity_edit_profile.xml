@@ -24,7 +24,7 @@
             android:layout_marginTop="10dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:text="Edit Profile"
+            android:text="@string/edit_profile"
             android:layout_height="wrap_content"/>
 
     <FrameLayout
@@ -62,7 +62,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:hint="Name"
+                android:hint="@string/name"
                 android:textColor="@android:color/black"
                 android:id="@+id/edit_profile_name_edit"
                 android:inputType="textAutoComplete"
@@ -81,7 +81,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:hint="Bio (optional)"
+                android:hint="@string/bio_optional"
                 android:textColor="@android:color/black"
                 android:inputType="textAutoComplete"
                 android:id="@+id/edit_profile_bio_edit"
@@ -107,7 +107,7 @@
 
         <TextView
                 android:layout_width="match_parent"
-                android:text="Save Details"
+                android:text="@string/save_details"
                 android:textColor="@color/colorPrimary"
                 android:layout_centerInParent="true"
                 android:gravity="center"

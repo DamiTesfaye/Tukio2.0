@@ -8,13 +8,13 @@
 
     <ProgressBar android:layout_width="wrap_content"
                  android:layout_gravity="center"
-                 android:id="@+id/loading_promoted_events"
+                 android:id="@+id/loading_pinned_events"
                  android:layout_height="wrap_content"/>
     
     <LinearLayout android:layout_width="wrap_content"
                   android:layout_gravity="center"
                   android:visibility="gone"
-                  android:id="@+id/promoted_events_no_events"
+                  android:id="@+id/pinned_events_no_events"
                   android:orientation="vertical"
                   android:layout_height="wrap_content">
         
@@ -31,7 +31,7 @@
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"
                   android:textSize="15sp"
-                  android:text="@string/ooh_you_haven_t_promoted_any_events_yet"
+                  android:text="@string/ooh_you_haven_t_pinned_any_events_yet"
                   android:layout_height="wrap_content"/>
     
     </LinearLayout>
@@ -39,7 +39,7 @@
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:id="@+id/promoted_events_recycler"
+            android:id="@+id/pinned_events_recycler"
             android:layout_height="match_parent"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

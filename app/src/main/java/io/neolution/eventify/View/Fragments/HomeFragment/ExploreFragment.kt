@@ -32,6 +32,7 @@ import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.View.Activities.AddEventPremActivity
 import io.neolution.eventify.View.Activities.SearchActivity
 import io.neolution.eventify.databinding.NewExploreLayoutBinding
+import kotlinx.android.synthetic.main.new_explore_layout.*
 import java.util.*
 
 
@@ -117,7 +118,7 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
         })
 
         //TODO: Return the alreadyLoaded variable to a global variable
-        loadEvents( currentEventType)
+
 
         return binding.root
     }
@@ -130,6 +131,7 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
     }
 
     private fun loadEvents( eventType: String){
+        new_explore_check_tags_layout.visibility = GONE
         exploreEmptyLayout.visibility = GONE
         eventRecycler.visibility = GONE
         exploreLoadingLayout.visibility = VISIBLE

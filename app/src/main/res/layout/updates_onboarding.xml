@@ -24,7 +24,7 @@
             android:textSize="25sp"
             android:layout_marginTop="30dp"
             android:textStyle="bold"
-            android:text="Stay Updated!"
+            android:text="@string/stay_updated"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:textColor="@android:color/black"
@@ -37,7 +37,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:gravity="center"
-            android:text="Last minute changes and Live Updates! "
+            android:text="@string/last_minute_changes_and_live_updates"
             android:textSize="17sp"
             android:textColor="@android:color/black"
             android:layout_height="wrap_content"/>

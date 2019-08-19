@@ -24,7 +24,7 @@
                               android:layout_height="match_parent">
 
                     <TextView android:layout_width="wrap_content"
-                              android:text="Explore"
+                              android:text="@string/explore"
                               android:layout_marginTop="15dp"
                               android:layout_marginStart="15dp"
                               android:textStyle="bold"
@@ -40,7 +40,7 @@
                                     android:layout_marginBottom="10dp"
                                     android:id="@+id/new_explore_search_container"
                                     android:layout_gravity="center_vertical"
-                                    android:elevation="5dp"
+                                    android:elevation="3dp"
                                     android:background="@drawable/search_edit_text_bg"
                                     android:layout_height="40dp">
 
@@ -53,7 +53,7 @@
                                    android:layout_height="20dp"/>
 
                         <TextView android:layout_width="wrap_content"
-                                  android:text="Search Events"
+                                  android:text="@string/search_events"
                                   android:id="@+id/new_explore_seach_textview"
                                   android:layout_toEndOf="@id/new_explore_search_image"
                                   android:layout_centerVertical="true"
@@ -105,7 +105,7 @@
                       android:layout_marginTop="10dp"
                       android:id="@+id/new_explore_progress_text"
                       android:textStyle="bold"
-                      android:text="Loading Tech Events"
+                      android:text="@string/loading_tech_events"
                       android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -133,7 +133,36 @@
                       android:layout_marginTop="20dp"
                       android:id="@+id/new_explore_empty_text"
                       android:textStyle="bold"
-                      android:text="There are no Tech Events for now..."
+                      android:text="@string/there_are_no_tech_events_for_now"
+                      android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_gravity="center"
+                      android:padding="10dp"
+                      android:visibility="visible"
+                      android:background="@color/colorPrimary"
+                      android:id="@+id/new_explore_check_tags_layout"
+                      android:orientation="vertical"
+                      android:layout_height="wrap_content">
+
+            <ImageView android:layout_width="150dp"
+                       android:layout_marginStart="20dp"
+                       android:layout_marginEnd="20dp"
+                       android:layout_gravity="center_horizontal"
+                       app:srcCompat="@drawable/ic_search_events"
+                       android:scaleType="centerCrop"
+                       android:layout_height="150dp"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:gravity="center"
+                      android:layout_gravity="center_horizontal"
+                      android:layout_marginTop="20dp"
+                      android:id="@+id/new_explore_check_tags_text"
+                      android:textStyle="bold"
+                      android:text="@string/click_one_of_the_tags_to_check_out_events_in_that_area"
                       android:layout_height="wrap_content"/>
 
 
