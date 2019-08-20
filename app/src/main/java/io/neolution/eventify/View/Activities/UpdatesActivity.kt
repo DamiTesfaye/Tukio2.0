@@ -1,12 +1,15 @@
 package io.neolution.eventify.View.Activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -96,7 +99,7 @@ class UpdatesActivity : AppCompatActivity() {
             val updateDesc = updateDescText.text.toString().trim()
 
             if (updateTitle.isNotEmpty() && updateDesc.isNotEmpty()){
-
+                closeKeyboard()
                 addUpdateLayout.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
                 addUpdateButton.visibility = GONE
                 addUpdateProgressBar.visibility = VISIBLE
@@ -166,5 +169,15 @@ class UpdatesActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    private fun closeKeyboard(){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = currentFocus
+        if (view == null){
+            view = View(this)
+        }
+
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

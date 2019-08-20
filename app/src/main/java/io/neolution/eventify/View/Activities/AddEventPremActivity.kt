@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
 import android.widget.DatePicker
 import android.widget.LinearLayout
 import android.widget.TimePicker
@@ -145,6 +147,7 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         }
 
         add_event_prem_tag_container.setOnClickListener {
+            closeKeyboard()
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
         }
@@ -191,7 +194,7 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
                 eventLocation.isNotEmpty() && eventTag != null && eventPicUri != null && eventFinalDateLong != null){
 
                 val intent = Intent(this, AddEventFinalActivity::class.java)
-                intent.putExtra("eventTitle", "$eventTitle")
+                intent.putExtra("eventTitle", eventTitle)
                 intent.putExtra("eventDesc", eventDesc)
                 intent.putExtra("eventDate", eventDate)
                 intent.putExtra("eventLocation", eventLocation)
@@ -370,6 +373,16 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
                 requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), IntentUtils.photoPermissionRequestCode)
             }
         }
+    }
+
+    private fun closeKeyboard(){
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        var view = currentFocus
+        if (view == null){
+            view = View(this)
+        }
+
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }
