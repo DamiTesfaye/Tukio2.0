@@ -12,6 +12,7 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
+            android:animateLayoutChanges="true"
             android:layout_height="match_parent">
 
         <LinearLayout android:layout_width="match_parent"
@@ -179,16 +180,16 @@
                             android:layout_marginTop="10dp"
                             android:layout_height="45dp">
 
-                <ProgressBar android:layout_width="15dp"
+                <ProgressBar android:layout_width="25dp"
                              android:indeterminate="true"
                              android:indeterminateTint="@color/colorAccent"
                              android:layout_centerInParent="true"
                              android:visibility="gone"
                              android:id="@+id/promote_event_promote_event_progress"
-                             android:layout_height="15dp"/>
+                             android:layout_height="25dp"/>
 
                 <TextView android:layout_width="match_parent"
-                          android:textSize="17sp"
+                          android:textSize="15sp"
                           android:id="@+id/promote_event_promote_event_text"
                           android:textStyle="bold"
                           android:textColor="@color/colorPrimary"
@@ -200,6 +201,13 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <View android:layout_width="match_parent"
+              android:background="#99000000"
+              android:visibility="gone"
+              android:id="@+id/promote_event_bottom_sheet_bg"
+              android:layout_height="match_parent"
+        />
 
         <include
             layout="@layout/promoting_plan_bottomsheet"

@@ -61,6 +61,18 @@ class AddEventFinalActivity : AppCompatActivity() {
         fireStoreRepo = FireStoreRepo()
 
         bottomSheetBehavior = BottomSheetBehavior.from(addGuestBottomSheet)
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                add_event_final_bottom_sheet_bg.visibility = VISIBLE
+                add_event_final_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    add_event_final_bottom_sheet_bg.visibility = GONE
+                }
+            }
+        })
 
         add_guest_bsheet_close.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -68,6 +80,10 @@ class AddEventFinalActivity : AppCompatActivity() {
 
         add_event_final_add_guest_container.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+
+        add_event_final_bottom_sheet_bg.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         add_event_final_back_btn.setOnClickListener {
@@ -120,13 +136,13 @@ class AddEventFinalActivity : AppCompatActivity() {
             }
         }
 
-        val bundle = intent.extras
+        val bundle = intent.extras!!
 
-        eventTitle = bundle.getString("eventTitle")
-        eventDesc = bundle.getString("eventDesc")
-        eventDate = bundle.getString("eventDate")
-        eventLocation = bundle.getString("eventLocation")
-        eventTag = bundle.getString("eventTag")
+        eventTitle = bundle.getString("eventTitle")!!
+        eventDesc = bundle.getString("eventDesc")!!
+        eventDate = bundle.getString("eventDate")!!
+        eventLocation = bundle.getString("eventLocation")!!
+        eventTag = bundle.getString("eventTag")!!
         eventPicUri = Uri.parse(bundle.getString("eventPicUri"))
         eventMillis = bundle.getLong("eventMillis")
 
@@ -173,8 +189,9 @@ class AddEventFinalActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val eventDressCode = add_event_final_dresscode_edit.text.toString().trim()
         val eventRegLink = add_event_final_reglink_edit.text.toString().trim()
+        val eventTicketLink = add_event_final_ticket_edit.text.toString().trim()
 
-        if(eventDressCode.isNotEmpty() || eventRegLink.isNotEmpty() || specialGuest.isNotEmpty()){
+        if(eventDressCode.isNotEmpty() || eventRegLink.isNotEmpty() || specialGuest.isNotEmpty() || eventTicketLink.isNotEmpty()){
             val dialog = AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
             dialog.setMessage("Do you want to discard your changes?")
             dialog.setPositiveButton("YES") { _, _ ->
@@ -199,8 +216,8 @@ class AddEventFinalActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK){
             if (requestCode == 2030){
                 if (data != null){
-                    val paymentStatus = data.extras.getString("paymentStatus")
-                    val amountPaidFromExtra = data.extras.getLong("promotedEvent")
+                    val paymentStatus = data.extras!!.getString("paymentStatus")
+                    val amountPaidFromExtra = data.extras!!.getLong("promotedEvent")
                     amountPaid = amountPaidFromExtra
                     if(paymentStatus == "success"){
                         when(amountPaidFromExtra){

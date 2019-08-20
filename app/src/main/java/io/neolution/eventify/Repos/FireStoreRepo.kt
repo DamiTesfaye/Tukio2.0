@@ -255,6 +255,18 @@ class FireStoreRepo {
 
     }
 
+    fun getEventBetaPosts(): CollectionReference{
+        return getFireStoreInstance().collection(FirebaseUtils.betaEventsCollectionPath)
+    }
+
+    fun getBetaPromotedEvents(): CollectionReference{
+        return getFireStoreInstance().collection(FirebaseUtils.betaPromotedCollectionPath)
+    }
+
+    fun getBetaPromotedEventClickedCollection(eventID: String): CollectionReference{
+        return getPromotedEvents().document(eventID).collection(FirebaseUtils.clickedCollectionPath)
+    }
+
     fun getEventPosts(): CollectionReference{
         return getFireStoreInstance().collection(FirebaseUtils.eventsCollectionPath)
     }

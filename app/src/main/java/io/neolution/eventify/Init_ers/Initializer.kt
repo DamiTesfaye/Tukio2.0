@@ -1,6 +1,8 @@
 package io.neolution.eventify.Init_ers
 
-import android.app.Application
+import android.content.Context
+import androidx.multidex.MultiDex
+import androidx.multidex.MultiDexApplication
 import co.paystack.android.PaystackSdk
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -8,7 +10,12 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 /**
  * Created by Big-Nosed Developer on the Edge of Infinity.
  */
-class Initializer: Application() {
+class Initializer: MultiDexApplication() {
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(this)
+    }
 
     override fun onCreate() {
         super.onCreate()

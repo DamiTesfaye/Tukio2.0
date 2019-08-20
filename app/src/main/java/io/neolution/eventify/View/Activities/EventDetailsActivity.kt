@@ -114,7 +114,7 @@ class EventDetailsActivity : AppCompatActivity() {
 
         val bundle = intent.extras
         fireStoreRepo = FireStoreRepo()
-        bindData(bundle)
+        bindData(bundle!!)
 
         shareBtn.setOnClickListener {
             bottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
@@ -173,18 +173,18 @@ class EventDetailsActivity : AppCompatActivity() {
             moreDetailsBtn.visibility = VISIBLE
         }
 
-        documentID = bundle.getString("documentID")
-        posterUID = bundle.getString("posterUID")
-        eventDate = bundle.getString("eventDate")
-        eventLocation = bundle.getString("eventLocation")
-        eventTitle = bundle.getString("eventTitle")
-        eventDesc = bundle.getString("eventDesc")
-        eventDressCode = bundle.getString("eventDressCode")
-        eventRegLink = bundle.getString("eventRegLink")
-        eventImageLink = bundle.getString("eventImageLink")
-        eventImageThumbLink = bundle.getString("eventImageThumb")
+        documentID = bundle.getString("documentID")!!
+        posterUID = bundle.getString("posterUID")!!
+        eventDate = bundle.getString("eventDate")!!
+        eventLocation = bundle.getString("eventLocation")!!
+        eventTitle = bundle.getString("eventTitle")!!
+        eventDesc = bundle.getString("eventDesc")!!
+        eventDressCode = bundle.getString("eventDressCode")!!
+        eventRegLink = bundle.getString("eventRegLink")!!
+        eventImageLink = bundle.getString("eventImageLink")!!
+        eventImageThumbLink = bundle.getString("eventImageThumb")!!
         eventMilis = bundle.getLong("eventMilis")
-        eventTicketLink = bundle.getString("eventTicketLink")
+        eventTicketLink = bundle.getString("eventTicketLink")!!
 
         Log.e(EventDetailsActivity::class.java.simpleName, eventMilis.toString())
 

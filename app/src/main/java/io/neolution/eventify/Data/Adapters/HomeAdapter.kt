@@ -75,10 +75,10 @@ class HomeAdapter(val context: Context,
                     holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).text = shortenedUsername
                 }
 
-                val imageView = holder.itemView.findViewById<CircleImageView>(R.id.new_event_vh_user_image)
+                val imageView = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_user_image)
 
                 val requestOptions = RequestOptions()
-                requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.ic_default_user))
+                requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.ic_male_placeholder))
                 val thumbNailRequest = Glide.with(context.applicationContext).load(userModel.userThumbLink)
 
                 Glide.with(context.applicationContext)

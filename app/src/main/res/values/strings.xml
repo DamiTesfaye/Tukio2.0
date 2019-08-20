@@ -232,4 +232,12 @@
     <string name="last_minute_changes_and_live_updates">Last minute changes and Live Updates!</string>
     <string name="name">Name</string>
     <string name="password">Password</string>
+    <string name="email_add">Your Email Address</string>
+    <string name="forgot_password_text">Let\'s get you sorted</string>
+    <string name="submit">Get Password</string>
+    <string name="go_back_sign_in">Go back to sign in</string>
+    <string name="password_sent">Your password has been sent to your mail!</string>
+    <string name="retrieval_complete">Steps to retrieve your password have been sent to your email!</string>
+    <string name="options">Options</string>
+    <string name="about_us">About Us</string>
 </resources>

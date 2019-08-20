@@ -6,21 +6,29 @@
         android:layout_height="wrap_content"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <de.hdodenhof.circleimageview.CircleImageView
+    <androidx.cardview.widget.CardView
             android:layout_width="30dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/comment_layout_user_image"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/placeholder"
-            android:layout_height="30dp"/>
+            app:cardCornerRadius="15dp"
+            android:id="@+id/comment_layout_image_container"
+            app:cardPreventCornerOverlap="true"
+            android:layout_height="30dp">
+
+        <ImageView android:layout_width="match_parent"
+                   android:id="@+id/comment_layout_user_image"
+                   app:srcCompat="@drawable/ic_male_placeholder"
+                   android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
 
     <TextView android:layout_width="wrap_content"
-              app:layout_constraintTop_toTopOf="@id/comment_layout_user_image"
+              app:layout_constraintTop_toTopOf="@id/comment_layout_image_container"
               android:layout_marginStart="10dp"
               android:textStyle="bold"
               android:id="@+id/comment_layout_user_name"
               android:text=""
-              app:layout_constraintStart_toEndOf="@id/comment_layout_user_image"
+              app:layout_constraintStart_toEndOf="@id/comment_layout_image_container"
               android:layout_height="wrap_content"/>
 
     <TextView android:layout_width="wrap_content"
@@ -36,7 +44,7 @@
 
     <TextView android:layout_width="wrap_content"
               app:layout_constraintTop_toBottomOf="@id/comment_layout_user_name"
-              app:layout_constraintStart_toEndOf="@id/comment_layout_user_image"
+              app:layout_constraintStart_toEndOf="@id/comment_layout_image_container"
               app:layout_constraintBottom_toTopOf="@id/coment_layout_divider"
               android:layout_marginBottom="10dp"
               android:layout_marginStart="10dp"

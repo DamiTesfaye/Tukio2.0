@@ -30,6 +30,7 @@ import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
 import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.Utils.IntentUtils
+import kotlinx.android.synthetic.main.activity_edit_profile.*
 
 class EditProfileActivity : AppCompatActivity() {
 
@@ -136,7 +137,7 @@ class EditProfileActivity : AppCompatActivity() {
 
                     FireStoreRepo().updateUserAccount(userName = nameText, userBio = bioText, userPicLink = userImageUri, ifCompleted = {
 
-                        Toast.makeText(this, "Profile Updated!", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "ProfileFragment Updated!", Toast.LENGTH_LONG)
                             .show()
                         finish()
 
@@ -207,7 +208,9 @@ class EditProfileActivity : AppCompatActivity() {
                             .setCropShape(CropImageView.CropShape.OVAL)
                             .start(this)
                     }
+                    edit_profile_trans_image.visibility = GONE
                 }
+
 
                 CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
                     val result = CropImage.getActivityResult(data)

@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".View.Activities.AddEventPremActivity">
 
@@ -35,8 +36,9 @@
                   android:text="@string/these_are_the_important_aspects_of_your_event"
                   android:layout_height="wrap_content"/>
 
-        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-                                               android:layout_height="wrap_content">
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <LinearLayout android:layout_width="match_parent"
                           android:orientation="vertical"
@@ -230,31 +232,41 @@
 
                 </RelativeLayout>
 
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_marginTop="70dp"
+                                android:id="@+id/add_event_prem_almost_done_btn"
+                                android:background="@drawable/buttonbg"
+                                android:layout_height="45dp">
+
+                    <TextView android:layout_width="wrap_content"
+                              android:layout_centerInParent="true"
+                              android:textSize="15sp"
+                              android:textStyle="bold"
+                              android:textColor="@color/colorPrimary"
+                              android:text="@string/you_re_almost_done"
+                              android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+
             </LinearLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </ScrollView>
 
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_marginTop="70dp"
-                        android:id="@+id/add_event_prem_almost_done_btn"
-                        android:background="@drawable/buttonbg"
-                        android:layout_height="45dp">
-
-            <TextView android:layout_width="wrap_content"
-                      android:layout_centerInParent="true"
-                      android:textSize="15sp"
-                      android:textStyle="bold"
-                      android:textColor="@color/colorPrimary"
-                      android:text="@string/you_re_almost_done"
-                      android:layout_height="wrap_content"/>
-
-        </RelativeLayout>
 
     </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:background="#99000000"
+          android:visibility="gone"
+          android:id="@+id/add_event_prem_bottom_sheet_bg"
+          android:layout_height="match_parent"
+    />
 
     <include
             layout="@layout/add_tag_bottomsheet"
             android:id="@+id/add_event_prem__tag_bottom_sheet"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

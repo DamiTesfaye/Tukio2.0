@@ -183,42 +183,44 @@ class HomeFragment: Fragment(){
 
                                                             if (eventModel.eventTags.compareLists(userTags) > 0) {
 
-                                                                if (alreadyLoaded) {
+                                                                if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                                                    if (alreadyLoaded) {
 
-                                                                    if (!listOfEvent.contains(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
+                                                                        if (!listOfEvent.contains(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
                                                                             )
-                                                                        )
-                                                                    ) {
-                                                                        listOfEvent.add(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
+                                                                        ) {
+                                                                            listOfEvent.add(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
                                                                             )
-                                                                        )
-                                                                        adapter.notifyDataSetChanged()
+                                                                            adapter.notifyDataSetChanged()
+
+                                                                        }
+
+                                                                    } else {
+
+                                                                        if (!listOfEvent.contains(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
+                                                                            )
+                                                                        ) {
+                                                                            listOfEvent.add(
+                                                                                0,
+                                                                                FullEventsModel(eventModel, eventID)
+                                                                            )
+                                                                            adapter.notifyDataSetChanged()
+
+                                                                        }
 
                                                                     }
-
-                                                                } else {
-
-                                                                    if (!listOfEvent.contains(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
-                                                                            )
-                                                                        )
-                                                                    ) {
-                                                                        listOfEvent.add(
-                                                                            0,
-                                                                            FullEventsModel(eventModel, eventID)
-                                                                        )
-                                                                        adapter.notifyDataSetChanged()
-
-                                                                    }
-
                                                                 }
 
                                                             }
@@ -295,49 +297,51 @@ class HomeFragment: Fragment(){
                                                             val eventModel = document.document.breakDocumentIntoEvntsModel()
                                                             val eventID = document.document.id
 
-                                                            if (eventModel.eventTags.compareLists(userTags) > 0) {
+                                                            if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                                                if (eventModel.eventTags.compareLists(userTags) > 0) {
 
-                                                                if (alreadyLoaded) {
+                                                                    if (alreadyLoaded) {
 
-                                                                    if (!listOfEvent.contains(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
+                                                                        if (!listOfEvent.contains(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
                                                                             )
-                                                                        )
-                                                                    ) {
-                                                                        listOfEvent.add(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
+                                                                        ) {
+                                                                            listOfEvent.add(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
                                                                             )
-                                                                        )
-                                                                        adapter.notifyDataSetChanged()
+                                                                            adapter.notifyDataSetChanged()
 
-                                                                        binding.fragHomeFineTuningLayout.visibility = GONE
-                                                                        binding.fragHomeRecycler.visibility = VISIBLE
+                                                                            binding.fragHomeFineTuningLayout.visibility = GONE
+                                                                            binding.fragHomeRecycler.visibility = VISIBLE
 
-                                                                    }
+                                                                        }
 
-                                                                } else {
+                                                                    } else {
 
-                                                                    if (!listOfEvent.contains(
-                                                                            FullEventsModel(
-                                                                                eventModel,
-                                                                                eventID
+                                                                        if (!listOfEvent.contains(
+                                                                                FullEventsModel(
+                                                                                    eventModel,
+                                                                                    eventID
+                                                                                )
                                                                             )
-                                                                        )
-                                                                    ) {
-                                                                        listOfEvent.add(
-                                                                            0,
-                                                                            FullEventsModel(eventModel, eventID)
-                                                                        )
-                                                                        adapter.notifyDataSetChanged()
+                                                                        ) {
+                                                                            listOfEvent.add(
+                                                                                0,
+                                                                                FullEventsModel(eventModel, eventID)
+                                                                            )
+                                                                            adapter.notifyDataSetChanged()
+
+                                                                        }
 
                                                                     }
 
                                                                 }
-
                                                             }
                                                         }
 
@@ -407,12 +411,14 @@ class HomeFragment: Fragment(){
 
                                 for (document in snapshot.documents) {
                                     val eventModel = document.breakDocumentIntoEvntsModel()
-                                    if (usersTags.compareLists(eventModel.eventTags) > 0) {
-                                        if (!listOfEvent.contains(FullEventsModel(eventModel, document.id))) {
-                                            listOfEvent.add(FullEventsModel(eventModel, document.id))
+                                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                        if (usersTags.compareLists(eventModel.eventTags) > 0) {
+                                            if (!listOfEvent.contains(FullEventsModel(eventModel, document.id))) {
+                                                listOfEvent.add(FullEventsModel(eventModel, document.id))
 
-                                            adapter.notifyDataSetChanged()
+                                                adapter.notifyDataSetChanged()
 
+                                            }
                                         }
                                     }
 

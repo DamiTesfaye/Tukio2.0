@@ -23,6 +23,9 @@ class FirebaseUtils {
         val promotedCollectionPath = "Promoted Events"
         val updatesCollectionPath = "Updates"
         val clickedCollectionPath = "Clicked"
+        val betaClickedCollectionPath = "Beta_Clicked"
+        val betaEventsCollectionPath = "Beta_Events"
+        val betaPromotedCollectionPath = "Beta_Promoted"
     }
 
     fun getDefaultPreferences(context: Context) = context.getSharedPreferences(defaultSharePrefPath, MODE_PRIVATE)
@@ -37,7 +40,7 @@ class FirebaseUtils {
     }
 
     fun getUserUID(context: Context): String{
-        return getDefaultPreferences(context).getString(sharePrefUIDPath, "")
+        return getDefaultPreferences(context).getString(sharePrefUIDPath, "")!!
     }
 
     fun saveUserDetails(user: UserModel?, context: Context){

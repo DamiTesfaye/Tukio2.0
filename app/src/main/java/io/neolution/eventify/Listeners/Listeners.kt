@@ -68,4 +68,6 @@ interface OnAuthLevelClicked{
     fun goSignUp()
 
     fun goSignIn()
+
+    fun recoverPassword()
 }

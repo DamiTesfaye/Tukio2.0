@@ -101,11 +101,11 @@
     <Button android:layout_width="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:textSize="17sp"
+            android:textSize="15sp"
             android:id="@+id/add_guest_bsheet_add_guest_btn"
             android:background="@drawable/buttonbg"
             android:text="@string/add_guest"
             android:layout_marginBottom="50dp"
-            android:layout_height="40dp"/>
+            android:layout_height="45dp"/>
 
 </LinearLayout>

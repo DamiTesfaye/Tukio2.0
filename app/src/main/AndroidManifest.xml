@@ -27,7 +27,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory">
-        <activity android:name=".View.Activities.AuthActivity">
+        <activity android:name=".View.Activities.AuthActivity"
+        android:screenOrientation="portrait">
         </activity>
         <activity
                 android:name=".View.Activities.ImageViewingActivity"
@@ -118,12 +119,6 @@
                 android:name="com.google.firebase.messaging.default_notification_channel_id"
                 android:value="Tukio Events"/>
 
-        <activity
-                android:name=".View.Activities.SignUpActivity"
-                android:theme="@style/AuthThemes"/>
-        <activity
-                android:name=".View.Activities.SignInActivity"
-                android:theme="@style/AuthThemes"/>
         <activity android:name=".View.Activities.EventDetailsFromLinkActivity"
                   android:screenOrientation="portrait"
                   android:theme="@style/EventDetailsTheme">

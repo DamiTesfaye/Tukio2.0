@@ -40,7 +40,7 @@
                   android:layout_below="@id/profile_opt_bsheet_sep"
                   android:id="@+id/profile_opt_bsheet_label"
                   android:textColor="@android:color/black"
-                  android:text="Edit Profile"
+                  android:text="@string/options"
                   android:layout_height="wrap_content"/>
 
     </RelativeLayout>
@@ -70,7 +70,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="Edit Profile"
+                    android:text="@string/edit_profile"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -93,7 +93,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="Change Interests"
+                    android:text="@string/change_interests"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -116,7 +116,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="Sign Out"
+                    android:text="@string/sign_out"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>
@@ -141,7 +141,7 @@
                     android:layout_marginStart="10dp"
                     android:textSize="17sp"
                     android:textColor="@android:color/black"
-                    android:text="About Us"
+                    android:text="@string/about_us"
                     android:layout_height="wrap_content"/>
 
         </LinearLayout>

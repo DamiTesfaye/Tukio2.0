@@ -5,8 +5,11 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import de.hdodenhof.circleimageview.CircleImageView
 import io.neolution.eventify.Data.ModelClasses.CommentModel
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
@@ -30,7 +33,7 @@ class CommentAdapter(val context: Context, val list: List<CommentModel>): Recycl
 
         val userNametv = holder.itemView.findViewById<TextView>(R.id.comment_layout_user_name)
         val commentTv = holder.itemView.findViewById<TextView>(R.id.comment_layout_comment)
-        val userImage = holder.itemView.findViewById<CircleImageView>(R.id.comment_layout_user_image)
+        val userImage = holder.itemView.findViewById<ImageView>(R.id.comment_layout_user_image)
         val commentPostTime = holder.itemView.findViewById<TextView>(R.id.comment_layout_post_time)
 
         commentTv.text = currentModel.commentMessage
@@ -41,9 +44,15 @@ class CommentAdapter(val context: Context, val list: List<CommentModel>): Recycl
                 val userModel = snapshot.breakDownToUserModel()
                 userNametv.text = userModel.userName
 
+                val requestOptions = RequestOptions()
+                requestOptions.placeholder(ContextCompat.getDrawable(context, R.drawable.ic_male_placeholder))
+                val thumbNailRequest = Glide.with(context.applicationContext).load(userModel.userThumbLink)
+
                 Glide.with(context.applicationContext)
+                    .setDefaultRequestOptions(requestOptions)
                     .asDrawable()
                     .load(userModel.userImage)
+                    .thumbnail(thumbNailRequest)
                     .into(userImage)
 
             }

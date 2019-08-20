@@ -1,6 +1,7 @@
 package io.neolution.eventify.View.Fragments.HomeFragment
 
 
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import androidx.fragment.app.Fragment
@@ -20,14 +21,17 @@ import io.neolution.eventify.Data.Adapters.OnBoardingAdapter
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.Data.ViewModels.EventsViewModel
 import io.neolution.eventify.Listeners.OnEditProfileClicked
+import io.neolution.eventify.Listeners.OnHomeFragmentsAttached
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
 
-class Profile : Fragment() {
+class ProfileFragment : Fragment() {
 
     private lateinit var fireStoreRepo: FireStoreRepo
     private lateinit var onEditProfileClicked: OnEditProfileClicked
+    private lateinit var onHomeFragmentsAttached: OnHomeFragmentsAttached
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -111,5 +115,11 @@ class Profile : Fragment() {
         return view
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        onHomeFragmentsAttached = context as OnHomeFragmentsAttached
+        onHomeFragmentsAttached.onProfileFragmentAttached()
+    }
 
 }

@@ -45,12 +45,8 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
     lateinit var adapter: TagsAdapter
 
     override fun onChipSelected(chipText: String) {
+        tagsArray.add(chipText)
 
-        if (tagsArray.size <= 5){
-            tagsArray.add(chipText)
-        }else{
-
-        }
     }
 
     override fun onChipDeselected(chipText: String) {
@@ -68,7 +64,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
         binding.tagsSaveInterestsText.setOnClickListener(this)
 
         val startedFrom = intent.getStringExtra("startedFrom")
-        if (startedFrom == SignUpActivity::class.java.simpleName){
+        if (startedFrom == AuthActivity::class.java.simpleName){
             binding.tagsCloseActivity.visibility = INVISIBLE
             binding.tagsCloseActivity.isEnabled = false
         }
@@ -130,19 +126,25 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
         binding.tagsSaveInterestsProgress.visibility = VISIBLE
         binding.tagsSaveInterestsText.visibility = GONE
 
-        profileViewModel.updateInterestedTags(tagList,{
 
-            binding.tagsSaveInterestsContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-            binding.tagsSaveInterestsProgress.visibility = GONE
-            binding.tagsSaveInterestsText.visibility = VISIBLE
+        if (tagList.size > 5){
+            profileViewModel.updateInterestedTags(tagList,{
 
-            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Please select a tag", this)
+                binding.tagsSaveInterestsContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                binding.tagsSaveInterestsProgress.visibility = GONE
+                binding.tagsSaveInterestsText.visibility = VISIBLE
+
+                AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Please select a tag", this)
+                    .show()
+            }, {
+
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+
+            })
+        }else{
+            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Only 5 tags are allowed. Reselect!", this)
                 .show()
-        }, {
-
-            startActivity(Intent(this, HomeActivity::class.java))
-            finish()
-
-        })
+        }
     }
 }

@@ -20,6 +20,7 @@ import io.neolution.eventify.Data.ModelClasses.toHashMap
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
+import kotlinx.android.synthetic.main.activity_updates.*
 
 class UpdatesActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ class UpdatesActivity : AppCompatActivity() {
     private lateinit var updateTitleText: TextInputEditText
     private lateinit var updateDescLayout: TextInputLayout
     private lateinit var updateDescText: TextInputEditText
+    private lateinit var updateProgressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,7 @@ class UpdatesActivity : AppCompatActivity() {
         }
 
         addUpdateBottomSheet = findViewById(R.id.activity_update_bottomsheet)
+        updateProgressBar = findViewById(R.id.activity_update_progress)
         bottomSheetBehavior = BottomSheetBehavior.from(addUpdateBottomSheet)
         closeBottomSheet = findViewById(R.id.add_update_bsheet_close)
         addUpdateButton = findViewById(R.id.add_update_bsheet_add_guest_text)
@@ -75,10 +78,17 @@ class UpdatesActivity : AppCompatActivity() {
 
         fab.setOnClickListener {
              bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            activity_updates_bottom_sheet_bg.visibility = VISIBLE
         }
 
         closeBottomSheet.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            activity_updates_bottom_sheet_bg.visibility = GONE
+        }
+
+        activity_updates_bottom_sheet_bg.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            activity_updates_bottom_sheet_bg.visibility = GONE
         }
 
         addUpdateButton.setOnClickListener {
@@ -104,6 +114,7 @@ class UpdatesActivity : AppCompatActivity() {
                         addUpdateProgressBar.visibility = GONE
 
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                        activity_updates_bottom_sheet_bg.visibility = GONE
 
                     }else{
 
@@ -140,12 +151,14 @@ class UpdatesActivity : AppCompatActivity() {
             if (snapshot != null && !snapshot.isEmpty){
                 for (document in snapshot.documents){
                     val update = document.toObject(UpdatesModel::class.java)
+                    updateProgressBar.visibility = GONE
                     list.add(update!!)
                     adapter.notifyDataSetChanged()
                 }
 
 
             }else{
+                updateProgressBar.visibility = GONE
                 recyclerView.visibility = GONE
                 noUpdateLayout.visibility = VISIBLE
             }

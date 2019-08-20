@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -53,16 +55,25 @@ class PinnedEventsFragment: Fragment() {
                 for (eventDoc in eventPostsSnapshot.documents) {
                     val eventModel = eventDoc.breakDocumentIntoEvntsModel()
 
-                    firestoreRepo.getDocumentLikesCollection(eventDoc.id).document(AuthRepo.getUserUid()).get()
-                        .addOnSuccessListener { documentTask ->
-                            if (documentTask.exists()) {
-                                val fullEventModel = FullEventsModel(eventModel, eventDoc.id)
-                                listOfEvents.add(fullEventModel)
-                                adapter.notifyDataSetChanged()
+                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                        firestoreRepo.getDocumentLikesCollection(eventDoc.id).document(AuthRepo.getUserUid()).get()
+                            .addOnSuccessListener { documentTask ->
+                                if (documentTask.exists()) {
+                                    val fullEventModel = FullEventsModel(eventModel, eventDoc.id)
+                                    listOfEvents.add(fullEventModel)
+                                    adapter.notifyDataSetChanged()
+                                    postedNoEvents.visibility = GONE
+                                    loadingPostedEvents.visibility = GONE
 
+                                }
                             }
-                        }
+                    }
                 }
+            }
+
+            if (listOfEvents.isEmpty()){
+                postedNoEvents.visibility = VISIBLE
+                loadingPostedEvents.visibility = GONE
             }
         }
 

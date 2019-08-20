@@ -19,11 +19,11 @@ import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.View.Activities.HomeActivity
-import io.neolution.eventify.View.Activities.SignUpActivity
 
 class SignInFragment: Fragment() {
 
     private lateinit var onAuthLevelClicked: OnAuthLevelClicked
+    private val EMAILRE = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.new_signin_activity_auth, container, false )
@@ -43,29 +43,40 @@ class SignInFragment: Fragment() {
         val signInText = view.findViewById<TextView>(R.id.new_auth_signin_act_signin_text)
         val signInProgress = view.findViewById<ProgressBar>(R.id.new_auth_signin_act_progress)
 
+        val forgotPassword = view.findViewById<TextView>(R.id.new_auth_signin_forgot_password)
+        forgotPassword.setOnClickListener {
+            onAuthLevelClicked.recoverPassword()
+        }
+
         signInText.setOnClickListener {
             val emailText = emailEdit.text.toString().trim()
             val passwordText = passwordEdit.text.toString().trim()
 
             if (emailText.isNotEmpty() && passwordText.isNotEmpty()){
 
-                closeKeyboard()
+                val regex = Regex(EMAILRE)
+                if (regex.matches(emailText)){
+                    closeKeyboard()
 
-                signInContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg_outline)
-                signInText.visibility = View.GONE
-                signInProgress.visibility = View.VISIBLE
+                    signInContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg_outline)
+                    signInText.visibility = View.GONE
+                    signInProgress.visibility = View.VISIBLE
 
-                AuthRepo.signIn(email = emailText, password = passwordText).addOnSuccessListener {
-                    context!!.startActivity(Intent(context!!, HomeActivity::class.java))
-                    activity!!.finish()
+                    AuthRepo.signIn(email = emailText, password = passwordText).addOnSuccessListener {
+                        context!!.startActivity(Intent(context!!, HomeActivity::class.java))
+                        activity!!.finish()
 
-                }.addOnFailureListener {
+                    }.addOnFailureListener {
+                        val vieW = activity!!.findViewById<View>(android.R.id.content)
+                        AppUtils.getCustomSnackBar(v = vieW, context = context!!, m = it.localizedMessage!!).show()
+
+                        signInContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg)
+                        signInText.visibility = View.VISIBLE
+                        signInProgress.visibility = View.GONE
+                    }
+                }else{
                     val vieW = activity!!.findViewById<View>(android.R.id.content)
-                    AppUtils.getCustomSnackBar(v = vieW, context = context!!, m = it.localizedMessage!!).show()
-
-                    signInContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg)
-                    signInText.visibility = View.VISIBLE
-                    signInProgress.visibility = View.GONE
+                    AppUtils.getCustomSnackBar(v = vieW, context = context!!, m = "Invalid Email Address").show()
                 }
 
             }else{

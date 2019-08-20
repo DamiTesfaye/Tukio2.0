@@ -26,8 +26,8 @@ class ImageViewingActivity : AppCompatActivity() {
         }
 
         val bundle = intent.extras
-        val eventImage = bundle.getString("eventImage")
-        val eventImageThumb = bundle.getString("eventImageThumb")
+        val eventImage = bundle!!.getString("eventImage")!!
+        val eventImageThumb = bundle.getString("eventImageThumb")!!
 
         val requestOptions = RequestOptions()
         requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.placeholder_2))

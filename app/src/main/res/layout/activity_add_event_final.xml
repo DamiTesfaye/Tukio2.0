@@ -5,217 +5,231 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:animateLayoutChanges="true"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".View.Activities.AddEventFinalActivity">
 
-    <LinearLayout
+    <ScrollView android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:background="@color/colorPrimary"
-    >
+        <LinearLayout
 
-        <ImageButton android:layout_width="wrap_content"
-                     android:layout_marginTop="20dp"
-                     android:background="?attr/selectableItemBackgroundBorderless"
-                     app:srcCompat="@drawable/ic_back"
-                     android:id="@+id/add_event_final_back_btn"
-                     android:layout_height="wrap_content"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:background="@color/colorPrimary"
+        >
 
-        <TextView android:layout_width="wrap_content"
-                  android:textSize="20sp"
-                  android:layout_marginTop="10dp"
-                  android:text="@string/additional_information"
-                  android:textStyle="bold"
-                  android:layout_height="wrap_content"/>
+            <ImageButton android:layout_width="wrap_content"
+                         android:layout_marginTop="20dp"
+                         android:background="?attr/selectableItemBackgroundBorderless"
+                         app:srcCompat="@drawable/ic_back"
+                         android:id="@+id/add_event_final_back_btn"
+                         android:layout_height="wrap_content"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:textSize="13sp"
-                  android:text="@string/additional_information_that_is_helpful_to_the_attendees_or_you_can_just_post_what_you_have_already"
-                  android:paddingEnd="20dp"
-                  android:paddingStart="0dp"
-                  android:layout_height="wrap_content"/>
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="20sp"
+                      android:layout_marginTop="10dp"
+                      android:text="@string/additional_information"
+                      android:textStyle="bold"
+                      android:layout_height="wrap_content"/>
 
-        <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
-                                               android:layout_height="wrap_content">
+            <TextView android:layout_width="wrap_content"
+                      android:textSize="13sp"
+                      android:text="@string/additional_information_that_is_helpful_to_the_attendees_or_you_can_just_post_what_you_have_already"
+                      android:paddingEnd="20dp"
+                      android:paddingStart="0dp"
+                      android:layout_height="wrap_content"/>
 
-            <LinearLayout android:layout_width="match_parent"
-                          android:orientation="vertical"
-                          android:layout_height="wrap_content">
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="30dp"
-                        app:hintAnimationEnabled="true"
-                        android:hint="@string/dress_code_optional"
-                        android:id="@+id/add_event_final_dresscode_layout"
-                        android:textColorHint="@android:color/darker_gray"
-                        android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:backgroundTint="@android:color/black"
-                            android:fontFamily="@font/font_family"
-                            android:id="@+id/add_event_final_dresscode_edit"
-                            android:textSize="15sp"
-                            android:layout_height="wrap_content"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="5dp"
-                        app:hintAnimationEnabled="true"
-                        android:hint="@string/registration_link_optional"
-                        android:id="@+id/add_event_final_reglink_layout"
-                        android:textColorHint="@android:color/darker_gray"
-                        android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:backgroundTint="@android:color/black"
-                            android:fontFamily="@font/font_family"
-                            android:id="@+id/add_event_final_reglink_edit"
-                            android:textSize="15sp"
-                            android:layout_height="wrap_content"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginTop="5dp"
-                        app:hintAnimationEnabled="true"
-                        android:hint="@string/ticket_link_optional"
-                        android:id="@+id/add_event_final_ticket_layout"
-                        android:textColorHint="@android:color/darker_gray"
-                        android:layout_height="wrap_content">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                            android:layout_width="match_parent"
-                            android:backgroundTint="@android:color/black"
-                            android:fontFamily="@font/font_family"
-                            android:id="@+id/add_event_final_ticket_edit"
-                            android:textSize="15sp"
-                            android:layout_height="wrap_content"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
+            <androidx.core.widget.NestedScrollView android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content">
 
                 <LinearLayout android:layout_width="match_parent"
                               android:orientation="vertical"
-                              android:layout_marginTop="10dp"
-                              android:animateLayoutChanges="true"
                               android:layout_height="wrap_content">
 
-                    <TextView android:layout_width="wrap_content"
-                              android:paddingTop="5dp"
-                              android:text="@string/special_guests_optional"
-                              android:textColor="@android:color/black"
-                              android:textStyle="bold"
-                              android:layout_height="wrap_content"/>
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="30dp"
+                            app:hintAnimationEnabled="true"
+                            android:hint="@string/dress_code_optional"
+                            android:id="@+id/add_event_final_dresscode_layout"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:backgroundTint="@android:color/black"
+                                android:fontFamily="@font/font_family"
+                                android:id="@+id/add_event_final_dresscode_edit"
+                                android:textSize="15sp"
+                                android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            app:hintAnimationEnabled="true"
+                            android:hint="@string/registration_link_optional"
+                            android:id="@+id/add_event_final_reglink_layout"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:backgroundTint="@android:color/black"
+                                android:fontFamily="@font/font_family"
+                                android:id="@+id/add_event_final_reglink_edit"
+                                android:textSize="15sp"
+                                android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="5dp"
+                            app:hintAnimationEnabled="true"
+                            android:hint="@string/ticket_link_optional"
+                            android:id="@+id/add_event_final_ticket_layout"
+                            android:textColorHint="@android:color/darker_gray"
+                            android:layout_height="wrap_content">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:backgroundTint="@android:color/black"
+                                android:fontFamily="@font/font_family"
+                                android:id="@+id/add_event_final_ticket_edit"
+                                android:textSize="15sp"
+                                android:layout_height="wrap_content"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <LinearLayout android:layout_width="match_parent"
-                                  android:layout_marginTop="10dp"
-                                  android:paddingTop="5dp"
-                                  android:animateLayoutChanges="true"
                                   android:orientation="vertical"
-                                  android:id="@+id/add_event_final_guest_container"
-                                  android:paddingBottom="5dp"
+                                  android:layout_marginTop="10dp"
+                                  android:animateLayoutChanges="true"
                                   android:layout_height="wrap_content">
+
+                        <TextView android:layout_width="wrap_content"
+                                  android:paddingTop="5dp"
+                                  android:text="@string/special_guests_optional"
+                                  android:textColor="@android:color/black"
+                                  android:textStyle="bold"
+                                  android:layout_height="wrap_content"/>
+
+                        <LinearLayout android:layout_width="match_parent"
+                                      android:layout_marginTop="10dp"
+                                      android:paddingTop="5dp"
+                                      android:animateLayoutChanges="true"
+                                      android:orientation="vertical"
+                                      android:id="@+id/add_event_final_guest_container"
+                                      android:paddingBottom="5dp"
+                                      android:layout_height="wrap_content">
+
+                        </LinearLayout>
+
+                        <RelativeLayout android:layout_width="match_parent"
+                                        android:layout_marginTop="20dp"
+                                        android:layout_marginBottom="10dp"
+                                        android:id="@+id/add_event_final_add_guest_container"
+                                        android:background="@drawable/buttonbg_outline"
+                                        android:layout_height="40dp">
+
+                            <ImageView android:layout_width="wrap_content"
+                                       app:srcCompat="@drawable/ic_add_black_24dp"
+                                       android:tint="@color/colorAccent"
+                                       android:layout_marginEnd="5dp"
+                                       android:layout_toStartOf="@id/add_event_final_add_guest_text"
+                                       android:layout_centerVertical="true"
+                                       android:layout_height="wrap_content"/>
+
+                            <TextView android:layout_width="wrap_content"
+                                      android:textSize="15sp"
+                                      android:textStyle="bold"
+                                      android:textColor="@color/colorAccent"
+                                      android:id="@+id/add_event_final_add_guest_text"
+                                      android:layout_centerInParent="true"
+                                      android:text="@string/add_a_special_guest"
+                                      android:layout_height="wrap_content"/>
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
                     <RelativeLayout android:layout_width="match_parent"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:id="@+id/add_event_final_add_guest_container"
                                     android:background="@drawable/buttonbg_outline"
+                                    android:layout_marginTop="15dp"
+                                    android:id="@+id/add_event_final_promote_event_container"
+                                    android:layout_marginBottom="10dp"
                                     android:layout_height="40dp">
 
                         <ImageView android:layout_width="wrap_content"
-                                   app:srcCompat="@drawable/ic_add_black_24dp"
-                                   android:tint="@color/colorAccent"
-                                   android:layout_marginEnd="5dp"
-                                   android:layout_toStartOf="@id/add_event_final_add_guest_text"
                                    android:layout_centerVertical="true"
+                                   android:layout_toStartOf="@id/add_event_final_promote_event_text"
+                                   android:layout_marginEnd="5dp"
+                                   app:srcCompat="@drawable/ic_money_accent"
                                    android:layout_height="wrap_content"/>
 
-                        <TextView android:layout_width="wrap_content"
-                                  android:textSize="15sp"
-                                  android:textStyle="bold"
-                                  android:textColor="@color/colorAccent"
-                                  android:id="@+id/add_event_final_add_guest_text"
-                                  android:layout_centerInParent="true"
-                                  android:text="@string/add_a_special_guest"
-                                  android:layout_height="wrap_content"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:text="@string/promote"
+                                android:textStyle="bold"
+                                android:id="@+id/add_event_final_promote_event_text"
+                                android:textColor="@color/colorAccent"
+                                android:layout_centerInParent="true"
+                                android:layout_height="wrap_content"/>
 
                     </RelativeLayout>
 
                 </LinearLayout>
 
-                <RelativeLayout android:layout_width="match_parent"
-                                android:background="@drawable/buttonbg_outline"
-                                android:layout_marginTop="15dp"
-                                android:id="@+id/add_event_final_promote_event_container"
-                                android:layout_marginBottom="10dp"
-                                android:layout_height="40dp">
+            </androidx.core.widget.NestedScrollView>
 
-                    <ImageView android:layout_width="wrap_content"
-                               android:layout_centerVertical="true"
-                               android:layout_toStartOf="@id/add_event_final_promote_event_text"
-                               android:layout_marginEnd="5dp"
-                               app:srcCompat="@drawable/ic_money_accent"
-                               android:layout_height="wrap_content"/>
+            <RelativeLayout android:layout_width="match_parent"
+                            android:layout_marginTop="70dp"
+                            android:id="@+id/add_event_final_share_event_container"
+                            android:background="@drawable/buttonbg"
+                            android:layout_height="45dp">
 
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:text="@string/promote"
-                            android:textStyle="bold"
-                            android:id="@+id/add_event_final_promote_event_text"
-                            android:textColor="@color/colorAccent"
-                            android:layout_centerInParent="true"
-                            android:layout_height="wrap_content"/>
+                <ProgressBar android:layout_width="25dp"
+                             android:indeterminate="true"
+                             android:indeterminateTint="@color/colorAccent"
+                             android:layout_centerInParent="true"
+                             android:visibility="gone"
+                             android:id="@+id/add_event_final_share_event_progress"
+                             android:layout_height="25dp"/>
 
-                </RelativeLayout>
+                <TextView android:layout_width="match_parent"
+                          android:textSize="15sp"
+                          android:id="@+id/add_event_final_share_event_text"
+                          android:textStyle="bold"
+                          android:textColor="@color/colorPrimary"
+                          android:layout_centerInParent="true"
+                          android:text="@string/share_event"
+                          android:gravity="center"
+                          android:layout_height="match_parent"/>
 
-            </LinearLayout>
+            </RelativeLayout>
 
-        </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
 
-        <RelativeLayout android:layout_width="match_parent"
-                        android:layout_marginTop="70dp"
-                        android:id="@+id/add_event_final_share_event_container"
-                        android:background="@drawable/buttonbg"
-                        android:layout_height="45dp">
+    </ScrollView>
 
-            <ProgressBar android:layout_width="15dp"
-                         android:indeterminate="true"
-                         android:indeterminateTint="@color/colorAccent"
-                         android:layout_centerInParent="true"
-                         android:visibility="gone"
-                         android:id="@+id/add_event_final_share_event_progress"
-                         android:layout_height="15dp"/>
 
-            <TextView android:layout_width="match_parent"
-                      android:textSize="17sp"
-                      android:id="@+id/add_event_final_share_event_text"
-                      android:textStyle="bold"
-                      android:textColor="@color/colorPrimary"
-                      android:layout_centerInParent="true"
-                      android:text="@string/share_event"
-                      android:gravity="center"
-                      android:layout_height="match_parent"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    <View android:layout_width="match_parent"
+          android:background="#99000000"
+          android:visibility="gone"
+          android:id="@+id/add_event_final_bottom_sheet_bg"
+          android:layout_height="match_parent"
+    />
 
     <include
-        layout="@layout/add_guest_bottomsheet"
-        android:id="@+id/add_guest_bsheet"/>
+            layout="@layout/add_guest_bottomsheet"
+            android:id="@+id/add_guest_bsheet"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

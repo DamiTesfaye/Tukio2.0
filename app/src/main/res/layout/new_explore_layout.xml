@@ -19,51 +19,37 @@
                     app:layout_scrollFlags="scroll|exitUntilCollapsed"
                     android:layout_height="wrap_content">
 
-                <LinearLayout android:layout_width="match_parent"
-                              android:orientation="vertical"
-                              android:layout_height="match_parent">
+                <RelativeLayout android:layout_width="match_parent"
+                                android:layout_weight="1"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginBottom="10dp"
+                                android:id="@+id/new_explore_search_container"
+                                android:layout_gravity="center_vertical"
+                                android:elevation="3dp"
+                                android:background="@drawable/search_edit_text_bg"
+                                android:layout_height="40dp">
+
+                    <ImageView android:layout_width="20dp"
+                               android:layout_centerVertical="true"
+                               android:id="@+id/new_explore_search_image"
+                               android:layout_marginStart="10dp"
+                               android:tint="@color/colorAccent"
+                               app:srcCompat="@drawable/ic_search"
+                               android:layout_height="20dp"/>
 
                     <TextView android:layout_width="wrap_content"
-                              android:text="@string/explore"
-                              android:layout_marginTop="15dp"
-                              android:layout_marginStart="15dp"
-                              android:textStyle="bold"
-                              android:textSize="32sp"
-                              android:layout_marginBottom="10dp"
+                              android:text="@string/search_events"
+                              android:id="@+id/new_explore_seach_textview"
+                              android:layout_toEndOf="@id/new_explore_search_image"
+                              android:layout_centerVertical="true"
+                              android:layout_marginStart="10dp"
+                              android:textSize="17sp"
+                              android:textColor="@android:color/darker_gray"
                               android:layout_height="wrap_content"/>
 
-                    <RelativeLayout android:layout_width="match_parent"
-                                    android:layout_weight="1"
-                                    android:layout_marginStart="10dp"
-                                    android:layout_marginEnd="10dp"
-                                    android:layout_marginTop="20dp"
-                                    android:layout_marginBottom="10dp"
-                                    android:id="@+id/new_explore_search_container"
-                                    android:layout_gravity="center_vertical"
-                                    android:elevation="3dp"
-                                    android:background="@drawable/search_edit_text_bg"
-                                    android:layout_height="40dp">
-
-                        <ImageView android:layout_width="20dp"
-                                   android:layout_centerVertical="true"
-                                   android:id="@+id/new_explore_search_image"
-                                   android:layout_marginStart="10dp"
-                                   android:tint="@color/colorAccent"
-                                   app:srcCompat="@drawable/ic_search"
-                                   android:layout_height="20dp"/>
-
-                        <TextView android:layout_width="wrap_content"
-                                  android:text="@string/search_events"
-                                  android:id="@+id/new_explore_seach_textview"
-                                  android:layout_toEndOf="@id/new_explore_search_image"
-                                  android:layout_centerVertical="true"
-                                  android:layout_marginStart="5dp"
-                                  android:layout_height="wrap_content"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
+                </RelativeLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

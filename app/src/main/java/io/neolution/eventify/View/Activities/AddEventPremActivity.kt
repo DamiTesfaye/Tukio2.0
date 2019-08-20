@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.DatePicker
 import android.widget.LinearLayout
@@ -124,12 +125,32 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
         add_tag_bsheet_recycler.layoutManager = manager
         add_tag_bsheet_recycler.adapter = adapter
 
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                add_event_prem_bottom_sheet_bg.visibility = VISIBLE
+                add_event_prem_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    add_event_prem_bottom_sheet_bg.visibility = GONE
+                }else{
+
+                }
+            }
+        })
+
         add_tag__bsheet_close.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         add_event_prem_tag_container.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        }
+
+        add_event_prem_bottom_sheet_bg.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         add_event_prem_back_btn.setOnClickListener {
@@ -170,7 +191,7 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
                 eventLocation.isNotEmpty() && eventTag != null && eventPicUri != null && eventFinalDateLong != null){
 
                 val intent = Intent(this, AddEventFinalActivity::class.java)
-                intent.putExtra("eventTitle", eventTitle)
+                intent.putExtra("eventTitle", "$eventTitle")
                 intent.putExtra("eventDesc", eventDesc)
                 intent.putExtra("eventDate", eventDate)
                 intent.putExtra("eventLocation", eventLocation)

@@ -19,14 +19,14 @@ import io.neolution.eventify.Data.ViewModels.AuthViewModel
 import io.neolution.eventify.Listeners.OnAuthLevelClicked
 import io.neolution.eventify.R
 import io.neolution.eventify.Utils.AppUtils
-import io.neolution.eventify.View.Activities.SignInActivity
-import io.neolution.eventify.View.Activities.SignUpActivity
+import io.neolution.eventify.View.Activities.AuthActivity
 import io.neolution.eventify.View.Activities.TagsActivity
 
 class SignUpFragment: Fragment() {
 
     lateinit var viewModel: AuthViewModel
     private lateinit var onAuthLevelClicked: OnAuthLevelClicked
+    private val EMAILRE = "[a-zA-Z0-9._-]+@[a-z]+.[a-z]+"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.new_signup_activity_auth, container, false)
@@ -64,42 +64,49 @@ class SignUpFragment: Fragment() {
 
             if (nameText.isNotEmpty() && emailText.isNotEmpty() && passwordText.isNotEmpty() && confPaswordText.isNotEmpty()){
 
-                if (passwordText == confPaswordText){
+                val regex = Regex(EMAILRE)
+                if (regex.matches(emailText)){
+                    if (passwordText == confPaswordText){
 
-                    closeKeyboard()
+                        closeKeyboard()
 
-                    signUpContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg_outline)
-                    signUpText.visibility = View.GONE
-                    signUpProgress.visibility = View.VISIBLE
+                        signUpContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg_outline)
+                        signUpText.visibility = View.GONE
+                        signUpProgress.visibility = View.VISIBLE
 
-                    viewModel.createAccount(email = emailText, userName = nameText, password = passwordText, bio = bioText, interestedTags = null,
-                        userImageThumb = null, userPicLink = null, if_Not_Successful = {
+                        viewModel.createAccount(email = emailText, userName = nameText, password = passwordText, bio = bioText, interestedTags = null,
+                            userImageThumb = null, userPicLink = null, if_Not_Successful = {
 
-                            signUpContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg)
-                            signUpText.visibility = View.VISIBLE
-                            signUpProgress.visibility = View.GONE
+                                signUpContainer.background = ContextCompat.getDrawable(context!!, R.drawable.buttonbg)
+                                signUpText.visibility = View.VISIBLE
+                                signUpProgress.visibility = View.GONE
 
-                            val vieW = activity!!.findViewById<View>(android.R.id.content)
-                            val snackbar = AppUtils.getCustomSnackBar(vieW, it, context!!)
-                            snackbar.show()
+                                val vieW = activity!!.findViewById<View>(android.R.id.content)
+                                val snackbar = AppUtils.getCustomSnackBar(vieW, it, context!!)
+                                snackbar.show()
 
-                        }, if_Successful = {
-                            val intent = Intent(context!!, TagsActivity::class.java)
-                            intent.putExtra("startedFrom", SignUpActivity::class.java.simpleName)
+                            }, if_Successful = {
+                                val intent = Intent(context!!, TagsActivity::class.java)
+                                intent.putExtra("startedFrom", AuthActivity::class.java.simpleName)
 
-                            startActivity(intent)
-                            activity!!.finish()
+                                startActivity(intent)
+                                activity!!.finish()
 
-                        }, whenCreatingAccount = {
+                            }, whenCreatingAccount = {
 
-                        })
+                            })
 
+                    }else{
+                        passwordLayout.isErrorEnabled = true
+                        passwordLayout.error = "Your passwords do not match"
+
+                        confPasswordLayout.isErrorEnabled = true
+                        confPasswordLayout.error = "Your passwords do not match"
+                    }
                 }else{
-                    passwordLayout.isErrorEnabled = true
-                    passwordLayout.error = "Your passwords do not match"
-
-                    confPasswordLayout.isErrorEnabled = true
-                    confPasswordLayout.error = "Your passwords do not match"
+                    val vieW = activity!!.findViewById<View>(android.R.id.content)
+                    val snackbaR = AppUtils.getCustomSnackBar(vieW, "Invalid Email Address", context!!)
+                    snackbaR.show()
                 }
 
             }else{

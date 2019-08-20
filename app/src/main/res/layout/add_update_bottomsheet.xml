@@ -103,17 +103,16 @@
     <RelativeLayout android:layout_width="match_parent"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:textSize="17sp"
             android:id="@+id/add_update_bsheet_add_guest_layout"
             android:background="@drawable/buttonbg"
 
             android:layout_marginBottom="50dp"
-                    android:layout_height="40dp">
+                    android:layout_height="45dp">
 
 
 
         <TextView android:layout_width="match_parent"
-                  android:textSize="17sp"
+                  android:textSize="15sp"
                   android:textStyle="bold"
                   android:layout_centerInParent="true"
                   android:gravity="center"

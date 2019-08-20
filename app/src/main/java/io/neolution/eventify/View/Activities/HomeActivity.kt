@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -30,14 +32,16 @@ import io.neolution.eventify.Utils.FirebaseUtils
 import io.neolution.eventify.Utils.IntentUtils
 import io.neolution.eventify.View.Fragments.HomeFragment.ExploreFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.HomeFragment
-import io.neolution.eventify.View.Fragments.HomeFragment.Profile
+import io.neolution.eventify.View.Fragments.HomeFragment.ProfileFragment
 import io.neolution.eventify.View.Fragments.HomeFragment.UpdatesFragment
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEventClicked, OnAddReminderClicked, OnEditProfileClicked {
 
     override fun onEditButtonClicked() {
         profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
+        home_bottom_sheet_bg.visibility = VISIBLE
     }
 
     override fun onTrendsFragmentAttached() {
@@ -45,7 +49,9 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     }
 
     override fun onProfileFragmentAttached() {
-
+        findViewById<FloatingActionButton>(R.id.home_fab)?.apply {
+            hide()
+        }
     }
 
     override fun OnAddReminderButtonClicked(timeInMillis: Long) {
@@ -84,6 +90,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onShareButtonClick(eventTitle: String, eventId: String, eventLocation: String, eventDate: String) {
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        home_bottom_sheet_bg.visibility = VISIBLE
 
         eventTitleToBeShared = eventTitle
         eventDateToBeShared = eventDate
@@ -94,6 +101,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     override fun onHomeFragmentAttached() {
 
         findViewById<FloatingActionButton>(R.id.home_fab)?.apply {
+            show()
             setOnClickListener {
 
                 startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
@@ -104,9 +112,27 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     override fun onExploreFragmentAttached() {
 
+        findViewById<FloatingActionButton>(R.id.home_fab)?.apply {
+            show()
+            setOnClickListener {
+
+                startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
+            }
+            setImageDrawable(ContextCompat.getDrawable(this@HomeActivity, io.neolution.eventify.R.drawable.ic_add_black_24dp))
+        }
+
     }
 
     override fun onUpdateFragmentAttached() {
+
+        findViewById<FloatingActionButton>(R.id.home_fab)?.apply {
+            show()
+            setOnClickListener {
+
+                startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
+            }
+            setImageDrawable(ContextCompat.getDrawable(this@HomeActivity, io.neolution.eventify.R.drawable.ic_add_black_24dp))
+        }
 
     }
 
@@ -160,6 +186,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         aboutUs = findViewById(R.id.profile_opt_bsheet_about_us)
         aboutUs.setOnClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
+            profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         signOut.setOnClickListener {
@@ -170,7 +197,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
                     _, _ ->
                 AuthRepo.signOut()
 
-                startActivity(Intent(this, SignInActivity::class.java))
+                startActivity(Intent(this, AuthActivity::class.java))
                 finish()
 
                 indicate("Signed out!")
@@ -187,6 +214,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
         editProfile.setOnClickListener {
             startActivity(Intent(this, EditProfileActivity::class.java))
+            home_bottom_sheet_bg.visibility = VISIBLE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -194,15 +222,25 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             val intent = Intent(this, TagsActivity::class.java)
             intent.putExtra("startedFrom", TagsActivity::class.java.simpleName)
             startActivity(intent)
+            home_bottom_sheet_bg.visibility = GONE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
-        closeProfileBottomSheetBtn.setOnClickListener {
+        home_bottom_sheet_bg.setOnClickListener {
+            home_bottom_sheet_bg.visibility = GONE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
+        closeProfileBottomSheetBtn.setOnClickListener {
+            home_bottom_sheet_bg.visibility = GONE
+            profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+
         }
 
         closeShareEventBottomSheetBtn = findViewById(R.id.share_bsheet_close)
         closeShareEventBottomSheetBtn.setOnClickListener {
+            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -210,11 +248,13 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         shareBsheetTukPicBtn.setOnClickListener {
             //TODO: SHOULD TAKE USER TO TUKPIC CREATING ACTIVITY
             //FOR NOW,
+            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
         shareBsheetSocialMedia.setOnClickListener {
+            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             IntentUtils.shareEvent(context = this, eventDate = eventDateToBeShared, eventLocation = eventLocationToBeShared,
                 eventTitle = eventTitleToBeShared, eventID = eventIDToBeShared)
@@ -222,6 +262,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
         shareBsheetCopyLink.setOnClickListener {
+            home_bottom_sheet_bg.visibility = GONE
             AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
@@ -254,16 +295,19 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
             }
 
-        homeFrameLayout = findViewById(R.id.home_frame_layout)
-        supportFragmentManager.beginTransaction().
-            replace(R.id.home_frame_layout, HomeFragment())
-            .commitAllowingStateLoss()
+
 
         homeFab.setOnClickListener {
             startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
         }
 
         val bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
+        homeFrameLayout = findViewById(R.id.home_frame_layout)
+        supportFragmentManager.beginTransaction().
+            replace(R.id.home_frame_layout, HomeFragment())
+            .commitAllowingStateLoss()
+        bottomNavBar.selectedItemId = R.id.main_menu_home
+
         bottomNavBar.setOnNavigationItemSelectedListener {
             item ->
             when (item.itemId){
@@ -296,7 +340,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
                 R.id.main_menu_profile -> {
                     supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, Profile())
+                        replace(R.id.home_frame_layout, ProfileFragment())
                         .commitAllowingStateLoss()
 
                     return@setOnNavigationItemSelectedListener true
@@ -332,7 +376,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     private fun checkIfUserExits(){
         if (AuthRepo.getCurrentUser() == null){
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, AuthActivity::class.java))
         }
     }
 

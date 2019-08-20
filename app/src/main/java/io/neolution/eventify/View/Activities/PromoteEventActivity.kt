@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputLayout
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Utils.AppUtils
+import kotlinx.android.synthetic.main.activity_promote_event.*
 
 class PromoteEventActivity : AppCompatActivity() {
 
@@ -144,10 +145,12 @@ class PromoteEventActivity : AppCompatActivity() {
         checkForFirstTime()
 
         selectPlanLayout.setOnClickListener {
+            promote_event_bottom_sheet_bg.visibility = VISIBLE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         closeBottomSheet.setOnClickListener {
+            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -158,6 +161,7 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 10000
 
+            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -169,6 +173,7 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 5000
 
+            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -180,8 +185,13 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 1000
 
+            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
+        }
+
+        promote_event_bottom_sheet_bg.setOnClickListener {
+            promote_event_bottom_sheet_bg.visibility = GONE
         }
 
         promoteEventText.setOnClickListener {
@@ -227,6 +237,8 @@ class PromoteEventActivity : AppCompatActivity() {
         val sharedPrefs = getSharedPreferences("promo_pref", Context.MODE_PRIVATE)
         if (sharedPrefs.getString("startup", "") ==  "started"){
             onFirstStartLayout.visibility = GONE
+        }else{
+            onFirstStartLayout.visibility = VISIBLE
         }
 
         closeFirstStartBtn.setOnClickListener {

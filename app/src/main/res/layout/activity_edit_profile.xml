@@ -42,12 +42,14 @@
         <de.hdodenhof.circleimageview.CircleImageView
                 android:layout_width="match_parent"
                 android:src="#85000000"
+                android:id="@+id/edit_profile_trans_image_bg"
                 android:layout_height="match_parent"/>
         
         <ImageView 
                 android:layout_width="30dp" 
                 app:srcCompat="@drawable/ic_image"
                 android:layout_gravity="center"
+                android:id="@+id/edit_profile_trans_image"
                 android:layout_height="30dp"/>
 
     </FrameLayout>
@@ -96,7 +98,7 @@
             android:layout_width="match_parent"
             android:id="@+id/edit_profile_save_container"
             android:background="@drawable/buttonbg"
-            android:layout_height="40dp">
+            android:layout_height="45dp">
 
         <ProgressBar android:layout_width="25dp"
                      android:layout_centerInParent="true"
@@ -113,7 +115,7 @@
                 android:gravity="center"
                 android:textStyle="bold"
                 android:id="@+id/edit_profile_save_text"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:layout_height="match_parent"/>
 
     </RelativeLayout>

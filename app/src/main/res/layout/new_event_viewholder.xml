@@ -26,27 +26,30 @@
                 android:animateLayoutChanges="true"
                 android:layout_height="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <androidx.cardview.widget.CardView
                     android:layout_width="25dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="15dp"
-                    android:contentDescription="User Image"
+                    android:id="@+id/new_event_vh_user_image_container"
                     android:layout_marginTop="15dp"
-                    app:civ_border_overlay="true"
-                    android:id="@+id/new_event_vh_user_image"
-                    app:civ_border_width="1dp"
-                    app:civ_fill_color="@color/colorPrimary"
-                    android:src="@drawable/ic_default_user"
-                    app:civ_border_color="@color/colorPrimary"
-                    android:layout_height="25dp"/>
+                    app:cardCornerRadius="12dp"
+                    app:cardPreventCornerOverlap="true"
+                    android:layout_height="25dp">
+
+                <ImageView android:layout_width="match_parent"
+                           app:srcCompat="@drawable/ic_male_placeholder"
+                           android:id="@+id/new_event_vh_user_image"
+                           android:layout_height="match_parent"/>
+
+            </androidx.cardview.widget.CardView>
 
             <TextView android:layout_width="wrap_content"
                       android:textSize="15sp"
                       android:textStyle="bold"
                       android:text=""
-                      app:layout_constraintStart_toEndOf="@id/new_event_vh_user_image"
-                      app:layout_constraintTop_toTopOf="@id/new_event_vh_user_image"
+                      app:layout_constraintStart_toEndOf="@id/new_event_vh_user_image_container"
+                      app:layout_constraintTop_toTopOf="@id/new_event_vh_user_image_container"
                       android:layout_marginStart="10dp"
                       android:id="@+id/new_event_vh_username"
                       android:textColor="@color/colorPrimary"
@@ -57,7 +60,7 @@
                       android:text=""
                       android:id="@+id/new_event_vh_post_date"
                       android:layout_marginStart="10dp"
-                      app:layout_constraintStart_toEndOf="@id/new_event_vh_user_image"
+                      app:layout_constraintStart_toEndOf="@id/new_event_vh_user_image_container"
                       app:layout_constraintTop_toBottomOf="@id/new_event_vh_username"
                       android:textColor="#FFFFFF"
                       android:layout_height="wrap_content"/>
@@ -219,13 +222,14 @@
             <TextView android:layout_width="150dp"
                       app:layout_constraintEnd_toEndOf="parent"
                       app:layout_constraintBottom_toBottomOf="parent"
-                      android:layout_margin="10dp"
                       android:id="@+id/new_event_vh_promoted_tag"
                       android:textSize="15sp"
                       android:textStyle="bold"
                       android:contentDescription="This event is promoted"
-                      android:gravity="center"
-                      android:background="@drawable/buttonbgtrans"
+                      android:gravity="end"
+                      android:paddingTop="5dp"
+                      android:paddingEnd="20dp"
+                      android:background="@drawable/buttonbg_fancy"
                       android:textColor="@color/colorPrimary"
                       android:text="@string/promoted"
                       android:layout_height="30dp"/>

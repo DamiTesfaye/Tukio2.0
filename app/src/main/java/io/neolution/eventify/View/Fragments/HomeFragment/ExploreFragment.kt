@@ -196,18 +196,22 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
 
                                 if (alreadyLoaded){
                                     if (!listOfEvent.contains(FullEventsModel(eventModel, documentID))){
-                                        if (eventModel.eventTags.contains(eventType)){
-                                            listOfEvent.add(FullEventsModel(eventModel, documentID))
-                                            homeAdapter.notifyDataSetChanged()
+                                        if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                            if (eventModel.eventTags.contains(eventType)){
+                                                listOfEvent.add(FullEventsModel(eventModel, documentID))
+                                                homeAdapter.notifyDataSetChanged()
+                                            }
                                         }
                                     }
 
                                 }else{
 
                                     if (!listOfEvent.contains(FullEventsModel(eventModel, documentID))){
-                                        if (eventModel.eventTags.contains(eventType)){
-                                            listOfEvent.add(0, FullEventsModel(eventModel, documentID))
-                                            homeAdapter.notifyDataSetChanged()
+                                        if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                            if (eventModel.eventTags.contains(eventType)){
+                                                listOfEvent.add(0, FullEventsModel(eventModel, documentID))
+                                                homeAdapter.notifyDataSetChanged()
+                                            }
                                         }
                                     }
                                 }
@@ -258,9 +262,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
                                 val documentID = change.document.id
 
                                 if (alreadyLoaded){
-                                    if (eventModel.eventTags.contains(eventType)){
-                                        listOfEvent.add(FullEventsModel(eventModel, documentID))
-                                        homeAdapter.notifyDataSetChanged()
+                                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                        if (eventModel.eventTags.contains(eventType)){
+                                            listOfEvent.add(FullEventsModel(eventModel, documentID))
+                                            homeAdapter.notifyDataSetChanged()
+                                        }
                                     }
                                 }else{
 
@@ -308,9 +314,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
                         val eventId = changes.document.id
 
                         if (!listOfEvent.contains(FullEventsModel(eventModel, eventId))){
-                            if (eventModel.eventTags[0] == currentEventType){
-                                listOfEvent.add(FullEventsModel(eventModel, eventId))
-                                homeAdapter.notifyDataSetChanged()
+                            if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
+                                if (eventModel.eventTags[0] == currentEventType){
+                                    listOfEvent.add(FullEventsModel(eventModel, eventId))
+                                    homeAdapter.notifyDataSetChanged()
+                                }
                             }
                         }
                     }
