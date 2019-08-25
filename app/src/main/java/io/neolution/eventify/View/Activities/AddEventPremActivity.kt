@@ -136,8 +136,6 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED){
                     add_event_prem_bottom_sheet_bg.visibility = GONE
-                }else{
-
                 }
             }
         })
@@ -194,7 +192,7 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
                 eventLocation.isNotEmpty() && eventTag != null && eventPicUri != null && eventFinalDateLong != null){
 
                 val intent = Intent(this, AddEventFinalActivity::class.java)
-                intent.putExtra("eventTitle", eventTitle)
+                intent.putExtra("eventTitle", "--beta--$eventTitle--beta--")
                 intent.putExtra("eventDesc", eventDesc)
                 intent.putExtra("eventDate", eventDate)
                 intent.putExtra("eventLocation", eventLocation)

@@ -127,6 +127,7 @@ class AddEventFinalActivity : AppCompatActivity() {
 
                 addGuestLayout.addView(view)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                closeKeyboard()
 
             }else{
                 if (guestName.isEmpty()){

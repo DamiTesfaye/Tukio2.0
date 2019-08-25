@@ -1,18 +1,18 @@
 package io.neolution.eventify.View.Activities
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.firestore.CollectionReference
@@ -79,14 +79,26 @@ class UpdatesActivity : AppCompatActivity() {
 
         fab.visibility = if (AuthRepo.getUserUid() == posterID) VISIBLE  else GONE
 
+         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback(){
+             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                 activity_updates_bottom_sheet_bg.visibility = VISIBLE
+                 activity_updates_bottom_sheet_bg.alpha = slideOffset
+             }
+
+             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                 if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                     activity_updates_bottom_sheet_bg.visibility = GONE
+                 }
+             }
+         })
+
         fab.setOnClickListener {
              bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            activity_updates_bottom_sheet_bg.visibility = VISIBLE
+
         }
 
         closeBottomSheet.setOnClickListener {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            activity_updates_bottom_sheet_bg.visibility = GONE
         }
 
         activity_updates_bottom_sheet_bg.setOnClickListener {

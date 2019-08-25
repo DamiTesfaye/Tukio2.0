@@ -33,13 +33,20 @@
             android:id="@+id/edit_profile_container"
             android:layout_height="70dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+        <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:id="@+id/edit_profile_image_view"
-                android:src="@drawable/placeholder"
-                android:layout_height="match_parent"/>
+                app:cardCornerRadius="35dp"
+                app:cardPreventCornerOverlap="true"
+                android:layout_height="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView android:layout_width="match_parent"
+                       app:srcCompat="@drawable/ic_male_placeholder"
+                       android:id="@+id/edit_profile_image_view"
+                       android:layout_height="match_parent"/>
+
+        </androidx.cardview.widget.CardView>
+
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:src="#85000000"
                 android:id="@+id/edit_profile_trans_image_bg"

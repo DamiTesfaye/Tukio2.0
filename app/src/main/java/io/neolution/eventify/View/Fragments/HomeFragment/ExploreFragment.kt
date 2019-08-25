@@ -196,12 +196,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
 
                                 if (alreadyLoaded){
                                     if (!listOfEvent.contains(FullEventsModel(eventModel, documentID))){
-                                        if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                             if (eventModel.eventTags.contains(eventType)){
                                                 listOfEvent.add(FullEventsModel(eventModel, documentID))
                                                 homeAdapter.notifyDataSetChanged()
                                             }
-                                        }
+
                                     }
 
                                 }else{
@@ -262,12 +261,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
                                 val documentID = change.document.id
 
                                 if (alreadyLoaded){
-                                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                         if (eventModel.eventTags.contains(eventType)){
                                             listOfEvent.add(FullEventsModel(eventModel, documentID))
                                             homeAdapter.notifyDataSetChanged()
                                         }
-                                    }
+
                                 }else{
 
                                     if (eventModel.eventTags.contains(eventType)){
@@ -314,12 +312,11 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
                         val eventId = changes.document.id
 
                         if (!listOfEvent.contains(FullEventsModel(eventModel, eventId))){
-                            if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                 if (eventModel.eventTags[0] == currentEventType){
                                     listOfEvent.add(FullEventsModel(eventModel, eventId))
                                     homeAdapter.notifyDataSetChanged()
                                 }
-                            }
+
                         }
                     }
                 }

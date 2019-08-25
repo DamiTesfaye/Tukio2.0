@@ -7,23 +7,22 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import de.hdodenhof.circleimageview.CircleImageView
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
@@ -39,7 +38,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var backBtn: ImageButton
 
     private lateinit var imageContainer: FrameLayout
-    private lateinit var userImage: CircleImageView
+    private lateinit var userImage: ImageView
 
     private lateinit var nameLayout: TextInputLayout
     private lateinit var nameEdit: TextInputEditText
@@ -112,7 +111,7 @@ class EditProfileActivity : AppCompatActivity() {
                 bioEdit.setText( userModel.userBio)
 
                 val requestOptions = RequestOptions()
-                requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.placeholder))
+                requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.ic_male_placeholder))
                 val thumbNailRequest = Glide.with(this.applicationContext).load(userModel.userThumbLink)
 
                 Glide.with(this.applicationContext)

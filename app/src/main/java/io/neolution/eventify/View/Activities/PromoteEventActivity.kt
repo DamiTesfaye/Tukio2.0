@@ -3,7 +3,6 @@ package io.neolution.eventify.View.Activities
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.GONE
@@ -11,6 +10,7 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import co.paystack.android.Paystack
 import co.paystack.android.PaystackSdk
@@ -144,13 +144,22 @@ class PromoteEventActivity : AppCompatActivity() {
 
         checkForFirstTime()
 
+        bottomSheetBehavior.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                promote_event_bottom_sheet_bg.visibility = VISIBLE
+                promote_event_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                promote_event_bottom_sheet_bg.visibility = GONE
+            }
+        })
+
         selectPlanLayout.setOnClickListener {
-            promote_event_bottom_sheet_bg.visibility = VISIBLE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         closeBottomSheet.setOnClickListener {
-            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -161,7 +170,6 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 10000
 
-            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -173,7 +181,6 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 5000
 
-            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -185,13 +192,12 @@ class PromoteEventActivity : AppCompatActivity() {
             selectPlanImage.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_people))
             amountPaid = 1000
 
-            promote_event_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
         }
 
         promote_event_bottom_sheet_bg.setOnClickListener {
-            promote_event_bottom_sheet_bg.visibility = GONE
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         promoteEventText.setOnClickListener {

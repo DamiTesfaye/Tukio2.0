@@ -182,8 +182,6 @@ class HomeFragment: Fragment(){
                                                             val eventID = document.document.id
 
                                                             if (eventModel.eventTags.compareLists(userTags) > 0) {
-
-                                                                if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                                                     if (alreadyLoaded) {
 
                                                                         if (!listOfEvent.contains(
@@ -221,7 +219,7 @@ class HomeFragment: Fragment(){
                                                                         }
 
                                                                     }
-                                                                }
+
 
                                                             }
 
@@ -296,8 +294,6 @@ class HomeFragment: Fragment(){
                                                         if (document.type == DocumentChange.Type.ADDED) {
                                                             val eventModel = document.document.breakDocumentIntoEvntsModel()
                                                             val eventID = document.document.id
-
-                                                            if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                                                 if (eventModel.eventTags.compareLists(userTags) > 0) {
 
                                                                     if (alreadyLoaded) {
@@ -342,7 +338,7 @@ class HomeFragment: Fragment(){
                                                                     }
 
                                                                 }
-                                                            }
+
                                                         }
 
                                                     }
@@ -411,7 +407,6 @@ class HomeFragment: Fragment(){
 
                                 for (document in snapshot.documents) {
                                     val eventModel = document.breakDocumentIntoEvntsModel()
-                                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                                         if (usersTags.compareLists(eventModel.eventTags) > 0) {
                                             if (!listOfEvent.contains(FullEventsModel(eventModel, document.id))) {
                                                 listOfEvent.add(FullEventsModel(eventModel, document.id))
@@ -420,7 +415,7 @@ class HomeFragment: Fragment(){
 
                                             }
                                         }
-                                    }
+
 
                                 }
 

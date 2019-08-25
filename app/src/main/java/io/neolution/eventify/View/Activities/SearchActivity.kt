@@ -32,6 +32,7 @@ import io.neolution.eventify.Repos.FireStoreRepo
 import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.Utils.IntentUtils
 import io.neolution.eventify.View.Fragments.HomeFragment.ExploreFragment
+import kotlinx.android.synthetic.main.activity_search.*
 import java.util.*
 
 class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventClicked {
@@ -123,11 +124,29 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
         shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
 
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                search_activity_bottom_sheet_bg.visibility = VISIBLE
+                search_activity_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    search_activity_bottom_sheet_bg.visibility = GONE
+                }
+            }
+        })
+
         shareBsheetTukPicBtn.setOnClickListener {
 
         }
 
+        search_activity_bottom_sheet_bg.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
         shareBsheetCopyLink.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
         }
 

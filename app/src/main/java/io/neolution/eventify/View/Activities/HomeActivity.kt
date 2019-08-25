@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
@@ -212,9 +213,35 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             dialog.show()
         }
 
+        profileBottomSheetBehaviour.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                home_bottom_sheet_bg.visibility = VISIBLE
+                home_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState== BottomSheetBehavior.STATE_COLLAPSED){
+                    home_bottom_sheet_bg.visibility = GONE
+                }
+            }
+        })
+
+        bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                home_bottom_sheet_bg.visibility = VISIBLE
+                home_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState== BottomSheetBehavior.STATE_COLLAPSED){
+                    home_bottom_sheet_bg.visibility = GONE
+                }
+            }
+        })
+
         editProfile.setOnClickListener {
             startActivity(Intent(this, EditProfileActivity::class.java))
-            home_bottom_sheet_bg.visibility = VISIBLE
+
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -222,25 +249,21 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             val intent = Intent(this, TagsActivity::class.java)
             intent.putExtra("startedFrom", TagsActivity::class.java.simpleName)
             startActivity(intent)
-            home_bottom_sheet_bg.visibility = GONE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         home_bottom_sheet_bg.setOnClickListener {
-            home_bottom_sheet_bg.visibility = GONE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         closeProfileBottomSheetBtn.setOnClickListener {
-            home_bottom_sheet_bg.visibility = GONE
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
 
         }
 
         closeShareEventBottomSheetBtn = findViewById(R.id.share_bsheet_close)
         closeShareEventBottomSheetBtn.setOnClickListener {
-            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
@@ -248,13 +271,11 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         shareBsheetTukPicBtn.setOnClickListener {
             //TODO: SHOULD TAKE USER TO TUKPIC CREATING ACTIVITY
             //FOR NOW,
-            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
         shareBsheetSocialMedia.setOnClickListener {
-            home_bottom_sheet_bg.visibility = GONE
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             IntentUtils.shareEvent(context = this, eventDate = eventDateToBeShared, eventLocation = eventLocationToBeShared,
                 eventTitle = eventTitleToBeShared, eventID = eventIDToBeShared)
@@ -262,9 +283,9 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
         shareBsheetCopyLink.setOnClickListener {
-            home_bottom_sheet_bg.visibility = GONE
-            AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            AppUtils.copyTextToClipBoard(AppUtils.createEventLink(eventIDToBeShared), this)
+
         }
 
         val currentUserId = AuthRepo.getUserUid()

@@ -54,20 +54,18 @@ class PinnedEventsFragment: Fragment() {
             if (eventPostsSnapshot != null && !eventPostsSnapshot.isEmpty) {
                 for (eventDoc in eventPostsSnapshot.documents) {
                     val eventModel = eventDoc.breakDocumentIntoEvntsModel()
-
-                    if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                         firestoreRepo.getDocumentLikesCollection(eventDoc.id).document(AuthRepo.getUserUid()).get()
                             .addOnSuccessListener { documentTask ->
                                 if (documentTask.exists()) {
                                     val fullEventModel = FullEventsModel(eventModel, eventDoc.id)
                                     listOfEvents.add(fullEventModel)
                                     adapter.notifyDataSetChanged()
+
                                     postedNoEvents.visibility = GONE
                                     loadingPostedEvents.visibility = GONE
 
                                 }
                             }
-                    }
                 }
             }
 

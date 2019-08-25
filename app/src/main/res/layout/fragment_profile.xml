@@ -47,6 +47,7 @@
                         <ImageView android:layout_width="match_parent"
                                    android:id="@+id/profile_frag_userimage"
                                    app:srcCompat="@drawable/ic_male_placeholder"
+                                   android:scaleType="center"
                                    android:layout_height="match_parent"/>
 
                     </androidx.cardview.widget.CardView>

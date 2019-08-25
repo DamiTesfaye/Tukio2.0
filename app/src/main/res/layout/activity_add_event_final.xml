@@ -190,6 +190,7 @@
 
             <RelativeLayout android:layout_width="match_parent"
                             android:layout_marginTop="70dp"
+                            android:layout_marginBottom="50dp"
                             android:id="@+id/add_event_final_share_event_container"
                             android:background="@drawable/buttonbg"
                             android:layout_height="45dp">

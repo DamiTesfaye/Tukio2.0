@@ -21,9 +21,9 @@
             android:name=".Init_ers.Initializer"
             android:allowBackup="true"
             android:appComponentFactory="whateverText"
-            android:icon="@drawable/tukio_icon"
-            android:label="@string/app_name"
-            android:roundIcon="@drawable/tukio_icon"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name_beta"
+            android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:replace="android:appComponentFactory">

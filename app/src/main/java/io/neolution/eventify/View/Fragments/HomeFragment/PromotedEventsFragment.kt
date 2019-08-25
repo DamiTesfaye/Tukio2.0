@@ -55,11 +55,10 @@ class PromotedEventsFragment: Fragment() {
                         val eventModel = document.breakDocumentIntoEvntsModel()
                         val documentID = document.id
 
-                        if (!eventModel.eventTitle.startsWith("--beta--", true) && !eventModel.eventTitle.endsWith("--beta--", true)){
                             loadingPostedEvents.visibility = View.GONE
                             listOfEvents.add(FullEventsModel(eventModel, documentID))
                             adapter.notifyDataSetChanged()
-                        }
+
                     }
 
                 }else{

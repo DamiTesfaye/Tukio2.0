@@ -30,7 +30,7 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
     }
 
     override fun onBindViewHolder(holder: TagViewHolder, position: Int) {
-        var isSelected: Boolean
+        var isSelected = false
 
         val chipContainer = holder.itemView.findViewById<RelativeLayout>(R.id.chip_layout_container)
         val chipTextView = holder.itemView.findViewById<TextView>(R.id.chip_layout_text)
@@ -68,23 +68,22 @@ class TagsAdapter(var chipList: MutableList<ChipModel>, var context: Context, va
             chipTextView.setTextColor(context.resources.getColor(android.R.color.black))
         }
 
+        chipContainer.setOnClickListener {
+            if (isSelected){
 
-        if (isSelected){
-
-            chipContainer.setOnClickListener {
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg_outline)
                 chipTextView.setTextColor(context.resources.getColor(android.R.color.black))
 
                 onChipSelected__.onChipDeselected(chipTextView.text.toString())
                 isSelected = false
-            }
-        }else{
-            chipContainer.setOnClickListener {
+
+            }else{
                 chipContainer.background = ContextCompat.getDrawable(context, R.drawable.buttonbg)
                 chipTextView.setTextColor(context.resources.getColor(R.color.colorPrimary))
 
                 onChipSelected__.onChipSelected(chipTextView.text.toString())
                 isSelected = true
+
             }
         }
     }
