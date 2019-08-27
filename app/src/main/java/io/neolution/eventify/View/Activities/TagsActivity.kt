@@ -34,7 +34,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
             }
 
             R.id.tags_close_activity -> {
-               finish()
+                finish()
             }
 
         }
@@ -45,8 +45,9 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
     lateinit var adapter: TagsAdapter
 
     override fun onChipSelected(chipText: String) {
-        tagsArray.add(chipText)
-
+        if (tagsArray.size <= 5){
+            tagsArray.add(chipText)
+        }
     }
 
     override fun onChipDeselected(chipText: String) {
@@ -71,14 +72,12 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
 
         val chipList= AppUtils.createChipList()
 
-        FireStoreRepo().getCurrentUserDocumentPath().addSnapshotListener(this){
-            snapshot, _ ->
-
+        FireStoreRepo().getCurrentUserDocumentPath().get().addOnSuccessListener { snapshot ->
             if (snapshot != null && snapshot.exists()){
                 val userModel = snapshot.breakDownToUserModel()
                 val userTags = userModel.tags
 
-                if (userTags != null){
+                if (userTags != null) {
 
                     adapter = TagsAdapter(chipList, this, userTags, this)
 
@@ -89,7 +88,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
                     )
                     manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
-                    recyclerView.apply{
+                    recyclerView.apply {
                         layoutManager = manager
                         setHasFixedSize(true)
                     }
@@ -97,8 +96,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
                     recyclerView.adapter = adapter
                     tags_circular_progress_bar.visibility = GONE
 
-                }else{
-
+                } else{
                     adapter = TagsAdapter(chipList, this, null, this)
 
                     val recyclerView = binding.tagsContainer
@@ -115,26 +113,48 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
 
                     recyclerView.adapter = adapter
                     tags_circular_progress_bar.visibility = GONE
-
                 }
             }
+
+        }.addOnFailureListener {
+
+            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Failed to load already selected tags. Check your internet connection and try again..", this)
+                .show()
+
+            adapter = TagsAdapter(chipList, this, null, this)
+
+            val recyclerView = binding.tagsContainer
+            val manager = StaggeredGridLayoutManager(
+                8,
+                StaggeredGridLayoutManager.HORIZONTAL
+            )
+            manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+
+            recyclerView.apply{
+                layoutManager = manager
+                setHasFixedSize(true)
+            }
+
+            recyclerView.adapter = adapter
+            tags_circular_progress_bar.visibility = GONE
         }
     }
 
     private fun startUpdatingTags(tagList: MutableList<String>){
-        binding.tagsSaveInterestsContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
-        binding.tagsSaveInterestsProgress.visibility = VISIBLE
-        binding.tagsSaveInterestsText.visibility = GONE
 
+        if (tagList.size <= 5){
 
-        if (tagList.size > 5){
+            binding.tagsSaveInterestsContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
+            binding.tagsSaveInterestsProgress.visibility = VISIBLE
+            binding.tagsSaveInterestsText.visibility = GONE
+
             profileViewModel.updateInterestedTags(tagList,{
 
                 binding.tagsSaveInterestsContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
                 binding.tagsSaveInterestsProgress.visibility = GONE
                 binding.tagsSaveInterestsText.visibility = VISIBLE
 
-                AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Please select a tag", this)
+                AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), it, this)
                     .show()
             }, {
 
@@ -143,7 +163,7 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
 
             })
         }else{
-            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Only 5 tags are allowed. Reselect!", this)
+            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Only a maximum of 5 tags are allowed. Please reselect", this)
                 .show()
         }
     }

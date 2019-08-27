@@ -34,6 +34,7 @@
                     android:id="@+id/new_event_vh_user_image_container"
                     android:layout_marginTop="15dp"
                     app:cardCornerRadius="12dp"
+                    app:cardElevation="5dp"
                     app:cardPreventCornerOverlap="true"
                     android:layout_height="25dp">
 
@@ -85,7 +86,7 @@
                          app:srcCompat="@drawable/ic_notification"
                          android:layout_marginEnd="7dp"
                          android:layout_marginTop="15dp"
-                         android:layout_height="25dp"/>
+                         android:layout_height="20dp"/>
 
             <ImageView    android:layout_width="20dp"
                          app:layout_constraintEnd_toStartOf="@id/new_event_vh_event_updates"
@@ -94,7 +95,8 @@
                           android:contentDescription="Event Type"
                           android:id="@+id/new_event_vh_tag_image"
                           android:layout_marginEnd="9dp"
-                          app:srcCompat="@drawable/ic_popcorn"
+                          android:elevation="5dp"
+                          android:src="@drawable/tukio_logo_t"
                          android:background="?attr/selectableItemBackgroundBorderless"
                          android:layout_height="20dp"/>
 

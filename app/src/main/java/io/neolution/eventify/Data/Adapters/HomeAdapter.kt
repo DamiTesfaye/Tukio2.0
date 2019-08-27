@@ -36,11 +36,14 @@ import io.neolution.eventify.View.Activities.UpdatesActivity
  */
 class HomeAdapter(val context: Context,
                   val listOfEvents: List<FullEventsModel>,
-                  val activity: FragmentActivity, var shareEventListener: OnShareEventClicked,
-                  var onAddReminderClicked: OnAddReminderClicked)
+                  val activity: FragmentActivity, var shareEventListener: OnShareEventClicked, val onAddReminderClicked: OnAddReminderClicked)
     : RecyclerView.Adapter<HomeAdapter.HomeViewholder>() {
 
-    private val fireStoreRepo = FireStoreRepo()
+    private  var  fireStoreRepo: FireStoreRepo
+
+    init {
+        fireStoreRepo = FireStoreRepo()
+    }
 
     class HomeViewholder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -60,12 +63,12 @@ class HomeAdapter(val context: Context,
 
         var userName = ""
 
-        userInfo.addSnapshotListener { snapshot, _ ->
+        userInfo.get().addOnSuccessListener { snapshot ->
             if (snapshot != null && snapshot.exists()){
-                   val userModel = snapshot.breakDownToUserModel()
+                val userModel = snapshot.breakDownToUserModel()
+
                 userName = userModel.userName
                 val userPicLink = userModel.userImage
-
                 holder.itemView.findViewById<TextView>(R.id.new_event_vh_username).background = ContextCompat.getDrawable(context, R.drawable.transparent_drawable)
 
                 if (userName.length <= 30){
@@ -87,11 +90,13 @@ class HomeAdapter(val context: Context,
                     .load(userPicLink)
                     .thumbnail(thumbNailRequest)
                     .into(imageView)
+
             }
+        }.addOnFailureListener {
+
         }
 
         val promotedTag = holder.itemView.findViewById<TextView>(R.id.new_event_vh_promoted_tag)
-
         if (currentEvents.eventsModel.eventType == "promoted"){
             promotedTag.visibility = VISIBLE
         }else{
@@ -108,14 +113,7 @@ class HomeAdapter(val context: Context,
         }
 
         val reminderButton = holder.itemView.findViewById<ImageButton>(R.id.new_event_vh_reminder_btn)
-        if (currentEvents.eventsModel.eventMilis == null){
-            reminderButton.visibility = GONE
-        }else{
-            reminderButton.visibility = VISIBLE
-            reminderButton.setOnClickListener {
-                onAddReminderClicked.OnAddReminderButtonClicked(currentEvents.eventsModel.eventMilis!!)
-            }
-        }
+        reminderButton.visibility = GONE
 
         holder.itemView.findViewById<ImageView>(R.id.new_event_vh_share_event).setOnClickListener {
 
@@ -176,14 +174,11 @@ class HomeAdapter(val context: Context,
 
         val updateImageButton = holder.itemView.findViewById<ImageView>(R.id.new_event_vh_event_updates)
 
-        fireStoreRepo.getDocumentUpdatesPath(currentEvents.eventID).addSnapshotListener {
-                snapshot, _ ->
-
-            if(snapshot != null && !snapshot.isEmpty){
+        fireStoreRepo.getDocumentUpdatesPath(currentEvents.eventID).get().addOnSuccessListener { snapshot ->
+            if (snapshot != null && !snapshot.isEmpty){
                 updateImageButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notification_added))
             }else{
                 updateImageButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_notification))
-
             }
         }
 
@@ -239,14 +234,15 @@ class HomeAdapter(val context: Context,
 
             }
 
-        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context))
-            .addSnapshotListener { snapshot, _ ->
-                if (snapshot != null && snapshot.exists()){
-                    willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_pinned))
-                }else{
-                    willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_unpinned))
-                }
+        fireStoreRepo.getDocumentLikesCollection(currentEvents.eventID).document(FirebaseUtils().getUserUID(context)).get().addOnSuccessListener { snapshot ->
+            if (snapshot != null && snapshot.exists()){
+                willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_pinned))
+            }else{
+                willAttendButton.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_pin_unpinned))
             }
+        }.addOnFailureListener {
+
+        }
 
         willAttendButton.setOnClickListener {
             fireStoreRepo.likeDislikeEvent(context, currentEvents.eventID, it)

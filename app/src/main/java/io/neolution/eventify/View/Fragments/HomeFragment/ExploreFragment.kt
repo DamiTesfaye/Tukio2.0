@@ -45,8 +45,6 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
         loadEvents(eventType)
         currentEventType = eventType
 
-        Toast.makeText(context, "$currentEventType", Toast.LENGTH_LONG)
-            .show()
     }
 
     lateinit var binding: NewExploreLayoutBinding

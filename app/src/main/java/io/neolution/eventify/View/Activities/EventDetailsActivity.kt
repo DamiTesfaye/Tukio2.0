@@ -116,6 +116,23 @@ class EventDetailsActivity : AppCompatActivity() {
         fireStoreRepo = FireStoreRepo()
         bindData(bundle!!)
 
+        bottomSheetBehaviour.setBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                event_details_bottom_sheet_bg.visibility = VISIBLE
+                event_details_bottom_sheet_bg.alpha = slideOffset
+            }
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED){
+                    event_details_bottom_sheet_bg.visibility = GONE
+                }
+           }
+        })
+
+        event_details_bottom_sheet_bg.setOnClickListener {
+            bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
+
         shareBtn.setOnClickListener {
             bottomSheetBehaviour.state = BottomSheetBehavior.STATE_EXPANDED
         }
@@ -154,6 +171,7 @@ class EventDetailsActivity : AppCompatActivity() {
         shareEventSocial.setOnClickListener {
             IntentUtils.shareEvent(context = this, eventDate = eventDate, eventLocation = eventLocation,
                 eventTitle = eventTitle, eventID = documentID)
+            bottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
 
         viewImageText.setOnClickListener {
@@ -249,42 +267,8 @@ class EventDetailsActivity : AppCompatActivity() {
             }
         }
 
-        if (eventMilis != null && eventMilis != 0L){
-            reminderBtn.visibility = VISIBLE
-            reminderBtn.setOnClickListener {
-                var calName: String = ""
-                var calId: String = ""
+        reminderBtn.visibility = GONE
 
-                val projection = arrayOf("_id", "name")
-                val calendars = Uri.parse("content://calendar/calendars")
-
-                val managedCursor = managedQuery(
-                    calendars, projection,
-                    "selected=1", null, null
-                )
-
-                if (managedCursor.moveToFirst()) {
-
-                    val nameColumn = managedCursor.getColumnIndex("name")
-                    val idColumn = managedCursor.getColumnIndex("_id")
-                    do {
-                        calName = managedCursor.getString(nameColumn)
-                        calId = managedCursor.getString(idColumn)
-                    } while (managedCursor.moveToNext())
-                }
-
-                val event = ContentValues()
-                event.put("calendar_id", calId)
-                event.put("title", "Event Title")
-                event.put("description", "Event Desc")
-                event.put("eventLocation", "Event Location")
-
-                Toast.makeText(this, "This Event has been added to your calendar", Toast.LENGTH_LONG)
-                    .show()
-            }
-        }else{
-            reminderBtn.visibility = GONE
-        }
 
         val requestOptions = RequestOptions()
         requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.placeholder_2))

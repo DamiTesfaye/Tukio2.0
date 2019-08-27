@@ -23,7 +23,7 @@
 	          android:layout_height="wrap_content"
 	          android:textSize="20sp"
 	          android:textColor="@android:color/black"
-	          android:text="v2.0"
+	          android:text="v1.1"
 	          app:layout_constraintStart_toEndOf="@id/about_app_icon"
 			  app:layout_constraintTop_toTopOf="@id/about_app_icon"
 			  app:layout_constraintBottom_toBottomOf="@id/about_app_icon"

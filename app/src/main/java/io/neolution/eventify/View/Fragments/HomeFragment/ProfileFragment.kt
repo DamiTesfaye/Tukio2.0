@@ -63,14 +63,15 @@ class ProfileFragment : Fragment() {
         profileViewPager.adapter = adapter
         profileTabLayout.setupWithViewPager(profileViewPager)
 
+        userBioTextView.setTextColor(ContextCompat.getColor(context!!, android.R.color.darker_gray))
+
         fireStoreRepo = FireStoreRepo()
         val userDetails = fireStoreRepo.getUserAccountDetailsFromUid(AuthRepo.getUserUid())
-        userDetails.addSnapshotListener { snapshot, _ ->
+        userDetails.addSnapshotListener(activity!!) { snapshot, _ ->
             if (snapshot != null && snapshot.exists()){
                 val userModel = snapshot.breakDownToUserModel()
                 userNameTextView.text= userModel.userName
                 if (userModel.userBio.isEmpty()){
-                    userBioTextView.setTextColor(ContextCompat.getColor(context!!, android.R.color.darker_gray))
                     userBioTextView.text = "No Bio Set."
                 }else{
                     userBioTextView.text = userModel.userBio
@@ -90,6 +91,7 @@ class ProfileFragment : Fragment() {
                 }
             }
         }
+
 
         val eventViewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
         eventViewModel.getEventDocuments().whereEqualTo("userUID", AuthRepo.getUserUid())

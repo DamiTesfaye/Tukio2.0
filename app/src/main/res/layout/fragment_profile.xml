@@ -41,13 +41,14 @@
                             android:layout_width="70dp"
                             android:layout_gravity="center_vertical"
                             app:cardCornerRadius="35dp"
+                            app:cardElevation="5dp"
                             app:cardPreventCornerOverlap="true"
                             android:layout_height="70dp">
 
                         <ImageView android:layout_width="match_parent"
                                    android:id="@+id/profile_frag_userimage"
                                    app:srcCompat="@drawable/ic_male_placeholder"
-                                   android:scaleType="center"
+                                   android:scaleType="centerCrop"
                                    android:layout_height="match_parent"/>
 
                     </androidx.cardview.widget.CardView>

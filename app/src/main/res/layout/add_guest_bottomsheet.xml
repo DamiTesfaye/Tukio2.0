@@ -63,7 +63,7 @@
             app:hintAnimationEnabled="true"
             android:hint="@string/guest_s_name"
             android:id="@+id/add_guest_bsheet_guest_name_layout"
-            android:textColorHint="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
             android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -85,7 +85,7 @@
             app:hintAnimationEnabled="true"
             android:hint="@string/guest_s_description"
             android:id="@+id/add_guest_bsheet_guest_desc_layout"
-            android:textColorHint="@android:color/black"
+            android:textColorHint="@android:color/darker_gray"
             android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText

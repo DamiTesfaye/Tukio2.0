@@ -24,9 +24,9 @@ class OnBoardingActivity : AppCompatActivity() {
         val sharedPrefs = getSharedPreferences("startup_pref", Context.MODE_PRIVATE)
         val list = mutableListOf<Fragment>()
 
+        list.add(NotificationFragment())
         list.add(PersonalisedFeedFragment())
         list.add(UpdatesFragment())
-        list.add(NotificationFragment())
 
         val adapter = OnBoardingAdapter(list, supportFragmentManager)
         get_started_viewpager.adapter = adapter

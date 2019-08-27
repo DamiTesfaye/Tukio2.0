@@ -186,7 +186,7 @@ class AddEventPremActivity : AppCompatActivity(), DatePickerDialog.OnDateSetList
             val eventTitle = add_event_prem_title_edit.text.toString().trim()
             val eventDesc = add_event_prem_desc_edit.text.toString().trim()
             val eventDate = add_event_prem_date_edit.text.toString().trim()
-            val eventLocation = add_event_prem_location_edit.toString().trim()
+            val eventLocation = add_event_prem_location_edit.text.toString().trim()
 
             if (eventTitle.isNotEmpty() && eventDate.isNotEmpty() && eventDesc.isNotEmpty() &&
                 eventLocation.isNotEmpty() && eventTag != null && eventPicUri != null && eventFinalDateLong != null){

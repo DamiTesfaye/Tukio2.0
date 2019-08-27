@@ -23,6 +23,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
+import io.neolution.eventify.Data.ModelClasses.UserModel
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
@@ -33,6 +34,7 @@ import kotlinx.android.synthetic.main.activity_edit_profile.*
 
 class EditProfileActivity : AppCompatActivity() {
 
+    private var userModel: UserModel? = null
     private var userImageUri: String? = null
     private var changesMade = false
     private lateinit var backBtn: ImageButton
@@ -104,23 +106,25 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
         val userDetails = FireStoreRepo().getUserAccountDetailsFromUid(AuthRepo.getUserUid())
-        userDetails.addSnapshotListener { snapshot, _ ->
-            if (snapshot != null && snapshot.exists()){
-                val userModel = snapshot.breakDownToUserModel()
-                nameEdit.setText(userModel.userName)
-                bioEdit.setText( userModel.userBio)
+        userDetails.get().addOnSuccessListener {snapshot ->
+            if(snapshot != null && snapshot.exists()){
+                userModel = snapshot.breakDownToUserModel()
+                nameEdit.setText(userModel!!.userName)
+                bioEdit.setText( userModel!!.userBio)
 
                 val requestOptions = RequestOptions()
                 requestOptions.placeholder(ContextCompat.getDrawable(this, R.drawable.ic_male_placeholder))
-                val thumbNailRequest = Glide.with(this.applicationContext).load(userModel.userThumbLink)
+                val thumbNailRequest = Glide.with(this.applicationContext).load(userModel!!.userThumbLink)
 
                 Glide.with(this.applicationContext)
                     .setDefaultRequestOptions(requestOptions)
                     .asDrawable()
-                    .load(userModel.userImage)
+                    .load(userModel!!.userImage)
                     .thumbnail(thumbNailRequest)
                     .into(userImage)
             }
+        }.addOnFailureListener {
+
         }
 
         saveText.setOnClickListener {
@@ -136,7 +140,7 @@ class EditProfileActivity : AppCompatActivity() {
 
                     FireStoreRepo().updateUserAccount(userName = nameText, userBio = bioText, userPicLink = userImageUri, ifCompleted = {
 
-                        Toast.makeText(this, "ProfileFragment Updated!", Toast.LENGTH_LONG)
+                        Toast.makeText(this, "Profile Updated!", Toast.LENGTH_LONG)
                             .show()
                         finish()
 
@@ -158,7 +162,11 @@ class EditProfileActivity : AppCompatActivity() {
 
         nameEdit.addTextChangedListener(object : TextWatcher{
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                changesMade = true
+                if (p0 != null && userModel != null){
+                    if (p0 != userModel!!.userName){
+                        changesMade = true
+                    }
+                }
             }
 
             override fun afterTextChanged(p0: Editable?) {}
@@ -172,7 +180,11 @@ class EditProfileActivity : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                changesMade = true
+                if (p0 != null && userModel != null){
+                    if (p0 != userModel!!.userBio){
+                        changesMade = true
+                    }
+                }
             }
         })
 

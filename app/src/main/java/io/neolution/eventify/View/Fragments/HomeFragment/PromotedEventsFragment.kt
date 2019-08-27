@@ -46,7 +46,7 @@ class PromotedEventsFragment: Fragment() {
         recyclerView.adapter = adapter
 
         val eventViewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)
-        eventViewModel.getEventDocuments().whereEqualTo("userUID", AuthRepo.getUserUid())
+        eventViewModel.getPromotedEvents().whereEqualTo("userUID", AuthRepo.getUserUid())
             .addSnapshotListener { snapshot, _ ->
 
                 if (snapshot != null && !snapshot.isEmpty){
@@ -55,10 +55,14 @@ class PromotedEventsFragment: Fragment() {
                         val eventModel = document.breakDocumentIntoEvntsModel()
                         val documentID = document.id
 
-                            loadingPostedEvents.visibility = View.GONE
-                            listOfEvents.add(FullEventsModel(eventModel, documentID))
-                            adapter.notifyDataSetChanged()
+                        loadingPostedEvents.visibility = View.GONE
+                        listOfEvents.add(FullEventsModel(eventModel, documentID))
+                        adapter.notifyDataSetChanged()
+                    }
 
+                    if(listOfEvents.isEmpty()){
+                        loadingPostedEvents.visibility = View.GONE
+                        postedNoEvents.visibility = View.VISIBLE
                     }
 
                 }else{

@@ -40,8 +40,7 @@
                           android:maxLines="1"
                           android:textSize="15sp"
                           android:layout_weight="1"
-                          android:inputType="text"
-
+                          android:inputType="textFilter"
                           android:fontFamily="@font/font_family"
                           android:textColor="@android:color/black"
                           android:background="@android:color/transparent"

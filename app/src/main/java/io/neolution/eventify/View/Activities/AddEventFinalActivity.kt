@@ -16,6 +16,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
 import io.neolution.eventify.Data.ModelClasses.EventsModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
@@ -36,7 +37,6 @@ class AddEventFinalActivity : AppCompatActivity() {
 
     private lateinit var specialGuest: HashMap<String, Any>
     private lateinit var eventType: String
-    private var promoted = false
     private var amountPaid = 0L
 
     private lateinit var addGuestBottomSheet: LinearLayout
@@ -53,6 +53,7 @@ class AddEventFinalActivity : AppCompatActivity() {
         addGuestBottomSheet = findViewById(R.id.add_guest_bsheet)
         addGuestLayout = findViewById(R.id.add_event_final_guest_container)
         promoteEvent = findViewById(R.id.add_event_final_promote_event_container)
+        eventType = "normal"
         promoteEvent.setOnClickListener {
 
             val intent = Intent(this, PromoteEventActivity::class.java)
@@ -113,7 +114,7 @@ class AddEventFinalActivity : AppCompatActivity() {
 
         add_guest_bsheet_add_guest_btn.setOnClickListener {
             val guestName = add_guest_bsheet_guest_name_edit.text.toString().trim()
-            val guestDesc = add_guest_bsheet_guest_name_edit.text.toString().trim()
+            val guestDesc = add_guest_bsheet_guest_desc_edit.text.toString().trim()
 
             if (guestName.isNotEmpty() && guestDesc.isNotEmpty()){
                 specialGuest[guestName] = guestDesc
@@ -141,7 +142,6 @@ class AddEventFinalActivity : AppCompatActivity() {
         }
 
         val bundle = intent.extras!!
-
         eventTitle = bundle.getString("eventTitle")!!
         eventDesc = bundle.getString("eventDesc")!!
         eventDate = bundle.getString("eventDate")!!
@@ -150,7 +150,7 @@ class AddEventFinalActivity : AppCompatActivity() {
         eventPicUri = Uri.parse(bundle.getString("eventPicUri"))
         eventMillis = bundle.getLong("eventMillis")
 
-        eventType = "normal" //"promoted"
+      //"promoted"
 
         add_event_final_share_event_text.setOnClickListener {
 
@@ -169,23 +169,43 @@ class AddEventFinalActivity : AppCompatActivity() {
                 eventMilis = eventMillis, eventGuests = specialGuest, eventPostTime = eventPostTime.toString(), eventTicketLink = eventTicketLink,
                 userUID = AuthRepo.getUserUid(),amountPaid = amountPaid)
 
-            fireStoreRepo.postEvent(this, eventModel, {
+            if (eventType == "promoted"){
+                fireStoreRepo.postPromotedEvent(context = this, eventsModel = eventModel, ifNotCompeted = {
 
-                val v = findViewById<View>(android.R.id.content)
-                AppUtils.getCustomSnackBar(v, "Your event has been shared!", this).show()
+                    add_event_final_share_event_text.visibility = VISIBLE
+                    add_event_final_share_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                    add_event_final_share_event_progress.visibility = GONE
 
-                startActivity(Intent(this, HomeActivity::class.java))
-                finish()
-            }, {
+                    val v = findViewById<View>(android.R.id.content)
+                    AppUtils.getCustomSnackBar(v, it, this).show()
 
-                add_event_final_share_event_text.visibility = VISIBLE
-                add_event_final_share_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                add_event_final_share_event_progress.visibility = GONE
+                }, ifCompleted = {
+                    val v = findViewById<View>(android.R.id.content)
+                    AppUtils.getCustomSnackBar(v, "Your event has been shared and promoted!", this).show()
 
-                val v = findViewById<View>(android.R.id.content)
-                AppUtils.getCustomSnackBar(v, it, this).show()
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                })
+            }else{
+                fireStoreRepo.postEvent(this, eventModel, {
 
-            })
+                    val v = findViewById<View>(android.R.id.content)
+                    AppUtils.getCustomSnackBar(v, "Your event has been shared!", this).show()
+
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    finish()
+                }, {
+
+                    add_event_final_share_event_text.visibility = VISIBLE
+                    add_event_final_share_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+                    add_event_final_share_event_progress.visibility = GONE
+
+                    val v = findViewById<View>(android.R.id.content)
+                    AppUtils.getCustomSnackBar(v, it, this).show()
+
+                })
+            }
+
         }
 
     }
@@ -228,6 +248,8 @@ class AddEventFinalActivity : AppCompatActivity() {
 
                             1000L -> {
                                 eventType = "promoted"
+                                Toast.makeText(this, eventType, Toast.LENGTH_LONG)
+                                    .show()
 
                                 add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
                                 add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
@@ -236,6 +258,9 @@ class AddEventFinalActivity : AppCompatActivity() {
 
                             5000L -> {
                                 eventType = "promoted"
+                                Toast.makeText(this, eventType, Toast.LENGTH_LONG)
+                                    .show()
+
                                 add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
                                 add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
                                 add_event_final_promote_event_text.text = ("Medium Audience Plan: N5,000.000")
@@ -243,6 +268,9 @@ class AddEventFinalActivity : AppCompatActivity() {
 
                             10000L -> {
                                 eventType = "promoted"
+                                Toast.makeText(this, eventType, Toast.LENGTH_LONG)
+                                    .show()
+
                                 add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
                                 add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
                                 add_event_final_promote_event_text.text = ("Large Audience Plan: N10,000.000")

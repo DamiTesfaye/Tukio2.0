@@ -421,6 +421,14 @@
 
     </FrameLayout>
 
+    <View android:layout_width="match_parent"
+          android:background="#99000000"
+          android:visibility="gone"
+          android:id="@+id/event_details_bottom_sheet_bg"
+          android:layout_height="match_parent"
+    />
+
+
     <include
         layout="@layout/profile_options_bottomsheet"
         android:id="@+id/event_details_share_bottomsheet"

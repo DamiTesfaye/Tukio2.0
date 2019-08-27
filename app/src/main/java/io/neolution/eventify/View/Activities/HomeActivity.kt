@@ -137,6 +137,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     }
 
+    private lateinit var bottomNavBar: BottomNavigationView
     lateinit var adapter: HomePagerAdapter
     lateinit var broadcast: InternetBroadcast
     lateinit var filter: IntentFilter
@@ -297,7 +298,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         registerReceiver(broadcast, filter)
 
         FireStoreRepo().getCurrentUserDocumentPath().addSnapshotListener(this) {
-            snapshot, _ ->
+                snapshot, _ ->
             if (snapshot != null && snapshot.exists()){
                 val userModel = snapshot.breakDownToUserModel()
                 FirebaseUtils().saveUserDetails(userModel, this@HomeActivity)
@@ -322,7 +323,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             startActivity(Intent(this@HomeActivity, AddEventPremActivity::class.java))
         }
 
-        val bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
+        bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
         homeFrameLayout = findViewById(R.id.home_frame_layout)
         supportFragmentManager.beginTransaction().
             replace(R.id.home_frame_layout, HomeFragment())
@@ -330,7 +331,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         bottomNavBar.selectedItemId = R.id.main_menu_home
 
         bottomNavBar.setOnNavigationItemSelectedListener {
-            item ->
+                item ->
             when (item.itemId){
                 R.id.main_menu_home -> {
 
