@@ -66,31 +66,35 @@ class ProfileFragment : Fragment() {
         userBioTextView.setTextColor(ContextCompat.getColor(context!!, android.R.color.darker_gray))
 
         fireStoreRepo = FireStoreRepo()
-        val userDetails = fireStoreRepo.getUserAccountDetailsFromUid(AuthRepo.getUserUid())
-        userDetails.addSnapshotListener(activity!!) { snapshot, _ ->
-            if (snapshot != null && snapshot.exists()){
-                val userModel = snapshot.breakDownToUserModel()
-                userNameTextView.text= userModel.userName
-                if (userModel.userBio.isEmpty()){
-                    userBioTextView.text = "No Bio Set."
-                }else{
-                    userBioTextView.text = userModel.userBio
-                }
 
-                val requestOptions = RequestOptions()
-                if (context != null){
-                    requestOptions.placeholder(ContextCompat.getDrawable(context!!.applicationContext, R.drawable.ic_male_placeholder))
-                    val thumbNailRequest = Glide.with(context!!.applicationContext).load(userModel.userThumbLink)
+        if (AuthRepo.getCurrentUser() != null ){
+            val userDetails = fireStoreRepo.getUserAccountDetailsFromUid(AuthRepo.getUserUid())
+            userDetails.addSnapshotListener(activity!!) { snapshot, _ ->
+                if (snapshot != null && snapshot.exists()){
+                    val userModel = snapshot.breakDownToUserModel()
+                    userNameTextView.text= userModel.userName
+                    if (userModel.userBio.isEmpty()){
+                        userBioTextView.text = "No Bio Set."
+                    }else{
+                        userBioTextView.text = userModel.userBio
+                    }
 
-                    Glide.with(context!!.applicationContext)
-                        .setDefaultRequestOptions(requestOptions)
-                        .asDrawable()
-                        .load(userModel.userImage)
-                        .thumbnail(thumbNailRequest)
-                        .into(userImage)
+                    val requestOptions = RequestOptions()
+                    if (context != null){
+                        requestOptions.placeholder(ContextCompat.getDrawable(context!!.applicationContext, R.drawable.ic_male_placeholder))
+                        val thumbNailRequest = Glide.with(context!!.applicationContext).load(userModel.userThumbLink)
+
+                        Glide.with(context!!.applicationContext)
+                            .setDefaultRequestOptions(requestOptions)
+                            .asDrawable()
+                            .load(userModel.userImage)
+                            .thumbnail(thumbNailRequest)
+                            .into(userImage)
+                    }
                 }
             }
         }
+
 
 
         val eventViewModel = ViewModelProviders.of(this).get(EventsViewModel::class.java)

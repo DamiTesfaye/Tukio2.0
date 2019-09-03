@@ -14,6 +14,7 @@ import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.Data.ViewModels.ProfileViewModel
 import io.neolution.eventify.Listeners.OnChipSelected
 import io.neolution.eventify.R
+import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
 import io.neolution.eventify.Utils.AppUtils
 import io.neolution.eventify.databinding.ActivityTagsBinding
@@ -72,71 +73,73 @@ class TagsActivity : AppCompatActivity(), OnChipSelected, View.OnClickListener {
 
         val chipList= AppUtils.createChipList()
 
-        FireStoreRepo().getCurrentUserDocumentPath().get().addOnSuccessListener { snapshot ->
-            if (snapshot != null && snapshot.exists()){
-                val userModel = snapshot.breakDownToUserModel()
-                val userTags = userModel.tags
+        if (AuthRepo.getCurrentUser() != null ){
+            FireStoreRepo().getCurrentUserDocumentPath().get().addOnSuccessListener { snapshot ->
+                if (snapshot != null && snapshot.exists()){
+                    val userModel = snapshot.breakDownToUserModel()
+                    val userTags = userModel.tags
 
-                if (userTags != null) {
+                    if (userTags != null) {
 
-                    adapter = TagsAdapter(chipList, this, userTags, this)
+                        adapter = TagsAdapter(chipList, this, userTags, this)
 
-                    val recyclerView = binding.tagsContainer
-                    val manager = StaggeredGridLayoutManager(
-                        8,
-                        StaggeredGridLayoutManager.HORIZONTAL
-                    )
-                    manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+                        val recyclerView = binding.tagsContainer
+                        val manager = StaggeredGridLayoutManager(
+                            8,
+                            StaggeredGridLayoutManager.HORIZONTAL
+                        )
+                        manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
 
-                    recyclerView.apply {
-                        layoutManager = manager
-                        setHasFixedSize(true)
+                        recyclerView.apply {
+                            layoutManager = manager
+                            setHasFixedSize(true)
+                        }
+
+                        recyclerView.adapter = adapter
+                        tags_circular_progress_bar.visibility = GONE
+
+                    } else{
+                        adapter = TagsAdapter(chipList, this, null, this)
+
+                        val recyclerView = binding.tagsContainer
+                        val manager = StaggeredGridLayoutManager(
+                            8,
+                            StaggeredGridLayoutManager.HORIZONTAL
+                        )
+                        manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+
+                        recyclerView.apply{
+                            layoutManager = manager
+                            setHasFixedSize(true)
+                        }
+
+                        recyclerView.adapter = adapter
+                        tags_circular_progress_bar.visibility = GONE
                     }
-
-                    recyclerView.adapter = adapter
-                    tags_circular_progress_bar.visibility = GONE
-
-                } else{
-                    adapter = TagsAdapter(chipList, this, null, this)
-
-                    val recyclerView = binding.tagsContainer
-                    val manager = StaggeredGridLayoutManager(
-                        8,
-                        StaggeredGridLayoutManager.HORIZONTAL
-                    )
-                    manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-
-                    recyclerView.apply{
-                        layoutManager = manager
-                        setHasFixedSize(true)
-                    }
-
-                    recyclerView.adapter = adapter
-                    tags_circular_progress_bar.visibility = GONE
                 }
+
+            }.addOnFailureListener {
+
+                AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Failed to load already selected tags. Check your internet connection and try again..", this)
+                    .show()
+
+                adapter = TagsAdapter(chipList, this, null, this)
+
+                val recyclerView = binding.tagsContainer
+                val manager = StaggeredGridLayoutManager(
+                    8,
+                    StaggeredGridLayoutManager.HORIZONTAL
+                )
+                manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
+
+                recyclerView.apply{
+                    layoutManager = manager
+                    setHasFixedSize(true)
+                }
+
+                recyclerView.adapter = adapter
+                tags_circular_progress_bar.visibility = GONE
             }
-
-        }.addOnFailureListener {
-
-            AppUtils.getCustomSnackBar(findViewById<View>(android.R.id.content), "Failed to load already selected tags. Check your internet connection and try again..", this)
-                .show()
-
-            adapter = TagsAdapter(chipList, this, null, this)
-
-            val recyclerView = binding.tagsContainer
-            val manager = StaggeredGridLayoutManager(
-                8,
-                StaggeredGridLayoutManager.HORIZONTAL
-            )
-            manager.gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-
-            recyclerView.apply{
-                layoutManager = manager
-                setHasFixedSize(true)
-            }
-
-            recyclerView.adapter = adapter
-            tags_circular_progress_bar.visibility = GONE
         }
     }
 

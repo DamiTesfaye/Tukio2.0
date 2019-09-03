@@ -264,12 +264,13 @@ class PromoteEventActivity : AppCompatActivity() {
 
     private fun payPromotionMoney(accountNum: String, expMonth: String, expYear: String, cvv: String, amount: Int){
         closeKeyboard()
-        promoteEventText.visibility = GONE
-        promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
-        promoteProgressBar.visibility = VISIBLE
 
         val card = Card.Builder(accountNum, expMonth.toInt(), expYear.toInt(), cvv).build()
         if (card.isValid){
+
+            promoteEventText.visibility = GONE
+            promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg_outline)
+            promoteProgressBar.visibility = VISIBLE
 
             progressText.text = ("Validating Card..")
             val charge = Charge()
@@ -305,14 +306,15 @@ class PromoteEventActivity : AppCompatActivity() {
             })
 
         }else{
+
+            promoteEventText.visibility = VISIBLE
+            promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
+            promoteProgressBar.visibility = GONE
+
             if (!card.validCVC()){
 
                 cvvLayout.isErrorEnabled = true
                 cvvLayout.error = "Please input a valid cvv"
-
-                promoteEventText.visibility = VISIBLE
-                promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                promoteProgressBar.visibility = GONE
 
                 progressText.text = ("")
                 val v = findViewById<View>(android.R.id.content)
@@ -323,9 +325,6 @@ class PromoteEventActivity : AppCompatActivity() {
                 expMonthLayout.isErrorEnabled = true
                 expYearLayout.isErrorEnabled = true
 
-                promoteEventText.visibility = VISIBLE
-                promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                promoteProgressBar.visibility = GONE
 
                 val v = findViewById<View>(android.R.id.content)
                 AppUtils.getCustomSnackBar(v, "The expiry date is not valid..", this@PromoteEventActivity).show()
@@ -334,10 +333,6 @@ class PromoteEventActivity : AppCompatActivity() {
 
                 accountNumberLayout.isErrorEnabled = true
                 accountNumberLayout.error = "Please enter a valid account number"
-
-                promoteEventText.visibility = VISIBLE
-                promoteEventContainer.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
-                promoteProgressBar.visibility = GONE
 
                 val v = findViewById<View>(android.R.id.content)
                 AppUtils.getCustomSnackBar(v, "This account number is not valid", this@PromoteEventActivity).show()

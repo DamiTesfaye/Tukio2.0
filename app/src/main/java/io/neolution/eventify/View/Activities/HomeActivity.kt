@@ -297,12 +297,14 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         filter = IntentFilter("android.net.conn.CONNECTIVITY_CHANGE")
         registerReceiver(broadcast, filter)
 
-        FireStoreRepo().getCurrentUserDocumentPath().addSnapshotListener(this) {
-                snapshot, _ ->
-            if (snapshot != null && snapshot.exists()){
-                val userModel = snapshot.breakDownToUserModel()
-                FirebaseUtils().saveUserDetails(userModel, this@HomeActivity)
+        if (AuthRepo.getCurrentUser() != null){
+            FireStoreRepo().getCurrentUserDocumentPath().addSnapshotListener(this) {
+                    snapshot, _ ->
+                if (snapshot != null && snapshot.exists()){
+                    val userModel = snapshot.breakDownToUserModel()
+                    FirebaseUtils().saveUserDetails(userModel, this@HomeActivity)
 
+                }
             }
         }
 

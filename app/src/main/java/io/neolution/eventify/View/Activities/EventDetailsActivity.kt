@@ -186,11 +186,6 @@ class EventDetailsActivity : AppCompatActivity() {
     private fun bindData(bundle: Bundle){
 
         val eventType = bundle.getString("eventType")
-        if (eventType ==  "promoted")promotedLabel.visibility = VISIBLE
-        if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
-            moreDetailsBtn.visibility = VISIBLE
-        }
-
         documentID = bundle.getString("documentID")!!
         posterUID = bundle.getString("posterUID")!!
         eventDate = bundle.getString("eventDate")!!
@@ -203,6 +198,11 @@ class EventDetailsActivity : AppCompatActivity() {
         eventImageThumbLink = bundle.getString("eventImageThumb")!!
         eventMilis = bundle.getLong("eventMilis")
         eventTicketLink = bundle.getString("eventTicketLink")!!
+
+        if (eventType ==  "promoted")promotedLabel.visibility = VISIBLE
+        if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
+            moreDetailsBtn.visibility = GONE
+        }
 
         Log.e(EventDetailsActivity::class.java.simpleName, eventMilis.toString())
 
@@ -281,12 +281,12 @@ class EventDetailsActivity : AppCompatActivity() {
             .thumbnail(thumbNailRequest)
             .into(eventImageView)
 
-        fireStoreRepo.getEventDocumentRefererenceById(documentID).addSnapshotListener { snapshot, exception ->
+        fireStoreRepo.getEventDocumentRefererenceById(documentID).addSnapshotListener { snapshot, _ ->
             if (snapshot!= null && snapshot.exists()){
                 val eventModel = snapshot.breakDocumentIntoEvntsModel()
                 val mapOfGuests = eventModel.eventGuests
 
-                if ( mapOfGuests != null && !mapOfGuests.isEmpty()){
+                if ( mapOfGuests != null && mapOfGuests.isNotEmpty()){
                     val listOfGuest = mutableListOf<GuestModel>()
                     for (name in mapOfGuests.keys){
                         val bio = mapOfGuests[name].toString()
@@ -297,6 +297,9 @@ class EventDetailsActivity : AppCompatActivity() {
 
                     val adapter = GuestsAdapter(this, listOfGuest)
                     specialGuestsRecycler.adapter = adapter
+                    specialGuestsRecycler.visibility = VISIBLE
+                    noSpecialGuests.visibility = GONE
+
 
                 }else{
                     specialGuestsRecycler.visibility = GONE

@@ -20,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import io.neolution.eventify.Data.Adapters.GuestsAdapter
 import io.neolution.eventify.Data.ModelClasses.EventsModel
 import io.neolution.eventify.Data.ModelClasses.GuestModel
+import io.neolution.eventify.Data.ModelClasses.breakDocumentIntoEvntsModel
 import io.neolution.eventify.R
 import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
@@ -204,13 +205,7 @@ class EventDetailsFromLinkActivity : AppCompatActivity() {
     private fun bindData(documentID: String) {
         fireStoreRepo.getEventDocumentRefererenceById(documentID).addSnapshotListener { snapshot, _ ->
             if (snapshot != null && snapshot.exists()) {
-                val eventModel = snapshot.toObject(EventsModel::class.java)
-
-                val eventType = eventModel!!.eventType
-                if (eventType ==  "promoted")promotedLabel.visibility = View.VISIBLE
-                if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
-                    moreDetailsBtn.visibility = View.VISIBLE
-                }
+                val eventModel = snapshot.breakDocumentIntoEvntsModel()
 
                 posterUID = eventModel.userUID
                 eventDate = eventModel.eventDate
@@ -223,6 +218,14 @@ class EventDetailsFromLinkActivity : AppCompatActivity() {
                 eventImageThumbLink = eventModel.eventImageLinkThumb!!
                 eventMilis = eventModel.eventMilis
                 eventTicketLink = eventModel.eventTicketLink!!
+
+                val eventType = eventModel.eventType
+                if (eventType ==  "promoted")promotedLabel.visibility = VISIBLE
+                if(eventType == "promoted" && posterUID == AuthRepo.getUserUid()){
+                    moreDetailsBtn.visibility = View.GONE
+                }
+
+
 
                 eventDateText.text = eventDate
                 eventTitleText.text = eventTitle
@@ -311,6 +314,8 @@ class EventDetailsFromLinkActivity : AppCompatActivity() {
 
                     val adapter = GuestsAdapter(this, listOfGuest)
                     specialGuestsRecycler.adapter = adapter
+                    specialGuestsRecycler.visibility = View.VISIBLE
+                    noSpecialGuests.visibility = View.GONE
 
                 }else{
                     specialGuestsRecycler.visibility = View.GONE
@@ -319,6 +324,7 @@ class EventDetailsFromLinkActivity : AppCompatActivity() {
 
                 viewsContainer.visibility = VISIBLE
                 loadingBar.visibility = GONE
+
             }else{
 
                 Toast.makeText(this, "Sorry, we can't find that event", Toast.LENGTH_LONG)

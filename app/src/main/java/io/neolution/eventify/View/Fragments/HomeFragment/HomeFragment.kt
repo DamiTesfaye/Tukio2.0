@@ -25,6 +25,7 @@ import io.neolution.eventify.Listeners.OnAddReminderClicked
 import io.neolution.eventify.Listeners.OnHomeFragmentsAttached
 import io.neolution.eventify.Listeners.OnShareEventClicked
 import io.neolution.eventify.R
+import io.neolution.eventify.Repos.AuthRepo
 import io.neolution.eventify.Repos.FireStoreRepo
 import io.neolution.eventify.View.Activities.TagsActivity
 import io.neolution.eventify.databinding.FragmentHomeBinding
@@ -269,31 +270,32 @@ class HomeFragment: Fragment(){
 
 
                     if (activity != null){
-                        fireStoreRepoInstance.getCurrentUserDocumentPath()
-                            .addSnapshotListener(activity!!) { userSnapshot, _ ->
+                        if (AuthRepo.getCurrentUser() != null ){
+                            fireStoreRepoInstance.getCurrentUserDocumentPath()
+                                .addSnapshotListener(activity!!) { userSnapshot, _ ->
 
-                                if (userSnapshot != null && userSnapshot.exists()) {
-                                    val userModel = userSnapshot.breakDownToUserModel()
-                                    val userTags = userModel.tags
+                                    if (userSnapshot != null && userSnapshot.exists()) {
+                                        val userModel = userSnapshot.breakDownToUserModel()
+                                        val userTags = userModel.tags
 
-                                    if (userTags != null) {
+                                        if (userTags != null) {
 
-                                        eventViewModel.getEventDocuments()
-                                            .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
-                                            .addSnapshotListener(activity!!) { querySnapshot, _ ->
+                                            eventViewModel.getEventDocuments()
+                                                .orderBy("eventPostTime", Query.Direction.DESCENDING).limit(7)
+                                                .addSnapshotListener(activity!!) { querySnapshot, _ ->
 
-                                                if (querySnapshot != null && !querySnapshot.isEmpty) {
+                                                    if (querySnapshot != null && !querySnapshot.isEmpty) {
 
-                                                    if (alreadyLoaded) {
-                                                        lastDocumentSnapshot =
-                                                            querySnapshot.documents[querySnapshot.size() - 1]
-                                                    }
+                                                        if (alreadyLoaded) {
+                                                            lastDocumentSnapshot =
+                                                                querySnapshot.documents[querySnapshot.size() - 1]
+                                                        }
 
-                                                    for (document in querySnapshot.documentChanges) {
+                                                        for (document in querySnapshot.documentChanges) {
 
-                                                        if (document.type == DocumentChange.Type.ADDED) {
-                                                            val eventModel = document.document.breakDocumentIntoEvntsModel()
-                                                            val eventID = document.document.id
+                                                            if (document.type == DocumentChange.Type.ADDED) {
+                                                                val eventModel = document.document.breakDocumentIntoEvntsModel()
+                                                                val eventID = document.document.id
                                                                 if (eventModel.eventTags.compareLists(userTags) > 0) {
 
                                                                     if (alreadyLoaded) {
@@ -339,48 +341,49 @@ class HomeFragment: Fragment(){
 
                                                                 }
 
+                                                            }
+
                                                         }
 
-                                                    }
-
-                                                    if (swipeLayout.isRefreshing) {
-                                                        swipeLayout.isRefreshing = false
-                                                    }
-
-
-
-
-                                                    if (listOfEvent.isEmpty()) {
-                                                        binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
-                                                        binding.fragHomeFineTuningLayout.visibility = GONE
-                                                        binding.fragHomeRecycler.visibility = GONE
-
-
-                                                    } else {
-                                                        if (finalPromotedEventsList != null) {
-                                                            listOfEvent.addPromotedEventsIntoNormalEvents(
-                                                                finalPromotedEventsList!!
-                                                            )
-                                                            adapter.notifyDataSetChanged()
+                                                        if (swipeLayout.isRefreshing) {
+                                                            swipeLayout.isRefreshing = false
                                                         }
 
+
+
+
+                                                        if (listOfEvent.isEmpty()) {
+                                                            binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
+                                                            binding.fragHomeFineTuningLayout.visibility = GONE
+                                                            binding.fragHomeRecycler.visibility = GONE
+
+
+                                                        } else {
+                                                            if (finalPromotedEventsList != null) {
+                                                                listOfEvent.addPromotedEventsIntoNormalEvents(
+                                                                    finalPromotedEventsList!!
+                                                                )
+                                                                adapter.notifyDataSetChanged()
+                                                            }
+
+                                                        }
+
+                                                        alreadyLoaded = false
+
                                                     }
-
-                                                    alreadyLoaded = false
-
                                                 }
-                                            }
 
-                                    } else {
+                                        } else {
 
-                                        noInternetLayout.visibility = VISIBLE
-                                        binding.fragHomeFineTuningLayout.visibility = GONE
-                                        binding.fragHomeRecycler.visibility = GONE
+                                            noInternetLayout.visibility = VISIBLE
+                                            binding.fragHomeFineTuningLayout.visibility = GONE
+                                            binding.fragHomeRecycler.visibility = GONE
 
+                                        }
                                     }
-                                }
 
-                            }
+                                }
+                        }
                     }
                 }
             }
@@ -389,24 +392,25 @@ class HomeFragment: Fragment(){
 
     private fun loadMoreEvents() {
 
-        fireStoreRepoInstance.getCurrentUserDocumentPath().addSnapshotListener(activity!!) { userSnapshot, _ ->
+        if (AuthRepo.getCurrentUser() != null ){
+            fireStoreRepoInstance.getCurrentUserDocumentPath().addSnapshotListener(activity!!) { userSnapshot, _ ->
 
-            if (userSnapshot != null && userSnapshot.exists()) {
-                val userModel = userSnapshot.breakDownToUserModel()
-                val usersTags = userModel.tags
+                if (userSnapshot != null && userSnapshot.exists()) {
+                    val userModel = userSnapshot.breakDownToUserModel()
+                    val usersTags = userModel.tags
 
 
-                if (usersTags != null) {
+                    if (usersTags != null) {
 
-                    eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING)
-                        .limit(5).startAfter(lastDocumentSnapshot).addSnapshotListener(activity!!) { snapshot, _ ->
+                        eventViewModel.getEventDocuments().orderBy("eventPostTime", Query.Direction.DESCENDING)
+                            .limit(5).startAfter(lastDocumentSnapshot).addSnapshotListener(activity!!) { snapshot, _ ->
 
-                            if (snapshot != null && !snapshot.isEmpty) {
+                                if (snapshot != null && !snapshot.isEmpty) {
 
-                                lastDocumentSnapshot = snapshot.documents[snapshot.size() - 1]
+                                    lastDocumentSnapshot = snapshot.documents[snapshot.size() - 1]
 
-                                for (document in snapshot.documents) {
-                                    val eventModel = document.breakDocumentIntoEvntsModel()
+                                    for (document in snapshot.documents) {
+                                        val eventModel = document.breakDocumentIntoEvntsModel()
                                         if (usersTags.compareLists(eventModel.eventTags) > 0) {
                                             if (!listOfEvent.contains(FullEventsModel(eventModel, document.id))) {
                                                 listOfEvent.add(FullEventsModel(eventModel, document.id))
@@ -417,27 +421,28 @@ class HomeFragment: Fragment(){
                                         }
 
 
+                                    }
+
                                 }
 
                             }
-
-                        }
-                }
-            }
-
-
-            if (listOfEvent.isEmpty()) {
-                binding.fragHomeFineTuningLayout.visibility = GONE
-                binding.fragHomeRecycler.visibility = GONE
-                binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
-            } else if (listOfEvent.isNotEmpty() && listOfEvent.size <= 5) {
-
-                if (finalPromotedEventsList != null) {
-                    listOfEvent.addPromotedEventsIntoNormalEvents(finalPromotedEventsList!!)
+                    }
                 }
 
-            }
 
+                if (listOfEvent.isEmpty()) {
+                    binding.fragHomeFineTuningLayout.visibility = GONE
+                    binding.fragHomeRecycler.visibility = GONE
+                    binding.fragHomeEmptyFeedPicLayout.visibility = VISIBLE
+                } else if (listOfEvent.isNotEmpty() && listOfEvent.size <= 5) {
+
+                    if (finalPromotedEventsList != null) {
+                        listOfEvent.addPromotedEventsIntoNormalEvents(finalPromotedEventsList!!)
+                    }
+
+                }
+
+            }
         }
 
     }
