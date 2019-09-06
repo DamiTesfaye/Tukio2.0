@@ -11,6 +11,7 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:background="@color/colorPrimary"
+            app:elevation="0dp"
             android:layout_height="?attr/actionBarSize">
 
         <RelativeLayout android:layout_width="match_parent"
@@ -127,6 +128,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"
+                  android:textColor="@android:color/darker_gray"
                   android:layout_marginTop="10dp"
                   android:text="@string/no_comments_yet_you_can_add_yours_below"
                   android:layout_height="wrap_content"/>

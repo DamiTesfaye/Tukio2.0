@@ -100,6 +100,7 @@
 			          android:layout_height="wrap_content"
 			          android:layout_marginStart="20dp"
 					  android:gravity="center_horizontal"
+					  android:textColor="@android:color/darker_gray"
 					  android:layout_marginTop="10dp"
 					  android:layout_marginEnd="20dp"
 			          android:text="@string/sorry_there_are_no_updates_to_events_that_you_re_going_to_at_the_moment_you_can_try_reloading"

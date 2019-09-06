@@ -45,7 +45,7 @@
                               android:layout_toEndOf="@id/new_explore_search_image"
                               android:layout_centerVertical="true"
                               android:layout_marginStart="10dp"
-                              android:textSize="17sp"
+                              android:textSize="15sp"
                               android:textColor="@android:color/darker_gray"
                               android:layout_height="wrap_content"/>
 
@@ -56,7 +56,7 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_gravity="bottom"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="3dp"
                     android:layout_marginStart="10dp"
                     android:id="@+id/new_explore_tag_recycler"
                     android:layout_height="45dp"/>
@@ -119,6 +119,7 @@
                       android:layout_marginTop="20dp"
                       android:id="@+id/new_explore_empty_text"
                       android:textStyle="bold"
+                      android:textColor="@android:color/darker_gray"
                       android:text="@string/there_are_no_tech_events_for_now"
                       android:layout_height="wrap_content"/>
 
@@ -134,12 +135,12 @@
                       android:orientation="vertical"
                       android:layout_height="wrap_content">
 
-            <ImageView android:layout_width="150dp"
+            <ImageView android:layout_width="160dp"
                        android:layout_marginStart="20dp"
                        android:layout_marginEnd="20dp"
                        android:layout_gravity="center_horizontal"
                        app:srcCompat="@drawable/ic_search_events"
-                       android:scaleType="centerCrop"
+                       android:scaleType="fitXY"
                        android:layout_height="150dp"/>
 
             <TextView android:layout_width="wrap_content"
@@ -148,6 +149,7 @@
                       android:layout_marginTop="20dp"
                       android:id="@+id/new_explore_check_tags_text"
                       android:textStyle="bold"
+                      android:textColor="@android:color/darker_gray"
                       android:text="@string/click_one_of_the_tags_to_check_out_events_in_that_area"
                       android:layout_height="wrap_content"/>
 

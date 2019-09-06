@@ -10,8 +10,10 @@
         android:layout_height="wrap_content">
 
     <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="230dp"
             android:layout_marginStart="10dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitXY"
             android:layout_marginEnd="10dp"
             app:srcCompat="@drawable/ic_festivities"
             android:id="@+id/notification_image"

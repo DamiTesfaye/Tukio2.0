@@ -401,6 +401,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     private fun checkIfUserExits(){
         if (AuthRepo.getCurrentUser() == null){
             startActivity(Intent(this, AuthActivity::class.java))
+            finish()
         }
     }
 

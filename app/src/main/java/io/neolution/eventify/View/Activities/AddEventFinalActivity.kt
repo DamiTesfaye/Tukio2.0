@@ -253,7 +253,7 @@ class AddEventFinalActivity : AppCompatActivity() {
 
                                 add_event_final_promote_event_container.background = ContextCompat.getDrawable(this, R.drawable.buttonbg)
                                 add_event_final_promote_event_text.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
-                                add_event_final_promote_event_text.text = ("Big Audience Plan: N1,000.000")
+                                add_event_final_promote_event_text.text = ("Small Audience Plan: N1,000.000")
                             }
 
                             5000L -> {

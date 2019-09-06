@@ -80,7 +80,7 @@
                   android:text="@string/no_updates_at_the_moment_check_back_later"
                   android:layout_gravity="center_horizontal"
                   android:gravity="center"
-                  android:textColor="@android:color/black"
+                  android:textColor="@android:color/darker_gray"
                   android:layout_height="wrap_content"/>
 
 
