@@ -3,6 +3,7 @@ package io.neolution.eventify.View.Activities
 import androidx.lifecycle.ViewModelProviders
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -124,6 +125,8 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
         shareBsheetSocialMedia = findViewById(R.id.share_bsheet_socialmedia)
         shareBsheetCopyLink = findViewById(R.id.share_bsheet_copylink)
 
+
+
         bottomSheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 search_activity_bottom_sheet_bg.visibility = VISIBLE
@@ -190,15 +193,18 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
         })
 
         backBtn.setOnClickListener {
+            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
 
         searchEditText.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(p0: TextView?, p1: Int, p2: KeyEvent?): Boolean{
 
+                //actionSearch|actionSend|actionDone|actionGo
                 if (canBeSubmitted){
                     if (p0 != null){
-                        if (p1 == EditorInfo.IME_NULL && p2!!.action == KeyEvent.ACTION_DOWN){
+                        if (p1 == EditorInfo.IME_ACTION_SEARCH || p1 == EditorInfo.IME_ACTION_SEND || p1 == EditorInfo.IME_ACTION_DONE
+                            || p1 == EditorInfo.IME_ACTION_GO){
                             closeKeyboard()
                             val searchText = p0.text.toString()
                             searchEvents(searchText)
@@ -240,6 +246,15 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
 
             }
         })
+
+        if (savedInstanceState != null){
+            val searchString = savedInstanceState.getString("searchString", "")
+            if (searchString.isNotEmpty()){
+                closeKeyboard()
+                searchEvents(searchString)
+            }
+        }
+
     }
 
     private fun searchEvents(searchString: String){
@@ -433,6 +448,7 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
     }
 
     override fun onBackPressed() {
+        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 
@@ -444,6 +460,12 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
         }
 
         imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putString("searchString", currentSearchType)
     }
 
 }

@@ -165,6 +165,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     private lateinit var aboutUs: LinearLayout
 
     var registered = false
+    private var currentFragNo = 0
 
     private lateinit var homeFrameLayout: FrameLayout
 
@@ -327,9 +328,11 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
         bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
         homeFrameLayout = findViewById(R.id.home_frame_layout)
+
         supportFragmentManager.beginTransaction().
-            replace(R.id.home_frame_layout, HomeFragment())
-            .commitAllowingStateLoss()
+            replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
+            .commit()
+
         bottomNavBar.selectedItemId = R.id.main_menu_home
 
         bottomNavBar.setOnNavigationItemSelectedListener {
@@ -338,23 +341,26 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
                 R.id.main_menu_home -> {
 
                     supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, HomeFragment())
-                        .commitAllowingStateLoss()
+                        replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
+                        .commit()
+                    currentFragNo = 0
 
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.main_menu_explore -> {
                     supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, ExploreFragment())
-                        .commitAllowingStateLoss()
+                        replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
+                        .commit()
+                    currentFragNo = 1
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.main_menu_update -> {
                     supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, UpdatesFragment())
-                        .commitAllowingStateLoss()
+                        replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
+                        .commit()
+                    currentFragNo = 2
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -364,8 +370,9 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
                 R.id.main_menu_profile -> {
                     supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, ProfileFragment())
-                        .commitAllowingStateLoss()
+                        replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
+                        .commit()
+                    currentFragNo = 3
 
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -374,6 +381,31 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
                     return@setOnNavigationItemSelectedListener true
                 }
 
+            }
+        }
+
+        if (savedInstanceState != null){
+            val currentFragment = savedInstanceState.getInt("currentFragment", 0)
+            if (currentFragment != 0){
+                when(currentFragment){
+                    1 -> {
+                        supportFragmentManager.beginTransaction().
+                            replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
+                            .commit()
+                    }
+
+                    2 -> {
+                        supportFragmentManager.beginTransaction().
+                            replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
+                            .commit()
+                    }
+
+                    3 -> {
+                        supportFragmentManager.beginTransaction().
+                            replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
+                            .commit()
+                    }
+                }
             }
         }
 
@@ -435,6 +467,11 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.putInt("currentFragment", currentFragNo)
+    }
 
 }
 

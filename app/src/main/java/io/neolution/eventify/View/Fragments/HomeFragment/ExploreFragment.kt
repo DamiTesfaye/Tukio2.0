@@ -83,6 +83,7 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
 
         exploreSearchContainer.setOnClickListener {
             startActivity(Intent(context!!, SearchActivity::class.java))
+            activity!!.finish()
         }
 
         eventRecycler.setHasFixedSize(true)

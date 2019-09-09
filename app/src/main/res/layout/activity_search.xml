@@ -30,22 +30,21 @@
                         android:id="@+id/search_activity_back_btn"
                         android:layout_height="wrap_content"/>
 
-                <EditText android:layout_width="0dp"
-                          android:layout_marginStart="10dp"
-                          android:gravity="center_vertical"
-                          android:imeActionLabel="Search"
-                          android:imeOptions="actionSearch|actionGo|actionSend"
-                          android:id="@+id/search_activity_edit_text"
-                          android:imeActionId="2"
-                          android:maxLines="1"
-                          android:textSize="15sp"
-                          android:layout_weight="1"
-                          android:inputType="textFilter"
-                          android:fontFamily="@font/font_family"
-                          android:textColor="@android:color/black"
-                          android:background="@android:color/transparent"
-                          android:hint="@string/search_event_title"
-                          android:layout_height="match_parent"/>
+                <EditText
+                        android:layout_width="0dp"
+                        android:layout_marginStart="10dp"
+                        android:gravity="center_vertical"
+                        android:imeOptions="actionSearch"
+                        android:id="@+id/search_activity_edit_text"
+                        android:maxLines="1"
+                        android:textSize="15sp"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:fontFamily="@font/font_family"
+                        android:textColor="@android:color/black"
+                        android:background="@android:color/transparent"
+                        android:hint="@string/search_event_title"
+                        android:layout_height="match_parent"/>
 
                 <ImageButton
                         android:layout_width="wrap_content"
