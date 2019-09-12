@@ -3,22 +3,25 @@ package io.neolution.eventify.View.Activities
 import android.content.*
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.LinearLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import androidx.viewpager.widget.ViewPager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.messaging.FirebaseMessaging
 import io.neolution.eventify.Data.Adapters.HomePagerAdapter
+import io.neolution.eventify.Data.Adapters.OnBoardingAdapter
 import io.neolution.eventify.Data.ModelClasses.breakDownToUserModel
 import io.neolution.eventify.Data.ModelClasses.indicate
 import io.neolution.eventify.Listeners.OnAddReminderClicked
@@ -137,6 +140,29 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 
     }
 
+    override fun onEventTypeSelected(eventType: String) {
+        val contentView = findViewById<View>(R.id.home_container)
+        val snackBar = Snackbar.make(contentView, "Loading $eventType events..", Snackbar.LENGTH_SHORT)
+
+        val view = snackBar.view
+        view.setBackgroundColor(ContextCompat.getColor(this, R.color.colorAccent))
+        val textView = view.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary))
+
+        val layoutParams = view.layoutParams as CoordinatorLayout.LayoutParams
+
+        layoutParams.anchorId = R.id.home_bottom_nav_bar //Id for your bottomNavBar or TabLayout
+        layoutParams.anchorGravity = Gravity.TOP
+        layoutParams.gravity = Gravity.TOP
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            snackBar.view.elevation = 0F
+        }
+        snackBar.view.layoutParams = layoutParams
+
+        snackBar.show()
+
+    }
+
     private lateinit var bottomNavBar: BottomNavigationView
     lateinit var adapter: HomePagerAdapter
     lateinit var broadcast: InternetBroadcast
@@ -147,6 +173,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<LinearLayout>
     private lateinit var profileOptionsBottomSheet: LinearLayout
     private lateinit var profileBottomSheetBehaviour: BottomSheetBehavior<LinearLayout>
+    private lateinit var homeViewPager: ViewPager
 
     private lateinit var eventTitleToBeShared: String
     private lateinit var eventIDToBeShared: String
@@ -167,8 +194,6 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
     var registered = false
     private var currentFragNo = 0
 
-    private lateinit var homeFrameLayout: FrameLayout
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -178,6 +203,7 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         homeFab = findViewById(R.id.home_fab)
 
         shareEventBottomSheet = findViewById(R.id.profile_options_bottomsheet)
+        homeViewPager = findViewById(R.id.home_viewpager)
         bottomSheetBehavior = BottomSheetBehavior.from(shareEventBottomSheet)
         profileOptionsBottomSheet = findViewById(R.id.share_event_bottomsheet)
         profileBottomSheetBehaviour = BottomSheetBehavior.from(profileOptionsBottomSheet)
@@ -187,10 +213,17 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         changeInterests = findViewById(R.id.profile_opt_bsheet_change_interests)
         signOut = findViewById(R.id.profile_opt_bsheet_signout)
         aboutUs = findViewById(R.id.profile_opt_bsheet_about_us)
+
         aboutUs.setOnClickListener {
             startActivity(Intent(this, AboutActivity::class.java))
             profileBottomSheetBehaviour.state = BottomSheetBehavior.STATE_COLLAPSED
         }
+
+        val fragList = listOf(HomeFragment(), ExploreFragment(), UpdatesFragment(), ProfileFragment())
+        val adapter = OnBoardingAdapter(fragList, supportFragmentManager)
+
+        homeViewPager.adapter = adapter
+        homeViewPager.setCurrentItem(0, false)
 
         signOut.setOnClickListener {
             val dialog = androidx.appcompat.app.AlertDialog.Builder(this, R.style.MyTimePickerDialogTheme)
@@ -327,39 +360,42 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
         }
 
         bottomNavBar = findViewById<BottomNavigationView>(R.id.home_bottom_nav_bar)
-        homeFrameLayout = findViewById(R.id.home_frame_layout)
 
-        supportFragmentManager.beginTransaction().
-            replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
-            .commit()
-
-        bottomNavBar.selectedItemId = R.id.main_menu_home
+//        supportFragmentManager.beginTransaction().
+//            replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
+//            .commit()
 
         bottomNavBar.setOnNavigationItemSelectedListener {
                 item ->
             when (item.itemId){
                 R.id.main_menu_home -> {
 
-                    supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
-                        .commit()
+//                    supportFragmentManager.beginTransaction().
+//                        replace(R.id.home_frame_layout, HomeFragment(), "HOME_FRAGMENT")
+//                        .commit()
+
+                    homeViewPager.setCurrentItem(0, false)
                     currentFragNo = 0
 
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.main_menu_explore -> {
-                    supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
-                        .commit()
+//                    supportFragmentManager.beginTransaction().
+//                        replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
+//                        .commit()
+
+                    homeViewPager.setCurrentItem(1, false)
                     currentFragNo = 1
                     return@setOnNavigationItemSelectedListener true
                 }
 
                 R.id.main_menu_update -> {
-                    supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
-                        .commit()
+//                    supportFragmentManager.beginTransaction().
+//                        replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
+//                        .commit()
+
+                    homeViewPager.setCurrentItem(2, false)
                     currentFragNo = 2
                     return@setOnNavigationItemSelectedListener true
                 }
@@ -369,9 +405,11 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
 //                }
 
                 R.id.main_menu_profile -> {
-                    supportFragmentManager.beginTransaction().
-                        replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
-                        .commit()
+//                    supportFragmentManager.beginTransaction().
+//                        replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
+//                        .commit()
+
+                    homeViewPager.setCurrentItem(3, false)
                     currentFragNo = 3
 
                     return@setOnNavigationItemSelectedListener true
@@ -384,30 +422,32 @@ class HomeActivity : AppCompatActivity(),  OnHomeFragmentsAttached, OnShareEvent
             }
         }
 
-        if (savedInstanceState != null){
-            val currentFragment = savedInstanceState.getInt("currentFragment", 0)
-            if (currentFragment != 0){
-                when(currentFragment){
-                    1 -> {
-                        supportFragmentManager.beginTransaction().
-                            replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
-                            .commit()
-                    }
-
-                    2 -> {
-                        supportFragmentManager.beginTransaction().
-                            replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
-                            .commit()
-                    }
-
-                    3 -> {
-                        supportFragmentManager.beginTransaction().
-                            replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
-                            .commit()
-                    }
-                }
-            }
-        }
+//        if (savedInstanceState != null){
+//            val currentFragment = savedInstanceState.getInt("currentFragment", 0)
+//            if (currentFragment != 0){
+//                Toast.makeText(this, "$currentFragment", Toast.LENGTH_LONG)
+//                    .show()
+//                when(currentFragment){
+//                    1 -> {
+//                        supportFragmentManager.beginTransaction().
+//                            replace(R.id.home_frame_layout, ExploreFragment(), "EXPLORE_FRAGMENT")
+//                            .commit()
+//                    }
+//
+//                    2 -> {
+//                        supportFragmentManager.beginTransaction().
+//                            replace(R.id.home_frame_layout, UpdatesFragment(), "UPDATE_FRAGMENT")
+//                            .commit()
+//                    }
+//
+//                    3 -> {
+//                        supportFragmentManager.beginTransaction().
+//                            replace(R.id.home_frame_layout, ProfileFragment(), "PROFILE_FRAGMENT")
+//                            .commit()
+//                    }
+//                }
+//            }
+//        }
 
     }
 

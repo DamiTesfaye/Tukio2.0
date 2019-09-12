@@ -47,7 +47,7 @@ class AppUtils {
         fun copyTextToClipBoard(text: String, context: Context){
             val clipBoard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             val clip = ClipData.newPlainText("Tukio-Event-Link", text)
-            clipBoard.primaryClip = clip
+            clipBoard.setPrimaryClip(clip)
 
             Toast.makeText(context, "Event link copied to clipboard", Toast.LENGTH_LONG)
                 .show()

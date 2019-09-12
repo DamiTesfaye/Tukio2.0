@@ -16,6 +16,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.*
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.Query
@@ -42,6 +44,9 @@ import java.util.*
 class ExploreFragment: Fragment(), OnEventTypeSelected{
 
     override fun onEventTypeClicked(eventType: String) {
+
+        onHomeFragmentsAttached.onEventTypeSelected(eventType)
+
         loadEvents(eventType)
         currentEventType = eventType
 
@@ -83,7 +88,6 @@ class ExploreFragment: Fragment(), OnEventTypeSelected{
 
         exploreSearchContainer.setOnClickListener {
             startActivity(Intent(context!!, SearchActivity::class.java))
-            activity!!.finish()
         }
 
         eventRecycler.setHasFixedSize(true)

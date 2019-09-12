@@ -88,8 +88,7 @@
         events in-app!. For the
         right price, your events can reach everyone in your area
     </string>
-    <string name="sorry_there_are_no_updates_to_events_that_you_re_going_to_at_the_moment_you_can_try_reloading">Sorry,
-        You should see updates from events that you\'ve pinned here. Try reloading…
+    <string name="sorry_there_are_no_updates_to_events_that_you_re_going_to_at_the_moment_you_can_try_reloading">You should see updates from events you\'ve pinned here.. Try reloading!
     </string>
     <string name="promoted_instro">After filling your event details, you will select your audience range each having its
         own price tag. \n \n \nThen you\'ll fill in your card details and the selected price tag will be deducted from
@@ -131,8 +130,8 @@
     <string name="no_special_guests_for_this_event">No special guests for this event..</string>
     <string name="event_poster">Event Poster</string>
     <string name="get_started">Get Started!</string>
-    <string name="ooh_you_haven_t_pinned_any_events_yet">Ooh, You haven\'t pinned any events yet!</string>
-    <string name="oh_you_haven_t_posted_any_events_yet">Oh, you haven\'t posted any events yet!</string>
+    <string name="ooh_you_haven_t_pinned_any_events_yet">You haven\'t pinned any events yet!</string>
+    <string name="oh_you_haven_t_posted_any_events_yet">You haven\'t posted any events yet!</string>
     <string name="promote_your_event">Promote your event</string>
     <string name="let_s_get_your_events_to_everyone_and_make_it_trend">Let\'s get your events to everyone and make it
         trend!
@@ -148,7 +147,7 @@
         chosen plan..
     </string>
     <string name="done">DONE</string>
-    <string name="ooh_you_haven_t_promoted_any_events_yet">Ooh, You haven\'t promoted any events yet!</string>
+    <string name="ooh_you_haven_t_promoted_any_events_yet">You haven\'t promoted any events yet!</string>
     <string name="search_event_title">Search event title..</string>
     <string name="type_in_your_keyword_and_get_searching">Type in your keyword and get searching!</string>
     <string name="searching">Searching..</string>
@@ -185,7 +184,7 @@
     <string name="bio">Bio</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="tag_subjects_you_are_interested_in">Tag subjects you are interested in</string>
-    <string name="there_are_no_tech_events_for_now">There are no Tech Events for now...</string>
+    <string name="there_are_no_tech_events_for_now">There are no Tech events for now...</string>
     <string name="click_one_of_the_tags_to_check_out_events_in_that_area">Click one of the tags to check out events in
         that area!
     </string>

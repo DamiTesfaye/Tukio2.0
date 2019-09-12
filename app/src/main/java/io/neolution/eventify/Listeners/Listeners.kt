@@ -33,6 +33,8 @@ interface OnHomeFragmentsAttached{
     fun onTrendsFragmentAttached()
 
     fun onProfileFragmentAttached()
+
+    fun onEventTypeSelected(eventType: String)
 }
 
 interface OnEventTypeSelected{

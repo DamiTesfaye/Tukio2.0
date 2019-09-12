@@ -83,7 +83,7 @@
                   android:orientation="vertical"
                   android:layout_height="wrap_content">
 
-        <ImageView android:layout_width="160dp"
+        <ImageView android:layout_width="165dp"
                    app:srcCompat="@drawable/ic_search_events"
                    android:scaleType="fitXY"
                    android:layout_gravity="center_horizontal"
@@ -92,6 +92,7 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_gravity="center_horizontal"
                   android:layout_marginTop="10dp"
+                  android:textStyle="bold"
                   android:textColor="@android:color/darker_gray"
                   android:text="@string/type_in_your_keyword_and_get_searching"
                   android:layout_height="wrap_content"/>
@@ -119,7 +120,8 @@
         <TextView android:layout_width="wrap_content"
                   android:layout_marginTop="20dp"
                   android:layout_gravity="center_horizontal"
-                  android:textColor="@android:color/black"
+                  android:textColor="@android:color/darker_gray"
+                  android:textStyle="bold"
                   android:text="@string/searching"
                   android:layout_height="wrap_content"/>
 
@@ -144,7 +146,8 @@
 
         <TextView android:layout_width="wrap_content"
                   android:layout_gravity="center_horizontal"
-                  android:textColor="@android:color/black"
+                  android:textColor="@android:color/darker_gray"
+                  android:textStyle="bold"
                   android:text="@string/sorry_no_matches_for_your_entry_for_now"
                   android:layout_height="wrap_content"/>
 

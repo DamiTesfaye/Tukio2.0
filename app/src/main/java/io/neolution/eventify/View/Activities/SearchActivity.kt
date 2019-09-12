@@ -193,7 +193,6 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
         })
 
         backBtn.setOnClickListener {
-            startActivity(Intent(this, HomeActivity::class.java))
             finish()
         }
 
@@ -448,7 +447,6 @@ class SearchActivity : AppCompatActivity(), OnAddReminderClicked, OnShareEventCl
     }
 
     override fun onBackPressed() {
-        startActivity(Intent(this, HomeActivity::class.java))
         finish()
     }
 

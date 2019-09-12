@@ -80,6 +80,8 @@
 				<TextView android:layout_width="wrap_content"
 						  android:layout_gravity="center_horizontal"
 						  android:gravity="center"
+						  android:textColor="@android:color/darker_gray"
+						  android:textStyle="bold"
 						  android:layout_marginTop="10dp"
 						  android:text="@string/fine_tuning_your_interests"
 						  android:layout_height="wrap_content"/>
@@ -101,8 +103,8 @@
 							  android:padding="10dp"
 							  android:orientation="vertical">
 
-					<ImageView android:layout_width="match_parent"
-							   android:layout_height="200dp"
+					<ImageView android:layout_width="165dp"
+							   android:layout_height="150dp"
 							   app:srcCompat="@drawable/adjust_interests"
 							   android:id="@+id/frag_home_empty_feed_pic"
 							   android:layout_gravity="center_horizontal"
@@ -112,7 +114,9 @@
 							  android:layout_marginBottom="10dp"
 							  android:layout_height="wrap_content"
 							  android:layout_marginStart="25dp"
-							  android:textSize="15sp"
+							  android:textSize="13sp"
+							  android:textStyle="bold"
+							  android:textColor="@android:color/darker_gray"
 							  android:layout_marginEnd="25dp"
 							  android:layout_marginTop="20dp"
 							  android:gravity="center"
@@ -121,10 +125,11 @@
 
 					<Button android:layout_width="match_parent"
 							android:background="@drawable/buttonbg"
-							android:layout_marginTop="20dp"
+							android:layout_marginTop="30dp"
+							android:textSize="17sp"
 							android:id="@+id/frag_home_change_interests"
 							android:text="@string/change_interests"
-							android:layout_height="35dp"/>
+							android:layout_height="45dp"/>
 
 				</LinearLayout>
 
