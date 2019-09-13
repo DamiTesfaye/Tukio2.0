@@ -11,7 +11,7 @@
 			tools:context=".View.Activities.HomeActivity">
 
 
-    <io.neolution.eventify.Utils.NonSwipeableViewPager
+    <com.exceptos.tukio.Utils.NonSwipeableViewPager
             android:layout_width="match_parent"
             android:id="@+id/home_viewpager"
             android:layout_marginBottom="?attr/actionBarSize"

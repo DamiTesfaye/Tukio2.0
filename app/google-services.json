@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:648973975858:android:644add817826b74a32172b",
+        "android_client_info": {
+          "package_name": "com.exceptos.tukio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "648973975858-tufn208b46d2pthqv66l79g7e76a4ntf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exceptos.tukio",
+            "certificate_hash": "cb423c6a2fc33b79c13ab3d3cc6a13651b7281ff"
+          }
+        },
+        {
+          "client_id": "648973975858-d79dff43o1pk5cslj3urld4tivt2t61c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhA94-S1WubarNU59a6Yz6RDtDzfl5bjU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "648973975858-d79dff43o1pk5cslj3urld4tivt2t61c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:648973975858:android:ed95e59375ad6091",
         "android_client_info": {
           "package_name": "io.neolution.eventify"
@@ -33,20 +70,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "648973975858-d79dff43o1pk5cslj3urld4tivt2t61c.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

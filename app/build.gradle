@@ -8,11 +8,11 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "io.neolution.eventify"
+        applicationId "com.exceptos.tukio"
         minSdkVersion 19
         targetSdkVersion 29
-        versionCode 2
-        versionName "1.1"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled = true
